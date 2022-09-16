@@ -29,14 +29,15 @@
    
 }
 .avatar_image{
-    width: 10rem;
-    height: 10rem;
+    width: 12rem;
+    height: 12rem;
     margin-left: 4%;
+    object-fit: cover;
     border-radius: 50%;
 }
 .login_container2 > label{
     font-size: 20px;
-    margin: 15px 0px;
+    margin: 10px 0px;
     letter-spacing: 2px;
     color: gray;
     text-transform: capitalize;
@@ -53,6 +54,12 @@
     padding: 25px;
     outline: 0;
     border: 0.5px solid rgba(92, 165, 165, 0.4);
+}
+.file_image{
+    opacity: 0.4;
+    border: 0;
+    outline: 0;
+
 }
 .otp_button{
     width: 30%;
