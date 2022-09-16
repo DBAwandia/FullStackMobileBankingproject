@@ -37,7 +37,6 @@
 }
 .login_container2 > label{
     font-size: 20px;
-    margin: 10px 0px;
     letter-spacing: 2px;
     color: gray;
     text-transform: capitalize;
@@ -51,7 +50,7 @@
     caret-color: teal;
     font-size: 19px;
     font-weight: 540;
-    padding: 25px;
+    padding: 20px;
     outline: 0;
     border: 0.5px solid rgba(92, 165, 165, 0.4);
 }
@@ -89,6 +88,18 @@
     color: white;
 }
 
+/* SMALL DEVICES */
+@media screen  and (max-width: 768px) {
+ 
+}
+/* MEDIUM DEVICES */
+@media screen  and (max-width: 992px) {
+ 
+}
+/* LARGE DEVICES */
+@media screen  and (max-width: 1200px) {
+ 
+}
 
 
 

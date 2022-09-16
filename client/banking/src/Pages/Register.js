@@ -4,6 +4,8 @@ import { auth } from '../Firebase/Firebase';
 import "./Login.css"
 import axios from "axios"
 import { useNavigate} from "react-router-dom"
+import { useContext } from 'react';
+import { LoginContext } from '../Contexts/LoginContext';
 function Register() {
 
   const navigate = useNavigate()
@@ -14,10 +16,10 @@ function Register() {
   const [image, setImage] = useState("")
   const [final, setFinal] = useState("")
   const [loading, setLoading] = useState(false)
-  const [loadings, setLoadings] = useState(false)
   const [open, setOpen] = useState(false)
   const [opens, setOpens] = useState(false)
   const phonenumber = `+${phonenumbers}`
+  const {loadings,error,dispatch} = useContext(LoginContext)
     const sendOtp = (e)=>{
       e.preventDefault()
       setLoading(true)
@@ -49,7 +51,6 @@ function Register() {
       const URL = uploadUrl.URL
       console.log(URL)
 
-      setLoadings(true)
       final.confirm(otp).then((result) => {
         console.log(result)
         setOpen(true)
@@ -58,7 +59,6 @@ function Register() {
       }).catch((error) => {
         console.log(error)
        setOpens(true)
-       setLoadings(false)
       });
     }
   return (
