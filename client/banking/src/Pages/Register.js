@@ -80,4 +80,4 @@ function Register() {
   )
 }
 
-export default Regis
+export default Register
