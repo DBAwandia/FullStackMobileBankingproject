@@ -1,17 +1,20 @@
 .login{
     width: 100%;
     height: 100vh;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+    align-content: center;
     padding: 5px;
     background: rgb(199,190,235);
     background: radial-gradient(circle, rgba(199,190,235,1) 52%, rgba(233,148,193,1) 100%);
 }
 .login_container{
-    position: relative;
+    position: absolute;
     padding: 25px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    bottom: 0;
     width: 100%;
+    left: 19.5%;
     height: 100vh;
 }
 .login_container2{
@@ -20,7 +23,7 @@
     gap: 15px;
     padding: 25px;
     width: 50%;
-    margin-left: 28rem;
+    /* margin-left: 28rem; */
     /* position: absolute;
     left: 30%; */
 }
@@ -29,8 +32,8 @@
    
 }
 .avatar_image{
-    width: 12rem;
-    height: 12rem;
+    width: 7.5rem;
+    height: 7.5rem;
     margin-left: 4%;
     object-fit: cover;
     border-radius: 50%;
@@ -90,14 +93,84 @@
 
 /* SMALL DEVICES */
 @media screen  and (max-width: 768px) {
- 
+ .login_container{
+    padding: 5px;
+    left: 10%;
+    /* margin-top: 45px; */
+
+    /* margin-left: -24rem; */
+ }
+ .login{
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+ }
+ .avatar_container > img{
+    width: 4rem;
+    height: 4rem;
+ }
+ .login_container2>input{
+    height: 0.3rem;
+    font-size: 17px;
+ }
+ .login_container2>label{
+    font-size: 15px;
+ }
+ .otp_button{
+    font-size: 14px;
+    width: 70%;
+    padding: 5px;
+    height: 2.5rem;
+ }
+ .login_button{
+    font-size: 17px;
+    height: 2.5rem;
+ }
 }
 /* MEDIUM DEVICES */
-@media screen  and (max-width: 992px) {
- 
+@media screen  and (max-width: 992px) and (min-width: 768px) {
+    .login_container{
+        padding: 5px;
+        left: 17%;
+        /* margin-top: 45px; */
+    
+        /* margin-left: -24rem; */
+     }
+     .login{
+        text-align: center;
+        justify-content: center;
+        align-content: center;
+     }
+     .login_container{
+        width: 100%;
+     }
+     .login_container2{
+        gap: 18px;
+     }
+     .avatar_container > img{
+        width: 6rem;
+        height: 6rem;
+        /* margin-left: 10%; */
+     }
+     .login_container2>label{
+        font-size: 20px;
+     }
+     .login_container2>input{
+        font-size: 20px;
+        height: 2.3rem;
+     }
+     .otp_button{
+        font-size: 20px;
+        width: 50%;
+        height: 3.5rem;
+     }
+     .login_button{
+        font-size: 19px;
+        height: 3.5rem;
+     }
 }
 /* LARGE DEVICES */
-@media screen  and (max-width: 1200px) {
+@media screen  and (max-width: 1200px) and (min-width: 992) {
  
 }
 
