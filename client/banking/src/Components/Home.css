@@ -1,0 +1,40 @@
+.home{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(211, 211, 211,0.2);
+    position: relative;
+}
+.home_container{
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+.homes{
+    width: 100%;
+    height: 100vh;
+}
+.bodyandfooter_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem;
+    margin: 0;
+    
+}
+.body_container{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    z-index: 2;
+}
+.footer_container{
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    z-index: 99;
+    height: 5.4rem;
+    background-color: lightgray;
+    right: 0;
+}

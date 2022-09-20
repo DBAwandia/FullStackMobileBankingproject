@@ -3,9 +3,10 @@ import {RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from '../Firebase/Firebase';
 import "./Login.css"
 import axios from "axios"
-import { useNavigate} from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import { useContext } from 'react';
 import { LoginContext } from '../Contexts/LoginContext';
+import { axiosInstance } from '../Config/Baseurl';
 function Register() {
 
   const navigate = useNavigate()
@@ -16,13 +17,14 @@ function Register() {
   const [image, setImage] = useState("")
   const [final, setFinal] = useState("")
   const [loading, setLoading] = useState(false)
+  const [loadings, setLoadings] = useState(false)
   const [open, setOpen] = useState(false)
   const [opens, setOpens] = useState(false)
   const phonenumber = `+${phonenumbers}`
-  const {loadings,error,dispatch} = useContext(LoginContext)
+  // const {loadings,error,dispatch} = useContext(LoginContext)
     const sendOtp = (e)=>{
       e.preventDefault()
-      setLoading(true)
+      setLoadings(true)
       window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
         'size': 'invisible',
         'callback': (response) => {
@@ -33,33 +35,37 @@ function Register() {
       signInWithPhoneNumber(auth,phonenumber,  appVerifier)
           .then((confirmationResult) => {
             window.confirmationResult = confirmationResult;
+            setLoadings(false)
             setFinal(window.confirmationResult)
             setOpen(true)
-            setLoading(false)
           }).catch((error) => {
             console.log(error)
             setOpens(true)
-            setLoading(false)
+            setLoadings(false)
           });
     }
     const handleClick = async(e)=>{
       e.preventDefault()
+      setLoading(true)
       const data = new FormData()
       data.append("file", image)
       data.append("upload_preset", "keniko")
-      const uploadUrl = await axios.post("https://api.cloudinary.com/v1_1/wandia/image/upload", data)
-      const URL = uploadUrl.URL
-      console.log(URL)
+      const res = await axios.post("https://api.cloudinary.com/v1_1/wandia/image/upload", data)
+      const URL = res.data.url
 
-      final.confirm(otp).then((result) => {
-        console.log(result)
+      final.confirm(otp).then(async(result) => {
         setOpen(true)
+        await axiosInstance.post("/User/register", {photos: URL, password: password, phonenumber:phonenumbers,username: username })
         setLoading(false)
+        console.log(result)
         navigate("/login")
       }).catch((error) => {
         console.log(error)
        setOpens(true)
+       setLoading(false)
       });
+     
+
     }
   return (
      <div className='login'>
@@ -77,10 +83,11 @@ function Register() {
                 <input type="password" placeholder="Enter password" onChange={e=>setPassword(e.target.value)} required/>
                 <label>Enter phonenumber</label>
                 <input type="number" placeholder="Enter phonenumber" onChange={e=>setPhonenumbers(e.target.value)} required/>
-                <button className='otp_button'   onClick={sendOtp}>{loading? "Requesting" : "Request otp"}</button>
+                <button className='otp_button'   onClick={sendOtp}>{loadings? "Requesting..." : "Request otp"}</button>
                 {open && <label>Verify otp</label>}
-                {open && <input type="number" placeholder="Verify phonenumber" onChange={e=>setOtp(e.target.value)} required/>}
-                 <button className='login_button'  onClick={handleClick}>{loadings?"Loading...": "Register"}</button>
+                {open && <input type="number" placeholder="Verify otp sent" onChange={e=>setOtp(e.target.value)} required/>}
+                 <button className='login_button'  onClick={handleClick}>{loading?"Loading...": "Register"}</button>
+                <label style={{ color: "teal", marginTop: 20}}>Already registered <Link to="/login">Login</Link></label>
                  <div id='sign-in-button'/>
             </div>
           </div>

@@ -42,7 +42,7 @@ export const loginUser = async (req,res)=>{
             {expiresIn: "2d"}
             
         )
-        res.cookie("access_token",token,{httpOnly: true}).status(200).json({details:{...others},isAdmin})
+        res.cookie("access_token",token,{maxAge: 90000,httpOnly: true}).status(200).json({details:{...others},isAdmin})
     }catch(err){
         res.status(500).json(err)
     }
@@ -89,3 +89,15 @@ export const countUsers = async(req,res)=>{
         res.status(500).json(err)
     }
 }
+
+
+//find all users
+export const getUsers = async(req,res)=>{
+    try{
+        const countedUsers = await users.find().sort({_id: -1})
+         res.status(200).json(countedUsers)
+         
+     }catch(err){
+         res.status(500).json(err)
+     }
+ }

@@ -1,7 +1,7 @@
 import express from "express"
-import { aunthenticateAdmin, aunthenticateUser, aunthenticateUserAndAdmin } from "../Authentication/VerifyToken.js"
+import { VerifyTokenAdminOnly, VerifyToken, VerifyTokenUserAndAdmin } from "../Authentication/VerifyToken.js"
 const router = express.Router()
-import {loginUser, registerUser,findUser, findUserAndEdit,findUserAndDelete,countUsers} from "../Controllers/User.js"
+import {loginUser, registerUser,findUser, findUserAndEdit,getUsers,findUserAndDelete,countUsers} from "../Controllers/User.js"
 //register
 router.post("/register", registerUser)
 
@@ -19,6 +19,10 @@ router.delete("/findAndDelete/:id", findUserAndDelete)
 
 //count users
 router.get("/countUsers", countUsers)
+
+//find all users
+router.get("/findUsers", getUsers)
+
 
 
 

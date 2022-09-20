@@ -1,38 +1,39 @@
 import jwt from "jsonwebtoken";
 
 //sign in user
-export const aunthenticateUser = (req,res,next)=>{
+export const VerifyToken = (req,res,next)=>{
     const token = req.cookies.access_token
-    !token && res.status(400).json("Invalid token")
-    jwt.verify(process.env.JWT_TOKEN,token,(err,user)=>{
+    if(!token) {return res.status(400).json("Invalid token")}
+
+    //make sure you start with token
+    jwt.verify(token,process.env.JWT_TOKEN,(err,user)=>{
         if(err){
-           return res.status(400).json("Token expired")
+            res.status(403).json("Token expired")
         }else{
             req.user = user
-            return next()
+             next()
         }
     })
 }
 
 //sign in both user and admin
-
-export const aunthenticateUserAndAdmin = (req,res,next)=>{
-    aunthenticateUser(req,res,()=>{
+export const VerifyTokenUserAndAdmin = (req,res,next)=>{
+    VerifyToken(req,res,next,()=>{
         if(req.user.id === req.params.id || req.user.isAdmin){
         next()
         }else{
-            res.status(400).json("Error")
+            res.status(403).json("Error")
         }
     })
 }
 
 //sign in admin only
-export const aunthenticateAdmin = (req,res,next)=>{
-    aunthenticateUser(req,res,()=>{
+export const VerifyTokenAdminOnly = (req,res,next)=>{
+    VerifyToken(req,res,next,()=>{
         if(req.user.isAdmin){
         next()
     }else{
-        res.status(400).json("Only admin")
+        res.status(403).json("Only admin")
     }
     })
 }

@@ -1,20 +1,25 @@
-import React, { useState } from 'react'
-import {RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth } from '../Firebase/Firebase';
+import React, { useContext, useState } from 'react'
 import "./Login.css"
-import { useNavigate} from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
+import { LoginContext } from '../Contexts/LoginContext';
+import { axiosInstance } from '../Config/Baseurl';
 function Login() {
 
   const navigate = useNavigate()
   const [phonenumbers, setPhonenumbers] = useState("")
   const [password, setPassword] = useState("")
-  const [loadings, setLoadings] = useState(false)
-  const [open, setOpen] = useState(false)
-   
-    
-    const handleClick = (e)=>{
+  const { loadings,dispatch} = useContext(LoginContext)
+    const handleClick = async(e)=>{
       e.preventDefault()
-     
+      dispatch({type:"LOGIN_START"})
+      try{
+         const res = await axiosInstance.post("/User/login", {  phonenumber:phonenumbers,password: password })
+         dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
+         navigate("/")
+      }catch(err){
+        dispatch({type:"LOGIN_ERROR"})
+        console.log("err" + err)
+      }
     }
   return (
      <div className='login'>
@@ -26,6 +31,7 @@ function Login() {
                 <label>Enter password</label>
                 <input type="password" placeholder="Enter password" onChange={e=>setPassword(e.target.value)} required/>
                 <button className='login_button'  onClick={handleClick}>{loadings?"Loading...": "Login"}</button>
+                <label className='loginLink' style={{ color: "teal", marginTop:39}}>create acc <Link to="/register">Register</Link></label>
             </div>
           </div>
     </div>

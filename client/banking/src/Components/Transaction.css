@@ -1,0 +1,261 @@
+.transaction{
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: rgba(0, 0, 0,0.1);
+}
+.transaction_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.transaction_text{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 11rem;
+    margin-top: 2rem;
+}
+.transaction_text > p{
+    font-size: 23px;
+    color: gray;
+    font-weight: 450;
+    letter-spacing: 0.9px;
+}
+.transaction_text > h1{
+    font-size: 29px;
+    font-weight: 650;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 1.3px;
+
+}
+.transaction_page{
+    height: 17rem;
+    background-color: rgba(240, 76, 16,0.12);
+    box-shadow: 0px 4px 8px -2px rgba(0,0,0,0.56);
+-webkit-box-shadow: 0px 4px 8px -2px rgba(0,0,0,0.56);
+-moz-box-shadow: 0px 4px 8px -2px rgba(0,0,0,0.56);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 19px 50px;
+}
+.transaction_balance{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    position: relative;
+    gap: 8rem;
+   
+}
+.transcation_wallet{
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-left: 6rem;
+    margin-top: 2rem;
+}
+.transcation_wallet > p{
+    font-size: 25px;
+    letter-spacing: 1.8px;
+    color: teal;
+}
+.transcation_wallet > h1{
+    font-size: 36px;
+    letter-spacing: 2px;
+    font-weight: 690;
+    margin-top: 1rem;
+}
+.country_flag{
+    position: absolute;
+    right: 11rem;
+    top: 0.7rem;
+
+}
+.flags{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 100%;
+    /* object-fit: cover; */
+}
+.transaction_payments{
+    position: absolute;
+    width: 100%;
+    top: 10rem;
+    left: 9rem;
+}
+.send_receive_button{
+    padding: 1rem;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.center_button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 0.3rem;
+}
+.center_button:hover{
+    transition: all 0.1s ease-in-out;
+    transform: scale(1.1);
+    transition-delay: 0.1s;
+    transition-duration: 0.7s;
+    transition-timing-function: linear;
+}
+.center_button > p{
+    font-size: 20px;
+    letter-spacing: 1.3px;
+    font-weight: 600;
+    color: teal;
+    text-transform: capitalize;
+
+}
+.Quick_send{
+    width: 100%;
+    margin: 3rem 10rem;
+    cursor: pointer;
+}
+.Quick_sendContainer{
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.Quick_sendContainer > h1{
+    font-size: 23px;
+    font-weight: 650;
+    letter-spacing: 2px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: teal;
+}
+.transaction_avatars{
+    display: flex;
+    align-items: center;
+    margin: 2rem 2rem;
+    gap: 2rem;
+    width: 100%;
+
+}
+.rounded_borders{
+    border: 3px dotted orange;
+    background-color: rgba(180, 71, 31,0.2);
+    width: 9rem;
+    height: 9rem;
+    border-radius: 50%;
+    animation-name: bounce;
+    animation-timing-function: linear;
+    animation-play-state: running;
+    animation-delay: 0s;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    position: relative;
+}
+@keyframes bounce {
+    0%{
+        transform: translateZ(-100vw);
+        opacity: 0;
+        transition: all 0.2s ease-in;
+    }
+    50%{
+        transform: translateX(0);
+        background-color: rgba(255, 255, 255,0.3);
+        opacity: 0.5;
+        transition: all 0.2s ease-out;
+
+    }
+    100%{
+        transform: translateY(0);
+        background-color: rgba(255, 255, 255,0.3);
+        opacity: 0;
+        transition: all 0.2s ease-in-out;
+
+    }
+}
+.avatar_datails{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+}
+.avatar_datails > p{
+    font-size: 17px;
+    font-weight: 450;
+    letter-spacing: 1.5px;
+    color: gray;
+}
+.avatar_datails > img{
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0px 2.5rem;
+
+}
+.avatar_datails > img:hover{
+    transform: scale(1.2);
+    transition: all 0.1s ease-in-out;
+    transition-delay: 0.2s;
+    transition-duration: 0.7s;
+}
+.img_avatar{
+    margin-left: 12rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+.transaction_search_container{
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(15, 15, 15);
+    margin-top: 20px;
+}
+.transaction_search{
+    display: flex;
+    margin-left: 8rem;
+    width: 100%;
+    flex-direction: column;
+    gap: 2rem;
+}
+.transactions_header{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    padding: 2rem;
+    justify-content: space-between;
+}
+.transactions_header > h2{
+    color: teal;
+    font-size: 29px;
+    font-weight: 590;
+    letter-spacing: 1.3px;
+}
+.transactions_header > p{
+    color: orangered;
+    font-size: 22px;
+    font-weight: 490;
+    letter-spacing: 1.3px;
+    cursor: pointer;
+}
+.search_container{
+    margin: 1rem 2rem;
+    display: flex;
+    width: 80%;
+    align-items: center;
+    position: relative;
+}
+.search_container > input{
+    width: 100%;
+    height: 1.5px;
+    background-color: rgba(211, 211, 211,0.3);
+    padding: 2rem;
+    font-size: 20px;
+    color: #fff;
+    padding-left: 2rem;
+    caret-color: teal;
+}
+
+
