@@ -257,5 +257,57 @@
     padding-left: 2rem;
     caret-color: teal;
 }
+.transaction_date{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.transaction_date > h1{
+    text-transform: capitalize;
+    color: #fff;
+    margin: 10px 3rem;
+    font-size: 26px;
+    letter-spacing: 1.5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+.transaction_date_details{
+    width: 67%;
+    margin-left: 8rem;
+    display: flex;
+    justify-content: space-between;
+
+}
+.transaction_date_details > img{
+    width: 7.5rem;
+    height: 6rem;
+    object-fit: cover;
+    border-radius: 15px 15px 15px 15px;
+
+}
+.name_date{
+    display: flex;
+    width: 100%;
+    margin-left: 16rem;
+    flex-direction: column;
+    color: #fff;
+    opacity: 0.8;
+    font-size: 25px;
+    letter-spacing: 1.5px;
+    gap: 1.1rem;
+}
+.sent{
+    color: red;
+    font-size: 18px;
+    letter-spacing: 1.4px;
+    font-weight: 550;
+}
+.received{
+    color: green;
+    font-size: 18px;
+    letter-spacing: 1.4px;
+    font-weight: 550;
+}
 
 

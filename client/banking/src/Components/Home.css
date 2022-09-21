@@ -9,6 +9,8 @@
     width: 100%;
     position: sticky;
     top: 0;
+    right: 0;
+    left: 0;
     z-index: 9999;
 }
 .homes{
@@ -31,10 +33,11 @@
 }
 .footer_container{
     width: 100%;
+    background-color: rgba(41, 199, 199,0.8);
     bottom: 0;
     position: fixed;
     z-index: 99;
-    height: 5.4rem;
-    background-color: lightgray;
+    height: 3.4rem;
+    /* background-color: lightgray; */
     right: 0;
 }

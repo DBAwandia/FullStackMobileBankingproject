@@ -1,14 +1,48 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import "./Transaction.css"
 import { KE } from 'country-flag-icons/react/3x2'
 import { AddCircleOutlineOutlined, MoreHoriz, Search, Send, TransitEnterexit } from '@mui/icons-material'
+import { LoginContext } from '../Contexts/LoginContext'
+const data = [
+  {
+    name: "Kennedy Wandia",
+    date: "3 Jun, 6:12pm",
+    image: "/images/login.jpg",
+    amount: "+$5000",
+    type: "received"
 
+  },
+  {
+    name: "Kevin Kmau",
+    date: "13 Aug, 6:12pm",
+    image: "/images/login.jpg",
+    amount: "-$5000",
+    type: "sent"
+  }
+ ,
+  {
+    name: "Hilary Wandia",
+    date: "25 Feb, 2:12am",
+    image: "/images/login.jpg",
+    amount: "+$5000",
+    type: "received"
+
+  }
+]
 function Transaction() {
+  const {user} = useContext(LoginContext)
+  const [searchs, setSearchs] = useState("")
+  const Keys = ["name", "amount","type"]
+  const SearchData = (data) =>{
+    return data.filter((item) =>{
+      return Keys.some((key) => item[key].toLowerCase().includes(searchs))
+    })
+  }
   return (
     <div className='transaction'>
       <div className='transaction_container'>
           <div className="transaction_text">
-              <p>Hey Wandia ,</p><br/>
+              <p>Hey {user.username} ,</p><br/>
               <h1>Welcome back !</h1>
             </div>
         <div className="transaction_page">
@@ -87,7 +121,7 @@ function Transaction() {
         </div>
         
       </div>
-      <div className='transaction_search_container'>
+            <div className='transaction_search_container'>
                 <div className='transaction_search'>
                   <div className='transactions_header'>
                     <h2>Transactions</h2>
@@ -96,9 +130,24 @@ function Transaction() {
                   <div className='search_container'>
                     <Search 
                       sx={{ fontSize: "2.9rem", color: "gray",padding: "0px 10px"}}
-                    
                     />
-                    <input type="text"  placeholder="Search" />
+                    <input type="text"  placeholder="Search" onChange={e=>setSearchs(e.target.value)}/>
+                  </div>
+                  <div className='transaction_date'>
+                    <h1>Today</h1>
+                    {SearchData(data)?.map((item, i)=>{
+                      return <div className="transaction_date_details">
+                      <img src={item.image} alt="" />
+                      <div className='name_date' >
+                        <p>{item.name}</p>
+                        <p>{item.date}</p>
+                      </div>
+                      <div className='name_date' >
+                        <p className={`${item.type}`}>{item.amount}</p>
+                        <p style={{textTransform: "Capitalize"}}>{item.type}</p>
+                      </div>
+                    </div>
+                    } )}
                   </div>
                 </div>
               </div>

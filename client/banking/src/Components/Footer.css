@@ -1,0 +1,29 @@
+.footer{
+    width: 100%;
+}
+.footer_container{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.footer_links{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    align-items: center;
+    gap: 0.5rem;
+}
+.footer_links > p{
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 1.3px;
+}
+.footer_links :hover{
+    color: orangered;
+    transition: all 0.2s ease-in-out;
+}
+.footer_links>p.active{
+    background-color: rwed;
+    transition: all 0.2s ease-in-out;
+}
