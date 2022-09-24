@@ -24,6 +24,18 @@
     transition: all 0.2s ease-in-out;
 }
 .footer_links>p.active{
-    background-color: rwed;
+    background-color: red;
     transition: all 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+    .icons{
+        font-size: 25px !important;
+    }
+    .footer_links > p{
+        font-size: 15px;
+    }
+    .footer_links{
+        padding: 0px 0.3rem;
+    }
 }

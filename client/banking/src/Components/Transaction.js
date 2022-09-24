@@ -58,18 +58,22 @@ function Transaction() {
               <div className='send_receive_button'>
                   <div className="center_button">
                     <Send 
+                      className="iconss"
                       sx={{
                         fontSize: "2.5rem",
                         transform: "rotate(-30deg)",
                         margin: "10px 0px",
-                        color:"green"
+                        color:"crimson"
                       }}
                     />
                     <p>transfer</p>
                   </div>
                   <div className="center_button">
                     <TransitEnterexit
+                      className="iconss"
+
                       sx={{
+
                         fontSize: "2.5rem",
                         margin: "10px 0px",
                         color:"blue"
@@ -79,6 +83,7 @@ function Transaction() {
                   </div>
                   <div className="center_button">
                     <MoreHoriz 
+                      className="iconss"
                       sx={{
                         fontSize: "2.5rem",
                         margin: "10px 0px",
@@ -144,7 +149,7 @@ function Transaction() {
                       </div>
                       <div className='name_date' >
                         <p className={`${item.type}`}>{item.amount}</p>
-                        <p style={{textTransform: "Capitalize"}}>{item.type}</p>
+                        <p style={{textTransform: "Capitalize", marginRight:"5px"}}>{item.type}</p>
                       </div>
                     </div>
                     } )}

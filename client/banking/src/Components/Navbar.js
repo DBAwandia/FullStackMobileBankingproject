@@ -1,9 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Navbar.css"
 import {useNavigate} from "react-router-dom"
 import {Notifications} from '@mui/icons-material';
 import {LoginContext} from "../Contexts/LoginContext"
+import { axiosInstance } from '../Config/Baseurl';
+import useFetchs from '../useFetch/useFetchs';
+import Photos from './Photos';
 function Navbar() {
+  // const[data, setData] = useState([])
+  const [open, setOpen] = useState(false)
   const navigate = useNavigate()
   const {user,dispatch} = useContext(LoginContext)
   const handleLogout = () =>{
@@ -11,23 +16,45 @@ function Navbar() {
     navigate("/login")
   }
 
-  const phonenumber = user.phonenumber
-  const photo = user.photos
-  // console.log(phonenumber,photo)
-
+  const id = user._id
+  // const obj = `/User/find/${id}`
+  // useEffect(()=>{
+  //     const fetchData = async(obj)=>{
+  //       try{
+  //         const res = await axiosInstance.get(obj)
+  //         setData(res.data)
+  //       }catch(err){
+          
+  //       }
+  //     }
+  //     fetchData(obj)
+  // },[obj])
+  // const datas = [data]
+  const { data } = useFetchs(`/User/find/${id}`)
+  const datas = [data]
+  const openProfile = ()=>{
+    setOpen(true)
+  }
   return (
     <div className='Navbar'>
-        <div className='navbar_container'>
-            <div className='nabvar_objects'>
-                <img className='avatar_img' src={photo} alt='' />
-                <div className='logoutAndPhone_container'>
-                    <span>Phone:</span>
-                    <p className='phonenumber_input'>{phonenumber}</p>
-                    <button className='logout_button' onClick={handleLogout}>Logout</button>
-                    <Notifications />
+       {datas?.map((item, i) =>{
+        return <div className='navbar_container' key={i}>
+              <div className='nabvar_objects'>
+                <div onClick={openProfile}>
+                  <img  className='avatar_img' src={item.photos} alt='' />
                 </div>
-            </div>
+              <div className='logoutAndPhone_container'>
+                  <span>Phone:</span>
+                  <p className='phonenumber_input'>{item.phonenumber}</p>
+                  <button className='logout_button' onClick={handleLogout}>Logout</button>
+                  <Notifications className='icons'/>
+              </div>
+          </div>
         </div>
+      })}
+  {open && <div className="prof_pic">
+    <Photos setOpen ={setOpen} />
+  </div>}
     </div>
   )
 }

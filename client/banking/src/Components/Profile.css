@@ -1,0 +1,103 @@
+.profile{
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; 
+    background-image: url("../../public/images/login.jpg");
+    background-position: center;
+    background-size: cover;
+    filter: contrast(80%) saturate(60%) blur(15%);
+    background-repeat: no-repeat;
+}
+.profile_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+
+}
+.EEdit_input_container{
+    width: 40%;
+    display: flex;
+    margin-top: 8rem;
+    gap: 2rem;
+    flex-direction: column;
+}
+.EEdit_input_container > label{
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    color: white;
+    opacity: 0.8;
+}
+.EEdit_input_container > input{
+    height: 3.3rem;
+    border-radius: 3px;
+    font-size: 18px;
+    caret-color: blue;
+    color: teal;
+    padding: 0px 1.2rem;
+}
+.EEdit_input_container > button{
+    background-color: teal;
+    align-items: center;
+    color: white;
+    opacity: 0.7;
+    height: 3.4rem;
+    font-size: 19px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.EEdit_input_container > button:hover{
+    background-color: white;
+    color: teal;
+    transition: all 0.3s ease-in-out;
+    transition-delay: 0.45s;
+    transition-duration: 0.8s;
+
+}
+@media screen and (max-width: 768px) {
+    .profile_container{
+        gap: 0;
+    }
+    .EEdit_input_container{
+        width: 100%;
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+    .EEdit_input_container > label{
+        font-size: 1.2rem;
+        padding-left: 0.8rem;
+    }
+    .EEdit_input_container > input{
+        margin:0px 0.8rem ;
+        height: 3rem;
+        font-size: 15px;
+    }
+    .EEdit_input_container > button{
+        margin:0px 0.8rem ;
+        height: 3rem;
+        font-size: 15px;
+    }
+
+}
+@media screen  and (max-width: 992px) and (min-width: 768px) {
+    
+    .EEdit_input_container{
+        width: 100%;
+        padding: 0px 8rem;
+        margin-top: 2rem;
+        gap: 1.6rem;
+    }
+    .EEdit_input_container > label{
+        font-size: 1.2rem;
+        padding-left: 0.7rem;
+    }
+    .EEdit_input_container > input{
+        height: 3.1rem;
+        font-size: 16px;
+    }
+    .EEdit_input_container > button{
+        height: 3.1rem;
+        font-size: 17px;
+    }
+}

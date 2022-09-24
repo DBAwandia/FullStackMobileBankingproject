@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { axiosInstance } from '../Config/Baseurl'
-import {useFetch }from '../useFetch/useFetch'
+// import {useFetch }from '../useFetch/useFetch'
 import Footer from './Footer'
 import "./Home.css"
 import Navbar from './Navbar'

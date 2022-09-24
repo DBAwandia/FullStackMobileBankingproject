@@ -1,36 +1,46 @@
 import { AddCardRounded, DashboardRounded, PersonOutlineOutlined, SupportAgentRounded } from '@mui/icons-material'
 import React from 'react'
 import "./Footer.css"
+import {Link} from "react-router-dom"
 function Footer() {
+
   return (
     <div className='footer'>
       <div className='footer_container'>
-        <div className='footer_links'>
+       <Link to="/">
+         <div className='footer_links'>
           <DashboardRounded 
+            className='icons'
             sx={{fontSize: "2.1rem"}}
           
           />
           <p style={{color: "black"}}>Dashboard</p>
         </div>
+       </Link>
         <div className='footer_links'>
           <AddCardRounded 
-            sx={{fontSize: "2.1rem", color: "teal"}}
+            className='icons'
+            sx={{fontSize: "2.5rem", color: "teal"}}
 
           />
           <p style={{color: "teal"}}>Cards</p>
         </div>
         <div className='footer_links'>
           <SupportAgentRounded 
-            sx={{fontSize: "2.1rem", color: "blue"}}
+            className='icons'
+            sx={{fontSize: "2.5rem", color: "blue"}}
 
           />
           <p style={{color: "blue", opacity:"0.8"}}>Support</p>
         </div>
         <div className='footer_links'>
+         <Link to="/profile">
           <PersonOutlineOutlined 
-            sx={{fontSize: "2.1rem", color: "gray"}}
-          />
-          <p style={{color: "gray"}}>Profile</p>
+              className='icons'
+              sx={{fontSize: "2.5rem", color: "gray"}}
+            />
+            <p style={{color: "gray"}}>Profile</p>
+         </Link>
         </div>
       </div>
       

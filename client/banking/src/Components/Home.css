@@ -33,6 +33,7 @@
 }
 .footer_container{
     width: 100%;
+    height: 7rem;
     background-color: rgba(41, 199, 199,0.8);
     bottom: 0;
     position: fixed;

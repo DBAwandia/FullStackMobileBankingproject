@@ -2,16 +2,13 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
     phonenumber:{
-        type: String,
-        required: true
+        type: Number,
     },
     password:{
         type: String,
-        required: true
     },
     username:{
         type: String,
-        required: true
     },
     photos:{
         type: String,

@@ -1,7 +1,6 @@
 .transaction{
     width: 100%;
     overflow-x: hidden;
-    overflow-y: scroll;
     background-color: rgba(0, 0, 0,0.1);
 }
 .transaction_container{
@@ -150,7 +149,7 @@
     animation-timing-function: linear;
     animation-play-state: running;
     animation-delay: 0s;
-    animation-duration: 4s;
+    animation-duration: 2s;
     animation-iteration-count: infinite;
     position: relative;
 }
@@ -216,6 +215,7 @@
 .transaction_search{
     display: flex;
     margin-left: 8rem;
+    padding: 25px;
     width: 100%;
     flex-direction: column;
     gap: 2rem;
@@ -309,5 +309,239 @@
     letter-spacing: 1.4px;
     font-weight: 550;
 }
-
+@media screen and (max-width: 768px) {
+    .transaction_text{
+        margin-left: 6.3rem;
+    }
+    .transaction_text > p{
+        font-size: 16px;
+    }
+    .transaction_text > h1{
+        font-size: 20px;
+    }
+    .transaction_page{
+        height: 12rem;
+    }
+    .transcation_wallet{
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    .transcation_wallet > p{
+        font-size: 17px;
+    }
+    .transcation_wallet > h1{
+        font-size: 27px;
+    }
+    .country_flag{
+        right: 0;
+        top: -0.1rem;
+    }
+    .flags{
+        width: 2.0rem;
+        height: 2.0rem;
+    }
+    .transaction_payments{
+        top: 6rem;
+        left: 0;
+    }
+    .send_receive_button{
+        gap: 1.7rem;
+    }
+    .center_button{
+        gap:8px;
+    }
+    .center_button > p{
+        font-size: 12px;
+    }
+    .iconss{
+        font-size: 22px !important;
+    }
+    .Quick_send{
+        margin: 0;
+    }
+    .Quick_sendContainer{
+        gap: 10px;
+    }
+    .Quick_sendContainer > h1{
+        font-size: 17px;
+    }
+    .transaction_avatars{
+        margin: 0px 10px;
+        gap: 0;
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .rounded_borders{
+        border: 0;
+        font-size: 13px;
+        background-color: 0;
+    }
+    .rounded_borders > p{
+        display: none;
+    }
+    .avatar_datails > img{
+        width: 3rem;
+        margin: 0px -1.2rem;
+        height: 3rem;
+    }
+    .transaction_search{
+        margin: 0;
+    }
+    .transactions_header > h2{
+        font-size: 21px;
+    }
+    .transactions_header > p{
+        font-size: 17px;
+    }
+    .search_container{
+        margin: 0px 1rem;
+    }
+    .search_container > input{
+        height: 1px;
+        font-size: 18px;
+        padding-left: 1rem;
+    }
+    .transaction_date{
+        gap: 15px;
+        overflow-y: scroll;
+        overflow-x: scroll;
+    }
+    .transaction_date > h1{
+        font-size: 20px;
+        margin: 0px 3rem;
+    }
+    .transaction_date_details{
+        margin:1rem 2rem;
+        padding: 10px 2rem;
+    }
+    .transaction_date_details > img{
+        width: 4.3rem;
+        height: 4.3rem;
+        border-radius: 50%;
+    }
+    .name_date{
+        margin-left: 7rem;
+        font-size: 17px;
+        padding-right: 5px;
+    }
+    .name_date > p{
+        margin-right: -26px;
+    }
+}
+@media screen  and (max-width: 992px) and (min-width: 768px) {
+    .transaction_text{
+        margin-left: 6.3rem;
+    }
+    .transaction_text > p{
+        font-size: 16px;
+    }
+    .transaction_text > h1{
+        font-size: 20px;
+    }
+    .transaction_page{
+        height: 12rem;
+    }
+    .transcation_wallet{
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    .transcation_wallet > p{
+        font-size: 17px;
+    }
+    .transcation_wallet > h1{
+        font-size: 27px;
+    }
+    .country_flag{
+        right: 0;
+        top: -0.1rem;
+    }
+    .flags{
+        width: 2.0rem;
+        height: 2.0rem;
+    }
+    .transaction_payments{
+        top: 6rem;
+        left: 0;
+    }
+    .send_receive_button{
+        gap: 1.7rem;
+    }
+    .center_button{
+        gap:8px;
+    }
+    .center_button > p{
+        font-size: 12px;
+    }
+    .iconss{
+        font-size: 22px !important;
+    }
+    .Quick_send{
+        margin: 0;
+    }
+    .Quick_sendContainer{
+        gap: 10px;
+    }
+    .Quick_sendContainer > h1{
+        font-size: 17px;
+    }
+    .transaction_avatars{
+        margin: 0px 10px;
+        gap: 0;
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .rounded_borders{
+        border: 0;
+        font-size: 13px;
+        background-color: 0;
+    }
+    .rounded_borders > p{
+        display: none;
+    }
+    .avatar_datails > img{
+        width: 3rem;
+        margin: 0px -1.2rem;
+        height: 3rem;
+    }
+    .transaction_search{
+        margin: 0;
+    }
+    .transactions_header > h2{
+        font-size: 21px;
+    }
+    .transactions_header > p{
+        font-size: 17px;
+    }
+    .search_container{
+        margin: 0px 1rem;
+    }
+    .search_container > input{
+        height: 1px;
+        font-size: 18px;
+        padding-left: 1rem;
+    }
+    .transaction_date{
+        gap: 15px;
+        overflow-y: scroll;
+        overflow-x: scroll;
+    }
+    .transaction_date > h1{
+        font-size: 20px;
+        margin: 0px 3rem;
+    }
+    .transaction_date_details{
+        margin:1rem 2rem;
+        padding: 10px 2rem;
+    }
+    .transaction_date_details > img{
+        width: 4.3rem;
+        height: 4.3rem;
+        border-radius: 50%;
+    }
+    .name_date{
+        margin-left: 7rem;
+        font-size: 17px;
+    }
+   
+}
 
