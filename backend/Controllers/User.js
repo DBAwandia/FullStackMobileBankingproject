@@ -2,20 +2,42 @@
 import users from "../Models/User.js"
 import CryptoJS from "crypto-js"
 import jwt from "jsonwebtoken";
+import accountBalances from "../Models/Transaction.js"
 
 //register
 export const registerUser = async( req,res)=>{
     // const username = req.body.username
     // const phonenumber = req.body.phonenumber
     const password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC);
-    const savedUser = users({...req.body,password: password})
+    
+    //generate uuid
+    var minm = 1000000;
+    var maxm = 9999999;
+    const added = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
+
+    const savedUser = users({...req.body,password: password,uuid: added})
+    const savedUsers = accountBalances({uuid: added})
     try{
         const oldUser = await users.findOne({ phonenumber: req.body.phonenumber})
         if(oldUser){
             res.status(400).json("Already exists")
         }else{
-            const user = await savedUser.save()
-            res.status(200).json(user)
+
+                    try{
+                        const user = await savedUser.save()
+                        await savedUsers.save()
+                  
+                        res.status(200).json(user)
+    
+                    }catch(err){
+                        res.status(500).json(err)
+                    }
+    
+                
+               
+
+                    
+
         }
 
     }catch(err){
@@ -82,8 +104,10 @@ export const findUserAndDelete = async(req,res)=>{
 //count users
 export const countUsers = async(req,res)=>{
     try{
-       const countedUsers = await users.countDocuments()
-        res.status(200).json(countedUsers)
+    
+       
+    //    const countedUsers = await users.countDocuments()
+    //     res.status(200).json(countedUsers)
         
     }catch(err){
         res.status(500).json(err)

@@ -4,6 +4,9 @@ const userSchema = new mongoose.Schema({
     phonenumber:{
         type: Number,
     },
+    history:{
+        type: [String]
+    },
     password:{
         type: String,
     },
@@ -12,6 +15,9 @@ const userSchema = new mongoose.Schema({
     },
     photos:{
         type: String,
+    },
+    uuid:{
+        type: Number
     },
     isAdmin:{
         type: Boolean,

@@ -44,8 +44,8 @@ function Navbar() {
                   <img  className='avatar_img' src={item.photos} alt='' />
                 </div>
               <div className='logoutAndPhone_container'>
-                  <span>Phone:</span>
-                  <p className='phonenumber_input'>{item.phonenumber}</p>
+                  <span>  UID:</span>
+                  <p className='phonenumber_input'>{item.uuid}</p>
                   <button className='logout_button' onClick={handleLogout}>Logout</button>
                   <Notifications className='icons'/>
               </div>

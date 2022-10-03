@@ -18,7 +18,6 @@ function Profile() {
 
 
     const navigate = useNavigate()
-    console.log(user)
     const handleSubmit = async(e) =>{
         e.preventDefault()
         setLoading(true)
@@ -30,7 +29,7 @@ function Profile() {
 
         const res = await axios.post("https://api.cloudinary.com/v1_1/wandia/image/upload", data)
         const URL = res.data.url
-        await axios.put(`http://localhost:5000/api/User/findAndEdit/${id}` , { photos: URL,password: password,username: username})
+        await axiosInstance.put(`/User/findAndEdit/${id}` , { photos: URL,password: password,username: username})
         setOpens(true)
         setLoading(false)
         navigate("/")

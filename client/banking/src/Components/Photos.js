@@ -8,7 +8,7 @@ function Photos({setOpen}) {
     const id = user._id
     const {data} = useFetchs(`/User/find/${id}`)
     const datas = [data]
-    const photo = datas.map(item => item.photos)
+    const photo = datas?.map(item => item.photos)
   return (
     <div className='photoss'>
         <div className='photos_container'>

@@ -3,7 +3,9 @@ import "./Transaction.css"
 import { KE } from 'country-flag-icons/react/3x2'
 import { AddCircleOutlineOutlined, MoreHoriz, Search, Send, TransitEnterexit } from '@mui/icons-material'
 import { LoginContext } from '../Contexts/LoginContext'
-const data = [
+import useFetchs from '../useFetch/useFetchs'
+import { Link } from 'react-router-dom'
+const dataz = [
   {
     name: "Kennedy Wandia",
     date: "3 Jun, 6:12pm",
@@ -31,10 +33,15 @@ const data = [
 ]
 function Transaction() {
   const {user} = useContext(LoginContext)
+  const id = user._id
+  const {data} = useFetchs(`/Transaction/balance/${id}`)
+  const datas = [data]
+  const amounts = datas.toLocaleString("en-us")
+  const amountz = amounts
   const [searchs, setSearchs] = useState("")
   const Keys = ["name", "amount","type"]
-  const SearchData = (data) =>{
-    return data.filter((item) =>{
+  const SearchData = (dataz) =>{
+    return dataz.filter((item) =>{
       return Keys.some((key) => item[key].toLowerCase().includes(searchs))
     })
   }
@@ -49,38 +56,43 @@ function Transaction() {
             <div className='transaction_balance'>
               <div className='transcation_wallet'>
                 <p>Wallet Balance: </p>
-                <h1>$9.00</h1>
+                <h1>$ {amountz}</h1>
               </div>
               <div className='country_flag'>
               <KE title="United States" className="flags"/>
               </div>
             <div className='transaction_payments'>
               <div className='send_receive_button'>
-                  <div className="center_button">
-                    <Send 
-                      className="iconss"
-                      sx={{
-                        fontSize: "2.5rem",
-                        transform: "rotate(-30deg)",
-                        margin: "10px 0px",
-                        color:"crimson"
-                      }}
-                    />
-                    <p>transfer</p>
-                  </div>
-                  <div className="center_button">
-                    <TransitEnterexit
-                      className="iconss"
+                  <Link to={`/transfer/${id}`}>
+                    <div className="center_button">
+                      <Send 
+                        className="iconss"
+                        sx={{
+                          fontSize: "2.5rem",
+                          transform: "rotate(-30deg)",
+                          margin: "10px 0px",
+                          color:"crimson"
+                        }}
+                      />
+                      <p>transfer</p>
+                    </div>
+                  </Link>
+                  <Link to={`/deposit/${id}`}>
+                    <div className="center_button">
+                      <TransitEnterexit
+                        className="iconss"
 
-                      sx={{
+                        sx={{
 
-                        fontSize: "2.5rem",
-                        margin: "10px 0px",
-                        color:"blue"
-                      }}
-                     />
-                    <p>Receive</p>
-                  </div>
+                          fontSize: "2.5rem",
+                          margin: "10px 0px",
+                          color:"blue"
+                        }}
+                      />
+                      <p>Deposit</p>
+                    </div>
+                  </Link>
+
                   <div className="center_button">
                     <MoreHoriz 
                       className="iconss"
@@ -140,7 +152,7 @@ function Transaction() {
                   </div>
                   <div className='transaction_date'>
                     <h1>Today</h1>
-                    {SearchData(data)?.map((item, i)=>{
+                    {SearchData(dataz)?.map((item, i)=>{
                       return <div className="transaction_date_details">
                       <img src={item.image} alt="" />
                       <div className='name_date' >

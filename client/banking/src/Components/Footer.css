@@ -14,6 +14,7 @@
     align-items: center;
     gap: 0.5rem;
 }
+
 .footer_links > p{
     font-size: 17px;
     font-weight: 500;
@@ -23,10 +24,13 @@
     color: orangered;
     transition: all 0.2s ease-in-out;
 }
-.footer_links>p.active{
-    background-color: red;
-    transition: all 0.2s ease-in-out;
+.main-nav{
+    background-color: rgba(209, 87, 87,0.3);
+    padding: 0.3rem;
+    color: blue;
+    /* transition: all 0.2s ease-in-out; */
 }
+
 
 @media screen and (max-width: 768px) {
     .icons{
