@@ -1,10 +1,13 @@
 import express from "express"
-import { deposits, getBalance, stripePayment } from "../Controllers/Transaction.js"
+import { deposits, getBalance, savedReason, stripePayment, withdraw } from "../Controllers/Transaction.js"
 const router = express.Router()
 
 
 //save amount
-// router.post("/savedamount", savedAmount)
+router.put("/savedamount/:id", savedReason)
+
+//withdraw
+router.put("/withdraw/:id", withdraw)
 
 //deposit
 router.put("/deposit/:id", deposits)
@@ -13,7 +16,7 @@ router.put("/deposit/:id", deposits)
 router.get("/balance/:id", getBalance)
 
 //stripepayment
-router.post("/stripepay", stripePayment)
+router.post("/stripepays", stripePayment)
 
 
 

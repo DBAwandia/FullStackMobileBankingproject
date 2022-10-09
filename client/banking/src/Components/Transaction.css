@@ -1,7 +1,22 @@
+.transaction_body_container{
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    background-color: rgba(0, 0, 0,0.1);  
+}
 .transaction{
     width: 100%;
     overflow-x: hidden;
+    position: relative;
     background-color: rgba(0, 0, 0,0.1);
+}
+.choose_pay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99999999;
 }
 .transaction_container{
     width: 100%;

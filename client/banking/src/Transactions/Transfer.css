@@ -8,18 +8,38 @@
     /* filter: blur(20px); */
     overflow: hidden;
     background-image: url("../../public/images/money2.jpeg");
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     object-fit: cover;
 }
+.enable{
+    background-color: rgba(211, 211, 211,0.4);
+    cursor:not-allowed;
+     width: 73%;
+    height: 3.5rem;
+    margin-top: 1.2rem;
+    color: rgba(220, 20, 60,0.65);
+    text-transform: capitalize;
+    border-radius: 4px;
+    font-size: 22px;
+}
+.spinner_transfer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999999;
+}
 .transfer_container{
     width: 100%;
-    margin: 1rem 5rem;
+    margin: 0.5rem 5rem;
     position: relative;
     position: absolute;
     left: 10%;
-    top: 5%;
+    /* top: 2%; */
     display: flex;
     flex-direction: column;
     gap: 1.3rem;

@@ -1,5 +1,7 @@
 .footer{
     width: 100%;
+    position: relative;
+    z-index: 9999;
 }
 .footer_container{
     padding: 1rem;

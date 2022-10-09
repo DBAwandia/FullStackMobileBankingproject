@@ -125,3 +125,16 @@ export const getUsers = async(req,res)=>{
          res.status(500).json(err)
      }
  }
+
+ //get user by their uuid
+ export const getUserbyUid = async (req,res)=>{
+    const UUID = req.body.uuid
+    const QUERYUID = req.query.QUERYUID
+    try{
+        const getUser = await users.findOne({uuid: QUERYUID})
+        res.status(200).json(getUser)
+        
+    }catch(err){
+        res.status(500).json(err)
+    }
+ }

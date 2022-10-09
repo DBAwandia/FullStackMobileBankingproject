@@ -1,46 +1,65 @@
 import { ArrowBackIos, AttachMoneyOutlined, CreditCardOutlined } from '@mui/icons-material'
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import { LoginContext } from '../Contexts/LoginContext'
 import "./Stripepayment.css"
+import axios from "axios"
 import StripeCheckout from 'react-stripe-checkout';
 import { axiosInstance } from '../Config/Baseurl'
+import SpinnerLoading from '../LoadingPages/SpinnerLoading'
 
 function Stripepayment() {
     const {user } = useContext(LoginContext)
     const [amount, setAmount] = useState("")
+    const [ opens ,setOpens] = useState(false)
     const [loading, setLoading ] = useState(false)
-    const [stripeTokens, setStripeTokens] = useState("")
+    const [stripeToken, setStripeToken] = useState("")
+    const location = useLocation()
+    const id = location.pathname.split("/")[2]
+    const numb1 = 100000000
+    const numb2 = 999999999
+    const added = (Math.floor(Math.random()*(numb2-numb1+1) + numb1))
+    console.log(added)
     const navigate = useNavigate()
     const amountz = amount * 100
 
-    const onTokens = (token) =>{
-     setStripeTokens(token)
+    const handleClick = async()=>{
+        await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
+        navigate("/confirmtransfer",{state:  {amount,added}})
     }
+    // const onToken = (token) =>{
+    //  setStripeToken(token)
+    // }
 
    
-    useEffect(()=>{
-        // setLoading(true)
-        const makeRequest = async() =>{
-        try{
-            await axiosInstance.post("/api/Transaction/stripepay", {tokenId: stripeTokens.id, amount: amountz})
-            setLoading(false)
-            navigate("/")
-        }catch(err){}
-        }
-    setStripeTokens && makeRequest()
-
-    },[navigate, stripeTokens,amount])
-
-    const completeStripe = () =>{
-       setLoading(true)
-    }
-    console.log(stripeTokens)
+    // useEffect(()=>{
+    //     const makeRequest = async()=>{
+    //     setOpens(true)
+    //     try{
+    //         const res = await axiosInstance.post("/Transaction/stripepays",{
+    //           tokenId: stripeToken.id,
+    //           amount: amountz
+    //         })
+    //         await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
+    //         navigate("/",{state:  amount})
+      
+    //         }catch(err){
+                // setOpens(false)
+    // }
+    //       }
+    //         stripeToken && makeRequest()
+      
+    //   },[stripeToken, amount,navigate])
+  
+    // console.log(stripeTokens)
   return (
     <div className='stripepayment'>
         <Navbar />
+        {opens && <div className="spiner_loading">
+            <SpinnerLoading/>
+            </div>}
            <div className='striper_payment_container_list'>
             <div className='stripe_payment_container'>
                     <Link to="/">
@@ -65,19 +84,20 @@ function Stripepayment() {
                 </div>
                 <div className="stripe_input_button">
                     
-                <button onClick={completeStripe}>
-                    <StripeCheckout
+                <button onClick={handleClick}>
+                    {/* <StripeCheckout
                         name="Complete payment"
                         image="/images/login.jpg"
-                        token={onTokens}
+                        token={onToken}
                         stripeKey="pk_test_51LHrwyBVP5viye6wD4xBD8eSEKWLQTdrIdicuDlnosQ4XSvKIUMKJqwq3fOAPa03FSJHqGBdI07jIgzEToSxoFGh00Q4WdAkbQ"
-                        locale="us"
+                        currency='USD'
                         amount={amountz}
                         billingAddress
                         ComponentClass='stripe_colore'
                     >
                             {loading ? "loading..." : "Deposit"}
-                    </StripeCheckout>
+                    </StripeCheckout> */}
+                    DEPOSIT
                 </button>
 
                 </div>

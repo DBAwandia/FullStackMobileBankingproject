@@ -5,6 +5,7 @@ import { AddCircleOutlineOutlined, MoreHoriz, Search, Send, TransitEnterexit } f
 import { LoginContext } from '../Contexts/LoginContext'
 import useFetchs from '../useFetch/useFetchs'
 import { Link } from 'react-router-dom'
+import DepositType from '../Transactions/DepositType'
 const dataz = [
   {
     name: "Kennedy Wandia",
@@ -36,6 +37,10 @@ function Transaction() {
   const id = user._id
   const {data} = useFetchs(`/Transaction/balance/${id}`)
   const datas = [data]
+
+  //open the deposit type
+  const [openDeposit, setOpenDeposit] = useState(false)
+
   const amounts = datas.toLocaleString("en-us")
   const amountz = amounts
   const [searchs, setSearchs] = useState("")
@@ -46,6 +51,11 @@ function Transaction() {
     })
   }
   return (
+    <div className='transaction_body_container'>
+      {/* choose pay type */}
+      {openDeposit && <div className='choose_pay'>
+          <DepositType setOpenDeposit={setOpenDeposit} />
+      </div>}
     <div className='transaction'>
       <div className='transaction_container'>
           <div className="transaction_text">
@@ -77,8 +87,9 @@ function Transaction() {
                       <p>transfer</p>
                     </div>
                   </Link>
-                  <Link to={`/deposit/${id}`}>
-                    <div className="center_button">
+               
+               {/* choose deposit */}
+                    <div className="center_button"  onClick={()=>setOpenDeposit(true)}>
                       <TransitEnterexit
                         className="iconss"
 
@@ -91,7 +102,7 @@ function Transaction() {
                       />
                       <p>Deposit</p>
                     </div>
-                  </Link>
+                 
 
                   <div className="center_button">
                     <MoreHoriz 
@@ -169,6 +180,8 @@ function Transaction() {
                 </div>
               </div>
     </div>
+    </div>
+
   )
 }
 

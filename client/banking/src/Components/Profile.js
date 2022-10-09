@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { axiosInstance } from '../Config/Baseurl'
 import { LoginContext } from '../Contexts/LoginContext'
+import SpinnerLoading from '../LoadingPages/SpinnerLoading'
 import Footer from './Footer'
 import Navbar from './Navbar'
 import "./Profile.css"
@@ -21,6 +22,8 @@ function Profile() {
     const handleSubmit = async(e) =>{
         e.preventDefault()
         setLoading(true)
+        setOpens(true)
+
        try{
 
         const data = new FormData()
@@ -30,18 +33,21 @@ function Profile() {
         const res = await axios.post("https://api.cloudinary.com/v1_1/wandia/image/upload", data)
         const URL = res.data.url
         await axiosInstance.put(`/User/findAndEdit/${id}` , { photos: URL,password: password,username: username})
-        setOpens(true)
         setLoading(false)
         navigate("/")
        }catch(err){
         console.log(err)
         setOpen(true)
+        setOpens(false)
         setLoading(false)
        }
     }
   return (
     <div className='profile'>
     <Navbar />
+    {opens && <div className="spiner_loading">
+      <SpinnerLoading/>
+    </div>}
         <div className='profile_container'>
             <div className='EEdit_input_container'>
                 {open && <p style={{color: "white",fontSize:"19px", background:"red", padding: "15px"}}>Input correctly</p>}

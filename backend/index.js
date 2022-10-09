@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors"
 import userRouter from "./Routes/User.js"
 import transactRouter from "./Routes/Transaction.js"
+import historyRouter from "./Routes/HistoryData.js"
 import cookieParser from "cookie-parser"
 const app = express()
 
@@ -20,7 +21,7 @@ db.once("open", ()=>console.log("Server working"))
 
 app.use("/api/User", userRouter)
 app.use("/api/Transaction", transactRouter)
-// app.use("/api/Savings", savedRouter)
+app.use("/api/HistoryData", historyRouter)
 
 
 

@@ -10,6 +10,14 @@
     background: rgb(199,190,235);
     background: radial-gradient(circle, rgba(199,190,235,1) 52%, rgba(233,148,193,1) 100%);
 }
+.home_loading_container{
+   position: absolute;
+   top: 0;
+   right: 0;
+   z-index: 999999;
+   bottom: 0;
+   left: 0;
+}
 .login_container{
     position: absolute;
     padding: 25px;

@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const transactSchema = new mongoose.Schema({
     balance: {
-        type: String,
-        default: 0
+        type: Number,
+        default: 2000
     },
     history: {
         type:[ String]
@@ -11,6 +11,9 @@ const transactSchema = new mongoose.Schema({
     ,
     uuid: {
         type: String
+    },
+    paymentReason:{
+        type: [String]
     }
 },{timestamps: true})
 

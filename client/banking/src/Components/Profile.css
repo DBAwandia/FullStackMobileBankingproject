@@ -4,9 +4,18 @@
     object-fit: cover; 
     background-image: url("../../public/images/login.jpg");
     background-position: center;
+    position: relative;
     background-size: cover;
     filter: contrast(80%) saturate(60%) blur(15%);
     background-repeat: no-repeat;
+}
+.spiner_loading{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999999;
 }
 .profile_container{
     width: 100%;
