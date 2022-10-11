@@ -38,8 +38,17 @@
     flex-direction: column;
     gap: 3rem;
     margin-left: 10rem;
+    /* background-color: red; */
     width: 100%;
     padding: 1.5rem;
+}
+.depo_method_type:active{
+    background-color: rgba(226, 149, 191,0.15);
+    width: 80%;
+    align-items: center;
+    margin-right: 10rem;
+    border-radius: 4px;
+    padding-left: 1.3rem;
 }
 .depo_method_type{
     display: flex;

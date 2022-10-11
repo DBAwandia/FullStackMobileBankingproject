@@ -6,6 +6,8 @@ import userRouter from "./Routes/User.js"
 import transactRouter from "./Routes/Transaction.js"
 import historyRouter from "./Routes/HistoryData.js"
 import cookieParser from "cookie-parser"
+// import { generateToken } from "./Authentication/VerifyToken.js";
+import { generateToken, lipanaMpesa } from "./Controllers/Transaction.js";
 const app = express()
 
 dotenv.config()
@@ -22,7 +24,12 @@ db.once("open", ()=>console.log("Server working"))
 app.use("/api/User", userRouter)
 app.use("/api/Transaction", transactRouter)
 app.use("/api/HistoryData", historyRouter)
-
+// app.get("/",(req,res)=>{
+//     generateToken()
+//     res.send("working")
+// })
+app.post("/",generateToken, lipanaMpesa
+)
 
 
 app.listen(`${PORT}`, ()=>console.log("Mongodb connected"))

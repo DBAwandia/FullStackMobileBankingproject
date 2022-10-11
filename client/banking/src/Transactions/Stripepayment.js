@@ -23,35 +23,35 @@ function Stripepayment() {
     const added = (Math.floor(Math.random()*(numb2-numb1+1) + numb1))
     console.log(added)
     const navigate = useNavigate()
-    const amountz = amount * 100
+    // const amountz = 
 
-    const handleClick = async()=>{
-        await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
-        navigate("/confirmtransfer",{state:  {amount,added}})
-    }
-    // const onToken = (token) =>{
-    //  setStripeToken(token)
+    // const handleClick = async()=>{
+    //     await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
+    //     navigate("/confirmtransfer",{state:  {amount,added}})
     // }
+    const onToken = (token) =>{
+     setStripeToken(token)
+    }
 
    
-    // useEffect(()=>{
-    //     const makeRequest = async()=>{
-    //     setOpens(true)
-    //     try{
-    //         const res = await axiosInstance.post("/Transaction/stripepays",{
-    //           tokenId: stripeToken.id,
-    //           amount: amountz
-    //         })
-    //         await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
-    //         navigate("/",{state:  amount})
+    useEffect(()=>{
+        const makeRequest = async()=>{
+        setOpens(true)
+        try{
+            const res = await axiosInstance.post("/Transaction/stripepays",{
+              tokenId: stripeToken.id,
+              amount: amount * 100
+            })
+            // await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
+            // navigate("/",{state:  {amount}})
       
-    //         }catch(err){
-                // setOpens(false)
-    // }
-    //       }
-    //         stripeToken && makeRequest()
+            }catch(err){
+                setOpens(false)
+    }
+          }
+            stripeToken && makeRequest()
       
-    //   },[stripeToken, amount,navigate])
+      },[stripeToken, amount,navigate])
   
     // console.log(stripeTokens)
   return (
@@ -62,7 +62,7 @@ function Stripepayment() {
             </div>}
            <div className='striper_payment_container_list'>
             <div className='stripe_payment_container'>
-                    <Link to="/">
+                    <Link to="/depotype">
                         <ArrowBackIos sx={{fontSize: "35px",marginLeft: "-42em"}}/>
                     </Link>
                     <div className='payment_header_object'>
@@ -84,19 +84,21 @@ function Stripepayment() {
                 </div>
                 <div className="stripe_input_button">
                     
-                <button onClick={handleClick}>
-                    {/* <StripeCheckout
+                <button 
+                // onClick={handleClick}
+                >
+                    <StripeCheckout
                         name="Complete payment"
                         image="/images/login.jpg"
                         token={onToken}
                         stripeKey="pk_test_51LHrwyBVP5viye6wD4xBD8eSEKWLQTdrIdicuDlnosQ4XSvKIUMKJqwq3fOAPa03FSJHqGBdI07jIgzEToSxoFGh00Q4WdAkbQ"
                         currency='USD'
-                        amount={amountz}
+                        amount={amount * 100}
                         billingAddress
                         ComponentClass='stripe_colore'
                     >
                             {loading ? "loading..." : "Deposit"}
-                    </StripeCheckout> */}
+                    </StripeCheckout>
                     DEPOSIT
                 </button>
 
