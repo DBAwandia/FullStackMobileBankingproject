@@ -6,6 +6,7 @@ import HomeLoading from "./LoadingPages/HomeLoading";
 import SpinnerLoading from "./LoadingPages/SpinnerLoading";
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
+import ResetPassword from "./Pages/ResetPassword";
 import BitcoinPayment from "./Transactions/BitcoinPayment";
 import Confirmation from "./Transactions/Confirmation";
 import DepositType from "./Transactions/DepositType";
@@ -34,6 +35,8 @@ function App() {
           <Route path="/depotype" element={<DepositType/>} />
           <Route path="/mpesapay" element={<MpesaPayment/>} />
           <Route path="/bitcoinpay" element={<BitcoinPayment/>} />
+          <Route path="/resetpassword" element={<ResetPassword/>} />
+
 
 
           {/* 
