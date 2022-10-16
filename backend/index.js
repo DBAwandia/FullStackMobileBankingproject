@@ -20,7 +20,7 @@ const db = mongoose.connection
 db.on("err", ()=>console.log("Mongoose error"))
 db.once("open", ()=>console.log("Server working"))
 
-app.use("/api//User", userRouter)
+app.use("/api/User", userRouter)
 app.use("/api/Transaction", transactRouter)
 app.use("/api/HistoryData", historyRouter)
 // app.get("/",(req,res)=>{

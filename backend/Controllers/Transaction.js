@@ -1,7 +1,7 @@
 import accountBalances from "../Models/Transaction.js"
 import User from "../Models/User.js"
-import axios from "axios"
-import moment from "moment"
+// import axios from "axios"
+// import moment from "moment"
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const stripe = require("stripe")(process.env.STRIPE_KEY)
@@ -102,83 +102,83 @@ export const stripePayment = async(req,res)=>{
 }
 
 //generate authToken
-export const generateToken = async(req,res,next) =>{
+// export const generateToken = async(req,res,next) =>{
 
-    const consumer_secret = process.env.CONSUMER_SECRET
-    const consumer_key = process.env.CONSUMER_KEY
-    const Authorization = `Basic ${new Buffer.from(
-        `${consumer_key}:${consumer_secret}`,
-        'utf-8'
-      ).toString('base64')}`;
-    try{
+//     const consumer_secret = process.env.CONSUMER_SECRET
+//     const consumer_key = process.env.CONSUMER_KEY
+//     const Authorization = `Basic ${new Buffer.from(
+//         `${consumer_key}:${consumer_secret}`,
+//         'utf-8'
+//       ).toString('base64')}`;
+//     try{
         
-        await  axios
-            .get("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
-              headers: {
-                authorization: Authorization
-              }
-            })
-            .then((response) => {
-              // Handle Success
-              console.log(response.data.access_token)
-                tokens = response.data.access_token
-              next()
-            })
-            .catch((error) => {
-               //Handle your error
-               console.log(error)
-            });
-    }catch(err){
-        res.status(500).json(err)
-    }
-}
+//         await  axios
+//             .get("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
+//               headers: {
+//                 authorization: Authorization
+//               }
+//             })
+//             .then((response) => {
+//               // Handle Success
+//               console.log(response.data.access_token)
+//                 tokens = response.data.access_token
+//               next()
+//             })
+//             .catch((error) => {
+//                //Handle your error
+//                console.log(error)
+//             });
+//     }catch(err){
+//         res.status(500).json(err)
+//     }
+// }
 
 //lipa na mpesa payment
-export const lipanaMpesa = async (req,res)=>{
-    const phonenumber = `+254 + ${req.body.phonenumber}`
-    const amount = req.body.amount
+// export const lipanaMpesa = async (req,res)=>{
+//     const phonenumber = `+254 + ${req.body.phonenumber}`
+//     const amount = req.body.amount
 
-    //generate timestamp
-    const dateToday =moment().format()
+//     //generate timestamp
+    // const dateToday =moment().format()
 
-    //password
-    const shortCode = process.env.MY_PAYBILL
-    const passkey = process.env.PASS_KEY
-    const passwords = new Buffer.from( shortCode + passkey + dateToday,'utf-8' ).toString("base64")
+//     //password
+//     const shortCode = process.env.MY_PAYBILL
+//     const passkey = process.env.PASS_KEY
+//     const passwords = new Buffer.from( shortCode + passkey + dateToday,'utf-8' ).toString("base64")
 
-    // `Basic ${new Buffer.from(
-    //     `${consumer_key}:${consumer_secret}`,
-    //     'utf-8'
-    //   ).toString('base64')}`;
-    try{
+//     // `Basic ${new Buffer.from(
+//     //     `${consumer_key}:${consumer_secret}`,
+//     //     'utf-8'
+//     //   ).toString('base64')}`;
+//     try{
         
-    await axios.post("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
-        {    
-        BusinessShortCode: shortCode,    
-        Password: passwords,    
-        Timestamp: dateToday,     
-        TransactionType: "CustomerPayBillOnline",
-        Amount: amount,    
-        PartyA: phonenumber,    
-        PartyB: shortCode,    
-        PhoneNumber:phonenumber,    
-        CallBackURL:"https://mydomain.com/pat",    
-        AccountReference: phonenumber,    
-        TransactionDesc:"Test"
-        },
-        {
-            headers: {
-                  Authorization: `Bearer ${tokens}`
-            }
-        }
-    ).then((data)=>{
-        // res.status(200).json(data.data)
-        console.log(data.data)
-    }).catch((err)=>{
-        res.status(400).json(err + "err")
-    })
+//     await axios.post("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+//         {    
+//         BusinessShortCode: shortCode,    
+//         Password: passwords,    
+//         Timestamp: dateToday,     
+//         TransactionType: "CustomerPayBillOnline",
+//         Amount: amount,    
+//         PartyA: phonenumber,    
+//         PartyB: shortCode,    
+//         PhoneNumber:phonenumber,    
+//         CallBackURL:"https://mydomain.com/pat",    
+//         AccountReference: phonenumber,    
+//         TransactionDesc:"Test"
+//         },
+//         {
+//             headers: {
+//                   Authorization: `Bearer ${tokens}`
+//             }
+//         }
+//     ).then((data)=>{
+//         // res.status(200).json(data.data)
+//         console.log(data.data)
+//     }).catch((err)=>{
+//         res.status(400).json(err + "err")
+//     })
 
-    }catch(err){
-        res.status(500).json(err)
-    }
-}
+//     }catch(err){
+//         res.status(500).json(err)
+//     }
+// }

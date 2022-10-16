@@ -1,6 +1,6 @@
 import express from "express"
 // import { generateToken } from "../Authentication/VerifyToken.js"
-import { deposits, generateToken, getBalance, lipanaMpesa, savedReason, stripePayment, withdraw } from "../Controllers/Transaction.js"
+import { deposits, getBalance, savedReason, stripePayment, withdraw } from "../Controllers/Transaction.js"
 const router = express.Router()
 
 
@@ -20,7 +20,7 @@ router.get("/balance/:id", getBalance)
 router.post("/stripepays", stripePayment)
 
 //lipanampesa
-router.post("/lipanampesa",generateToken, lipanaMpesa)
+// router.post("/lipanampesa",generateToken, lipanaMpesa)
 
 
 

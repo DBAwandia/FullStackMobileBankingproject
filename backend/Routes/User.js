@@ -1,12 +1,15 @@
 import express from "express"
 import { VerifyTokenAdminOnly, VerifyToken, VerifyTokenUserAndAdmin } from "../Authentication/VerifyToken.js"
 const router = express.Router()
-import {loginUser, registerUser,findUser, findUserAndEdit,getUsers,findUserAndDelete,countUsers, getUserbyUid} from "../Controllers/User.js"
+import {loginUser, registerUser,findUser, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword} from "../Controllers/User.js"
 //register
 router.post("/register", registerUser)
 
 //login
 router.post("/login", loginUser)
+
+//reset password
+router.put("/reset", resetPassword)
 
 //find user by id
 router.get("/find/:id", findUser)
@@ -18,13 +21,15 @@ router.put("/findAndEdit/:id", findUserAndEdit)
 router.delete("/findAndDelete/:id", findUserAndDelete)
 
 //count users
-router.get("/countUsers", countUsers)
+// router.get("/countUsers", countUsers)
 
 //find all users
-router.get("/findUsers", getUsers)
+// router.get("/findUsers", getUsers)
 
 //get user by uuid
 router.get("/findUuid", getUserbyUid)
+
+// router.put("/findz",findPer)
 
 
 

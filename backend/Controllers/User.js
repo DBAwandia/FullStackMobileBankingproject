@@ -26,14 +26,12 @@ export const registerUser = async( req,res)=>{
     try{
         const oldUser = await People.findOne({ phonenumber: req.body.phonenumber})
         if(oldUser){
-          return  res.status(400).json("Already exists")
+           return res.status(400).json("Already exists")
         }else{
-
                         const user = await newUser.save()
                         await savedPeople.save()
                   
                         res.status(200).json(user)
-    
         }
 
     }catch(err){
@@ -45,7 +43,10 @@ export const registerUser = async( req,res)=>{
 export const loginUser = async (req,res)=>{
     try{
         const user = await People.findOne({phonenumber: req.body.phonenumber})
-           !user && res.status(400).json("please register")
+        // if(!user){
+        //     res.status(400).json("please register")
+        // }else{
+        
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
             const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
             originalPassword !== req.body.password  && res.status(400).json("Put correct password")
@@ -61,6 +62,7 @@ export const loginUser = async (req,res)=>{
             
         )
         res.cookie("access_token",token,{maxAge: 90000,httpOnly: true}).status(200).json({details:{...others},isAdmin})
+        // }
     }catch(err){
         res.status(500).json(err)
     }
