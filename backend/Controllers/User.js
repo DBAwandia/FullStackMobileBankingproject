@@ -1,8 +1,16 @@
 // import People from "../Models/User.js"
+import express from "express";
 import People from "../Models/User.js"
 import CryptoJS from "crypto-js"
 import jwt from "jsonwebtoken";
 import accountBalances from "../Models/Transaction.js"
+let app = express();
+
+//response as Json
+app.use(express.json()); 
+
+//Parse x-www-form-urlencoded request into req.body
+app.use(express.urlencoded({ extended: true }));  
 
 //register
 export const registerUser = async( req,res)=>{
@@ -10,13 +18,10 @@ export const registerUser = async( req,res)=>{
     var minm = 1000000;
     var maxm = 9999999;
     const generatedNumbers = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
-
-   const username = req.body.username
-   const phonenumber = req.body.phonenumber
-   const photos = req.body.photos
-   const history = req.body.history
+   const {username,photos,history,phonenumber} = req.body
+   const uuid= generatedNumbers
    const password = CryptoJS.AES.encrypt(req.body.password, (process.env.PASS_SEC));
-   const newUser =People({password: password,phonenumber:phonenumber,username: username,history: history,uuid:generatedNumbers,photos:photos}
+   const newUser =People({password: password,phonenumber:phonenumber,username: username,history: history,uuid:uuid,photos:photos}
        )
 
    const saveUuidToAccountSchema = accountBalances({uuid: generatedNumbers})
@@ -30,7 +35,7 @@ export const registerUser = async( req,res)=>{
                        await saveUuidToAccountSchema.save()
 
                        //bug ,returns undefined after console.log
-                    console.log(user.phonenumber)
+                    console.log(user.username)
 
                        return  res.status(200).json(user)
        }

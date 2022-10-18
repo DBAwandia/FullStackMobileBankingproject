@@ -1,0 +1,43 @@
+.FoodAccount{
+    width: 100%;
+    height: 100vh;
+}
+.FoodAccount_container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.FoodAccount_container_header{
+    width: 100%;
+    height: 10rem;
+    background-color: blue;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.foodandhealth_balance{
+    display: flex;
+    align-items: center;
+    padding: 0px 2rem;
+    margin-right: 10rem;
+    gap: 1.2rem;
+}
+.FoodAccount_container_header > h1{
+    font-size: 3rem;
+    font-weight: 600;
+    margin-left: 4rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+.foodandhealth_balance > p{
+    font-size: 1.5rem;
+}
+.foodandhealth_balance >span{
+    font-size: 1.8rem;
+}
+progress{
+    width: 100%;
+    height: 5rem;
+}
