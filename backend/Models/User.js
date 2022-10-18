@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    phonenumber:{
-        type: Number,
-    },
+   
     history:{
         type: [String]
+    },
+    phonenumber:{
+        type: Number,
     },
     password:{
         type: String,

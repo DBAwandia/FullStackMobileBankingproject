@@ -23,7 +23,6 @@ function ResetPassword() {
   const phonenumber = `+${phonenumbers.trim()}`
   // const {loadings,error,dispatch} = useContext(LoginContext)
 
-console.log(password,cPassword)
   useEffect(()=>{
     if(phonenumbers.length === "" || phonenumbers.length < 9 ||
     password.length === "" || password.length < 4 || cPassword.length < 4 

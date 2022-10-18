@@ -6,46 +6,49 @@ import accountBalances from "../Models/Transaction.js"
 
 //register
 export const registerUser = async( req,res)=>{
-    const username = req.body.username
-    const phonenumber = req.body.phonenumber
-    const photos = req.body.photos
-    const uuid = req.body.uuid
-    const history = req.body.history
-    const password = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC);
-    const newUser =People({password: password,phonenumber:phonenumber,username: username,history: history,uuid:uuid,photos:photos}
-        )
-
-    
     //generate uuid
     var minm = 1000000;
     var maxm = 9999999;
-    const added = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
+    const generatedNumbers = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
 
-    // const savedUser = People({username: username,phonenumber:phonenumber,password: password,uuid: added})
-    const savedPeople = accountBalances({uuid: added})
-    try{
-        const oldUser = await People.findOne({ phonenumber: req.body.phonenumber})
-        if(oldUser){
-           return res.status(400).json("Already exists")
-        }else{
-                        const user = await newUser.save()
-                        await savedPeople.save()
-                  
-                        res.status(200).json(user)
-        }
+   const username = req.body.username
+   const phonenumber = req.body.phonenumber
+   const photos = req.body.photos
+   const history = req.body.history
+   const password = CryptoJS.AES.encrypt(req.body.password, (process.env.PASS_SEC));
+   const newUser =People({password: password,phonenumber:phonenumber,username: username,history: history,uuid:generatedNumbers,photos:photos}
+       )
 
-    }catch(err){
-        res.status(500).json(err)
-    }
+   const saveUuidToAccountSchema = accountBalances({uuid: generatedNumbers})
+
+   try{
+       const oldUser = await People.findOne({ phonenumber: phonenumber})
+       if(oldUser){
+          return res.status(400).json("Already exists")
+       }else {
+                       const user = await newUser.save()
+                       await saveUuidToAccountSchema.save()
+
+                       //bug ,returns undefined after console.log
+                    console.log(user.phonenumber)
+
+                       return  res.status(200).json(user)
+       }
+
+   }catch(err){
+     return  res.status(500).json(err)
+   }
 
 }
+
 //login
 export const loginUser = async (req,res)=>{
     try{
         const user = await People.findOne({phonenumber: req.body.phonenumber})
-        // if(!user){
-        //     res.status(400).json("please register")
-        // }else{
+        if(!user){
+            res.status(400).json("please register")
+            return;
+        }else{
         
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
             const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
@@ -62,7 +65,7 @@ export const loginUser = async (req,res)=>{
             
         )
         res.cookie("access_token",token,{maxAge: 90000,httpOnly: true}).status(200).json({details:{...others},isAdmin})
-        // }
+        }
     }catch(err){
         res.status(500).json(err)
     }
@@ -75,7 +78,7 @@ export const resetPassword = async (req,res)=>{
         !user && res.status(400).json("inavilid")
         const phoneNumber = user.phonenumber
         const editedPassword = await People.findOneAndUpdate({phonenumber: phoneNumber}, {$set: {password: req.body.password}}, {new: true})
-        res.status(200).json(editedPassword)
+       return res.status(200).json(editedPassword)
     }catch(err){
         res.status(500).json(err)
     }
