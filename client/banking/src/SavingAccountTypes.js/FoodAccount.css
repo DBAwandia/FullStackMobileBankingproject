@@ -1,17 +1,26 @@
 .FoodAccount{
     width: 100%;
     height: 100vh;
+   
 }
 .FoodAccount_container{
     width: 100%;
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1483401757487-2ced3fa77952?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mjh8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.1rem;
 }
+
 .FoodAccount_container_header{
     width: 100%;
     height: 10rem;
-    background-color: blue;
+    background: #2b5876;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: white;
     display: flex;
     align-items: center;
@@ -25,19 +34,165 @@
     gap: 1.2rem;
 }
 .FoodAccount_container_header > h1{
-    font-size: 3rem;
+    font-size: 3.4rem;
     font-weight: 600;
     margin-left: 4rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 1.2px;
 }
 .foodandhealth_balance > p{
     font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: wheat;
 }
 .foodandhealth_balance >span{
-    font-size: 1.8rem;
+    font-size: 2.8rem;
+    color: white;
 }
-progress{
+.FoodAccount_container_animate{
     width: 100%;
-    height: 5rem;
+    height: 2.5rem;
+    overflow: hidden;
+    background-color: rgba(48, 48, 172,0.25);
+    display: grid;
+    place-items: center;
+    align-items: center;
+}
+.center_message_foodaccount{
+    width: 70%;
+    height: 50%;
+    left: 8%;
+    top: 30%;
+    position: absolute;
+    color: gold;
+    opacity: 0.6;
+}
+.center_message_foodaccount > p{
+    width: 50%;
+    font-size: 2.5rem;
+    line-height: 80px;
+    opacity: 0.89;
+}
+.foodbalance{
+    font-size: 3.5rem;
+    margin: 0px 1.2rem;
+}
+.FoodAccount_container_body{
+    position: relative;
+    animation-name: progress;
+    animation-delay: 0.5s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+}
+.FoodAccount_container_body:hover{
+    animation-play-state: paused;
+}
+
+
+.FoodAccount_container_body > p:nth-child(1){
+    font-size: 1.7rem;
+    color: gray;
+    margin-top: 1.7rem;
+    animation-name: progress;
+    /* animation-delay: 0.1s; */
+    /* animation-duration: 1.5s; */
+
+}
+.FoodAccount_container_body > p:nth-child(2){
+    font-size: 1.7rem;
+    color: white;
+    margin-top: 1.7rem;
+    opacity: 0.99;
+    animation-name: progress;
+    /* animation-delay: 0.2s; */
+    /* animation-duration: 1.6s; */
+}
+@keyframes progress {
+    0%{
+        bottom: 0px;
+        color: crimson;
+
+    }
+   
+    40%{
+        bottom: 40px;
+        color: crimson;
+    }
+    60%{
+        bottom: 60px;
+
+    }
+    80%{
+        bottom: 80px;
+
+    }
+    90%{
+        bottom: 95px;
+        color: crimson;
+
+    }
+    100%{
+        bottom: 110px;
+
+    }
+}
+.FoodAccount_container_circularbar{
+    width: 100%;
+    display: grid;
+    place-items: center;
+    align-items: center;
+    position: relative;
+
+}
+.FoodAccount_CircularBar_chart{
+    width: 100%;
+    position: relative;
+    /* display: grid;
+    place-items: center;
+    align-items: center; */
+}
+.FoodAccount_container_circularbar > p{
+    font-size: 1.7rem;
+    color: white;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    position: absolute;
+    right: 21.3%;
+    opacity: 0.89;
+    margin-top: 4.2rem;
+}
+hr{
+    width: 17%;
+    right: 20%;
+    margin-top: 7.2rem;
+    height: 3px;
+    position: absolute;
+    color: blue;
+    background-color: blue;
+}
+.circular_chart_model{
+    /* width: 10rem;
+    height: 10rem; */
+    position: absolute;
+    margin-top: 4.5rem;
+    right: 15%;
+}
+.icon_paragraph_chart{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+
+}
+.icon_paragraph_chart > p{
+    font-size: 2rem;
+    color: crimson;
+}
+.circulchartbar{
+    width: 350px;
+    height: 350px;
+    margin-top: 5rem;
 }
