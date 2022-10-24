@@ -16,7 +16,7 @@ function Navbar() {
     navigate("/login")
   }
 
-  const id = user._id
+  const id = user?._id
   // const obj = `/User/find/${id}`
   // useEffect(()=>{
   //     const fetchData = async(obj)=>{
@@ -41,11 +41,11 @@ function Navbar() {
         return <div className='navbar_container' key={i}>
               <div className='nabvar_objects'>
                 <div onClick={openProfile}>
-                  <img  className='avatar_img' src={item.photos} alt='' />
+                  <img  className='avatar_img' src={item?.photos} alt='' />
                 </div>
               <div className='logoutAndPhone_container'>
                   <span>  UID:</span>
-                  <p className='phonenumber_input'>{item.uuid}</p>
+                  <p className='phonenumber_input'>{item?.uuid}</p>
                   <button className='logout_button' onClick={handleLogout}>Logout</button>
                   <Notifications className='icons'/>
               </div>

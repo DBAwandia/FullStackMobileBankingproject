@@ -4,11 +4,11 @@ let app = express()
 import dotenv from "dotenv";
 import cors from "cors"
 import cookieParser from "cookie-parser"
-import bodyParser from "body-parser"
+// import bodyParser from "body-parser"
 const PORT = process.env.PORT || 5000
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 dotenv.config()

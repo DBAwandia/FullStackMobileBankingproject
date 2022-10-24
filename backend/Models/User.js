@@ -5,6 +5,16 @@ const userSchema = new mongoose.Schema({
     history:{
         type: [String]
     },
+    food:{
+        type: Number
+    },
+    
+    cars:{
+        type: Number
+    },
+    leisure:{
+        type: Number
+    },
     phonenumber:{
         type: Number,
     },

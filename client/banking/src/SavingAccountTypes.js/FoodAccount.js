@@ -20,7 +20,7 @@ function FoodAccount() {
             </div>
             <div className='FoodAccount_container_animate'>
                 <div className='FoodAccount_container_body'>
-                    <p className="vmove">Welcome Keniko to your savings account</p>
+                    <p className="vmove">Welcome Keniko to your Food savings account</p>
                     <p className="vmove">Only at 2%, continue saving more!!!</p>
                     {/* <p className="vmove">46h</p>
                     <p className="vmove">45h</p>
