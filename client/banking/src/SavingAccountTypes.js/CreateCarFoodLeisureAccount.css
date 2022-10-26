@@ -1,0 +1,97 @@
+.CreateCarAccount{
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    place-items: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    /* filter: blur(20px); */
+
+}
+.arrow-left{
+    position: absolute;
+    left: 5%;
+    top: 12%;
+    font-size: 3rem;
+    color: red;
+    cursor: pointer;
+}
+.arrow-left:hover{
+    color: gray;
+}
+a{
+    text-decoration: none;
+}
+.cars_header_top{
+    font-size: 2.2rem;
+    /* width: 100%; */
+    margin-top: 1.85rem;
+    /* margin-left: 50%; */
+    color: lightgray;
+    font-family: 'Times New Roman', Times, serif;
+}
+.CreateCarAccount_data{
+    width: 100%;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 20%;
+    
+}
+.cars{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   gap: 2rem;
+   /* margin-bottom: 1rem; */
+}
+.cars > p{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: teal;
+    margin-top: 1.8rem;
+}
+.cars> img{
+    width: 60%;
+    height: 55%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+.cars > b{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: crimson;
+}
+.cars > input{
+    width: 59%;
+    height: 2.8rem;
+    font-size: 1.3rem;
+    padding-left: 1rem;
+    color: black;
+    opacity: 0.5;
+    background-color: rgba(19, 77, 22, 0.3);
+}
+.button_car{
+    width: 61%;
+    height: 2.9rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    background-color: crimson;
+    color: white;
+    opacity: 0.84;
+}
+.cars > button:hover{
+    background-color: teal;
+}
+.enable{
+    width: 61%;
+    height: 2.9rem;
+    font-size: 1.4rem;
+    cursor: not-allowed;
+    background-color: gray;
+    color: crimson;
+    opacity: 0.84;
+}

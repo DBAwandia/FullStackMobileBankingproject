@@ -6,6 +6,7 @@ import { LoginContext } from '../Contexts/LoginContext'
 import useFetchs from '../useFetch/useFetchs'
 import { Link } from 'react-router-dom'
 import DepositType from '../Transactions/DepositType'
+import MoreItems from './MoreItems'
 const dataz = [
   {
     name: "Kennedy Wandia",
@@ -40,7 +41,7 @@ function Transaction() {
 
   //open the deposit type
   const [openDeposit, setOpenDeposit] = useState(false)
-
+  const [ open,setOpen] = useState(false)
   const amounts = datas.toLocaleString("en-us")
   const amountz = amounts
   const [searchs, setSearchs] = useState("")
@@ -104,7 +105,7 @@ function Transaction() {
                     </div>
                  
 
-                  <div className="center_button">
+                  <div className="center_button" onClick={()=> setOpen(true)}>
                     <MoreHoriz 
                       className="iconss"
                       sx={{
@@ -119,6 +120,9 @@ function Transaction() {
             </div>
           </div>
        </div>
+           {open && <div className="open_savings_modal">
+                  <MoreItems setOpen={setOpen} />
+            </div>}
         <div className="Quick_send">
             <div className="Quick_sendContainer">
                 <h1>Send to recent friends...</h1><hr style={{width: "8rem", fontWeight: 900,borderRadius:"130px 0px 70px 0px",height: "0.5rem",border:0,backgroundColor: 'crimson'}}/>

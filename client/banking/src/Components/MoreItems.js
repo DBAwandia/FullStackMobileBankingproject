@@ -1,13 +1,16 @@
-import { AddIcCall, KeyboardArrowRight, PowerSettingsNew, Savings, Settings } from '@mui/icons-material'
+import { AddIcCall, Cancel, KeyboardArrowRight, PowerSettingsNew, Savings, Settings } from '@mui/icons-material'
 import React, { useContext, useEffect, useState } from 'react'
 import "./MoreItem.css"
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../Contexts/LoginContext';
-function MoreItems() {
+import { axiosInstance } from '../Config/Baseurl';
+function MoreItems({setOpen}) {
     const [openStartSavings,setOpenStartSavings] = useState(false)
     const [openBuyAirtime,setOpenBuyAirtime] = useState(false)
     const [options, setOptions] = useState("")
-    console.log(options)
+    const {user} = useContext(LoginContext)
+    const id = user._id
+    console.log(id)
     const navigate = useNavigate()
     const {dispatch} = useContext(LoginContext)
     const handleClick = ()=>{
@@ -22,6 +25,8 @@ function MoreItems() {
             navigate("/buymineairtime")
             
         }else if(options === "Cars Savings"){
+        //    const res = await axiosInstance.post(`/api/Cars/createCarsSavings/${id}`)
+        //    console.log(res)/
             navigate("/createcarsavings")
         }else if(options === "Leisure Savings"){
             navigate("/createleisureavings")
@@ -31,7 +36,10 @@ function MoreItems() {
     },[options, navigate])
    
     return (
-    <div className='MoreItems'>
+    <div className='MoreItems' >
+        <div className="cancels">
+            <Cancel sx={{fontSize:' 45px',color: "red"}} onClick={()=>setOpen(false)}/>
+        </div>
         <div className='MoreItems_container'>
                    <div className='more_items_objects'>
                 <div className='more_items_icons_area'>

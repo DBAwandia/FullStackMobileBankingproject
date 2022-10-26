@@ -1,8 +1,14 @@
 .MoreItems{
     width: 100%;
     height: 100vh;
-    background-color: rgba(0, 0, 0,0.85);
+    background-color: rgba(0, 0, 0,0.87);
     position: relative;
+}
+.cancels{
+    position: absolute;
+    left: 3%;
+    top: 4%;
+    cursor: pointer;
 }
 .MoreItems_container{
     width: 100%;
@@ -68,7 +74,7 @@ a{
     display: flex;
     align-items: center;
     gap: 4rem;
-    margin-top: 20em;
+    margin-top: 10em;
     gap: 10rem;
     padding: 0.5rem 1.2rem;
     cursor: pointer;

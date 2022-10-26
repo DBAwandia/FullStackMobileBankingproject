@@ -2,20 +2,58 @@ import cars from "../Models/Cars.js"
 import users from "../Models/User.js"
 import accountBalances from "../Models/Transaction.js"
 
-//create cars account
+//admin create default cars
+export const carPlans = async(req,res)=>{
+    const {type,price,photos} = req.body
+    const savedAccount = cars({ photos: photos,price: price,type: type})
+    try{
+        const saved = await savedAccount.save()
+        res.status(200).json(saved)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+//get the cars
+export const getPlans = async(req,res)=>{
+    try{
+        const getplans = await cars.find().sort({_id: -1}).limit(4)
+        res.status(200).json(getplans)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+
+//user create cars account
 export const createCarsSavings = async (req,res) =>{
     const minm = 10000000
     const maxm = 99999999
     const generateUID = Math.floor(Math.random() * (maxm - minm + 1) - minm )
     const uuid= generateUID
-    const savedAccount = cars({ uuid: uuid})
+    
+    //uid of user
+    const UID = await users.findById(req.params.id)
+    const uid = UID.uuid
+
+    const {amount} = req.body
+    const savedAccount = cars({ uuid: uuid,amount: amount})
     try{
         const createdAcc = await savedAccount.save()
 
-        //push the uuid to user and use it to fetch carsSavings on frontend
-        await users.findByIdAndUpdate(req.params.id, {$set: {cars: createdAcc.uuid }})
-       
-        res.status(200).json(createdAcc)
+        //get initial amount
+        const initalAmount =await accountBalances.findOne({uuid: uid})
+        const amountAvailable =initalAmount.balance
+        // console.log(amountAvailable)
+        if(amountAvailable < amount){
+            res.status(400).json("insufficient funds")
+        }else{
+            //push the uuid to user and use it to fetch carsSavings on frontend
+            await users.findByIdAndUpdate(req.params.id, {$set: {cars: createdAcc.uuid }},{new: true})
+
+            //update startamouny in savings
+            await cars.findOneAndUpdate({uuid: createdAcc.uuid }, {$inc: {balance: amount}}, {new: true})
+            res.status(200).json(createdAcc)
+        }
+        
     }catch(err){
         res.status(500).json(err)
     }

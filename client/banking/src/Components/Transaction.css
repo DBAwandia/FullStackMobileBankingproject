@@ -53,6 +53,7 @@
     padding: 2rem;
     border-radius: 15px;
     margin: 19px 50px;
+    position: relative;
 }
 .transaction_balance{
     display: flex;
@@ -104,6 +105,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.open_savings_modal{
+    position: absolute;
+    height: fit-content;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 988888898099999999999;
+    bottom: 0;
 }
 .center_button{
     display: flex;
