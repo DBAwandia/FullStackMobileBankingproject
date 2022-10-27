@@ -7,9 +7,9 @@ import CryptoJS from "crypto-js"
 import { findUser, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser} from "../Controllers/User.js"
 //register
 router.post("/register", registerUser)
+
 //login
 router.post("/login", loginUser)
-
 
 //reset password
 router.put("/reset", resetPassword)

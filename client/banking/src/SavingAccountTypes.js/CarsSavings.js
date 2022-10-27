@@ -6,16 +6,17 @@ import 'react-circular-progressbar/dist/styles.css';
 import { ArrowUpward } from '@mui/icons-material';
 import useFetchs from '../useFetch/useFetchs';
 import { LoginContext } from '../Contexts/LoginContext';
+import { useLocation } from 'react-router-dom';
 
 function CarsSavings() {
     const { user} = useContext(LoginContext)
     const id = user._id
-
+const location = useLocation()
     //Maths (calculate percentage change)
     const target = 10000
     const {data} = useFetchs(`/Cars/fetchCarsBalance/${id}`)
     const percentageChange = Math.floor(data * 100/target)
-    console.log(percentageChange)
+    console.log(location)
 
   return (
     <div className="FoodAccount">

@@ -43,7 +43,7 @@ function CreateCarAccount() {
   const [amount, setAmount] = useState("")
   const [enable, setEnable] = useState(false)
   const { user} = useContext(LoginContext)
-  const id  = user._id
+  const idx  = user._id
   const navigate = useNavigate()
 
   //validate form
@@ -56,10 +56,9 @@ function CreateCarAccount() {
     }
   }, [amount,enable])
   
-  const handleClick = async(e) =>{
-    await axiosInstance.post(`/Cars/createCarsSavings/${id}`, {amount: amount})
-    console.log(e.selected)
-    navigate("/carsavings", {state: {name}})
+  const handleClick = async(id) =>{
+    await axiosInstance.post(`/Cars/createCarsSavings/${idx}`, {amount: amount})
+    navigate("/carsavings", {state: {id}})
   }
   return (
     <div className='CreateCarAccount'>
@@ -77,7 +76,7 @@ function CreateCarAccount() {
             <img src={item?.img} alt='' />
             <b>${item?.price}</b>
             <input type="number" placeholder="Enter starting $amount" onChange={e=> setAmount(e.target.value)} />
-            <button className={enable ? "enable" : "button_car"} disabled={enable} onClick={handleClick}>Select plan ${item?.price}</button>
+            <button className={enable ? "enable" : "button_car"} disabled={enable} onClick={()=>handleClick(item._id)}>Select plan ${item?.price}</button>
           </div>
           ))}
         </div>

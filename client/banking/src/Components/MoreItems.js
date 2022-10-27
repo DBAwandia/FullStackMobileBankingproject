@@ -4,13 +4,15 @@ import "./MoreItem.css"
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from '../Contexts/LoginContext';
 import { axiosInstance } from '../Config/Baseurl';
+import useFetchs from '../useFetch/useFetchs';
 function MoreItems({setOpen}) {
     const [openStartSavings,setOpenStartSavings] = useState(false)
     const [openBuyAirtime,setOpenBuyAirtime] = useState(false)
     const [options, setOptions] = useState("")
+    const [optionsAcc, setOptionsAcc] = useState("")
     const {user} = useContext(LoginContext)
     const id = user._id
-    console.log(id)
+    
     const navigate = useNavigate()
     const {dispatch} = useContext(LoginContext)
     const handleClick = ()=>{
@@ -18,6 +20,14 @@ function MoreItems({setOpen}) {
         navigate("/login")
 
     }
+
+    const {data}=useFetchs(`/User/find/${id}`)
+    const datas =[data]
+    // const cars = datas.map(item =>item?.cars)
+    const cars="6899"
+    const food = datas.map(item =>item?.food)
+    const leisure = datas.map(item =>item?.leisure)
+console.log(cars,optionsAcc)
     useEffect(()=>{
         if(options === "Other Phone"){
             navigate("/buyotherairtime")
@@ -25,15 +35,16 @@ function MoreItems({setOpen}) {
             navigate("/buymineairtime")
             
         }else if(options === "Cars Savings"){
-        //    const res = await axiosInstance.post(`/api/Cars/createCarsSavings/${id}`)
-        //    console.log(res)/
             navigate("/createcarsavings")
         }else if(options === "Leisure Savings"){
             navigate("/createleisureavings")
         }else if(options === "FoodandClothing Savings"){
             navigate("/createfoodsavings")
-        }
-    },[options, navigate])
+    }else if(optionsAcc==="Cars Savings Acc"){
+        navigate("/carsavings",{state:{cars}})
+
+    }
+    },[options, navigate,cars,optionsAcc])
    
     return (
     <div className='MoreItems' >
@@ -109,6 +120,42 @@ function MoreItems({setOpen}) {
 
                         </select>
                     </div>}
+                    {/* <Link to="/profile"> */}
+                        <div className='icons_resp_names'>
+                            <Savings 
+                            sx={{ color: "gray",marginLeft:"4rem",fontSize:"2.5rem"}}
+                            />
+                            <p>My Savings</p>
+                            <KeyboardArrowRight 
+                                sx={{marginLeft:"1.9rem"}}
+                            />
+
+                        </div>
+                         <div className='savings_type_select' >
+                        <select placeholder='select type' onChange={e=>setOptionsAcc(e.target.value)}>
+                            <option className='select_type_option'
+                            >
+                                SELECT
+                            </option>
+                            <option className='select_type_option'
+                            
+                            >
+                                Cars Savings Acc
+                                </option>
+                            <option className='select_type_option'
+                                >
+                            Leisure Savings Acc
+                            </option>
+                            <option className='select_type_option'
+                            
+                            >
+                                FoodandClothing Savings Acc
+                            </option>
+
+                        </select>
+                        
+                    </div>
+                    {/* </Link> */}
                     <Link to="/profile">
                         <div className='icons_resp_names'>
                             <Settings 
