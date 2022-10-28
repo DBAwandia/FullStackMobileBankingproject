@@ -151,9 +151,7 @@ console.log(cars,optionsAcc)
                             >
                                 FoodandClothing Savings Acc
                             </option>
-
-                        </select>
-                        
+                        </select>       
                     </div>
                     {/* </Link> */}
                     <Link to="/profile">
