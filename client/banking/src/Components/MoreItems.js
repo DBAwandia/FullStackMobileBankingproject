@@ -6,7 +6,9 @@ import { LoginContext } from '../Contexts/LoginContext';
 import { axiosInstance } from '../Config/Baseurl';
 import useFetchs from '../useFetch/useFetchs';
 function MoreItems({setOpen}) {
+    const  [carData,setCarData] =useState([])
     const [openStartSavings,setOpenStartSavings] = useState(false)
+    const [openoptionsAcc,setOpenoptionsAcc] = useState(false)
     const [openBuyAirtime,setOpenBuyAirtime] = useState(false)
     const [options, setOptions] = useState("")
     const [optionsAcc, setOptionsAcc] = useState("")
@@ -23,28 +25,31 @@ function MoreItems({setOpen}) {
 
     const {data}=useFetchs(`/User/find/${id}`)
     const datas =[data]
-    // const cars = datas.map(item =>item?.cars)
-    const cars="6899"
-    const food = datas.map(item =>item?.food)
-    const leisure = datas.map(item =>item?.leisure)
-console.log(cars,optionsAcc)
+    
+    //check if there is already an acc
+        const urlCarDATA =`/Cars/getCarsSavings/${id}`
+        useEffect(()=>{
+            const fetchData = async(urlCarDATA)=>{
+                const res =await axiosInstance.get(urlCarDATA)
+                setCarData(res.data)
+                
+            }
+            fetchData(urlCarDATA)
+        },[urlCarDATA])
+   
+    // console.log(cars,optionsAcc)
     useEffect(()=>{
         if(options === "Other Phone"){
             navigate("/buyotherairtime")
         }else if(options === "My Phone"){
             navigate("/buymineairtime")
             
-        }else if(options === "Cars Savings"){
+        }else if(options === "Create Cars Savings"){
             navigate("/createcarsavings")
-        }else if(options === "Leisure Savings"){
-            navigate("/createleisureavings")
-        }else if(options === "FoodandClothing Savings"){
-            navigate("/createfoodsavings")
-    }else if(optionsAcc==="Cars Savings Acc"){
-        navigate("/carsavings",{state:{cars}})
-
+    }else if(optionsAcc === "Cars Savings Acc"){
+        navigate("/carsavings")
     }
-    },[options, navigate,cars,optionsAcc])
+    },[options, navigate,optionsAcc])
    
     return (
     <div className='MoreItems' >
@@ -57,6 +62,7 @@ console.log(cars,optionsAcc)
                     <div className='icons_resp_names'
                         onClick={()=>{
                             setOpenStartSavings(false)
+                            setOpenoptionsAcc(false)
                             setOpenBuyAirtime(true)
                         }}
                     >
@@ -88,6 +94,7 @@ console.log(cars,optionsAcc)
                     </div>}
                     <div className='icons_resp_names' onClick={()=>{
                         setOpenBuyAirtime(false)
+                        setOpenoptionsAcc(false)
                         setOpenStartSavings(true)
                     }}>
                         <Savings 
@@ -104,24 +111,24 @@ console.log(cars,optionsAcc)
                             >
                                SELECT
                             </option>
-                            <option className='select_type_option'
+                            <option 
+                            disabled={carData}
+                            className= "select_type_option"
                             >
-                                Cars Savings
+                               {carData ? "Alreay Created,switch to my savings":"Create Cars Savings"}
                              </option>
-                            <option className='select_type_option'
-                                >
-                            Leisure Savings
-                            </option>
-                            <option className='select_type_option'
-                           
-                            >
-                                FoodandClothing Savings
-                            </option>
+                
 
                         </select>
                     </div>}
                     {/* <Link to="/profile"> */}
-                        <div className='icons_resp_names'>
+                        <div className='icons_resp_names' onClick={
+                            ()=>{
+                                setOpenBuyAirtime(false)
+                                setOpenStartSavings(false)
+                                setOpenoptionsAcc(true)
+                            }
+                        }>
                             <Savings 
                             sx={{ color: "gray",marginLeft:"4rem",fontSize:"2.5rem"}}
                             />
@@ -131,28 +138,20 @@ console.log(cars,optionsAcc)
                             />
 
                         </div>
-                         <div className='savings_type_select' >
-                        <select placeholder='select type' onChange={e=>setOptionsAcc(e.target.value)}>
-                            <option className='select_type_option'
-                            >
-                                SELECT
-                            </option>
-                            <option className='select_type_option'
-                            
-                            >
-                                Cars Savings Acc
-                                </option>
-                            <option className='select_type_option'
+                         {openoptionsAcc && <div className='savings_type_select' >
+                            <select placeholder='select type' onChange={e=>setOptionsAcc(e.target.value)}>
+                                <option className='select_type_option'
                                 >
-                            Leisure Savings Acc
-                            </option>
-                            <option className='select_type_option'
-                            
-                            >
-                                FoodandClothing Savings Acc
-                            </option>
+                                    SELECT
+                                </option>
+                                <option className='select_type_option'
+                                    disabled={!carData}
+                                >
+                                {!carData? "Please create saving acc": "Cars Savings Acc"}
+                                </option>
+                      
                         </select>       
-                    </div>
+                    </div>}
                     {/* </Link> */}
                     <Link to="/profile">
                         <div className='icons_resp_names'>

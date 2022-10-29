@@ -1,16 +1,19 @@
 import React, { useContext } from 'react'
 import "./DepositType.css"
 import {CloseOutlined, KeyboardArrowRight} from "@mui/icons-material"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { LoginContext } from '../Contexts/LoginContext'
 
 function DepositType({setOpenDeposit}) {
+    const navigate = useNavigate()
     const {user} = useContext(LoginContext)
     const id = user._id
   return (
     <div className='DepositType'>
         <div className='close_icon'>
-            <CloseOutlined onClick={()=>setOpenDeposit(false)} sx={{fontSize:"3.3rem",color: "red"}}/>
+            <CloseOutlined onClick={()=>{
+                navigate("/")
+            }} sx={{fontSize:"3.3rem",color: "blue"}}/>
         </div>
         <div className='DepositType_container'>
             <div className='DepositType_objects'>

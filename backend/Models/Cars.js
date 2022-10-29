@@ -11,16 +11,7 @@ const carsSchema = new mongoose.Schema({
     amount:{
         type: Number
     },
-    type:{
-        type: String
-    },
-    price: {
-        type:Number
-    },
-    photos:{
-        type: String
-    },
-    selectedCarId:{
+    theCaridx:{
         type: String
     }
 },{timestamps: true})

@@ -69,7 +69,9 @@ a{
 .select_type_option{
    color: gray;
     font-size: 1.2rem;
+   
 }
+
 .icons_resp_names_logout{
     display: flex;
     align-items: center;

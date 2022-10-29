@@ -20,6 +20,8 @@ import userRouter from "./Routes/User.js"
 import transactRouter from "./Routes/Transaction.js"
 import historyRouter from "./Routes/HistoryData.js"
 import carsRouter from "./Routes/Cars.js"
+import carRouter from "./Routes/Car.js"
+
 
 
 mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true})
@@ -31,6 +33,8 @@ app.use("/api/User", userRouter)
 app.use("/api/Transaction", transactRouter)
 app.use("/api/HistoryData", historyRouter)
 app.use("/api/Cars", carsRouter)
+app.use("/api/Car", carRouter)
+
 
 // app.get("/",(req,res)=>{
 //     generateToken()

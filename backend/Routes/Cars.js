@@ -1,19 +1,16 @@
 import express from "express"
-import { carPlans, createCarsSavings, fetchCarsBalance, getCarById, getPlans, startCarsSavings, transferCarsSavings } from "../Controllers/Cars.js"
+import { createCarsSavings, fetchCarsBalance, fetchCreatedCarAcc, getCarById, startCarsSavings, transferCarsSavings } from "../Controllers/Cars.js"
 
 const router = express.Router()
-
-//create carplans
-router.post("/createcarplans",carPlans)
-
-//get carplans
-router.get("/getcarplans",getPlans)
 
 //get getCarById
 router.get("/getcarplans/:id",getCarById)
 
 //create CarsAccount
 router.post("/createCarsSavings/:id",createCarsSavings)
+
+//get CarsAccount
+router.get("/getCarsSavings/:id",fetchCreatedCarAcc)
 
 //start saving
 router.put("/startCarsSavings/:id",startCarsSavings)

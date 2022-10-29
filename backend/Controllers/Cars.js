@@ -1,38 +1,8 @@
 import cars from "../Models/Cars.js"
 import users from "../Models/User.js"
 import accountBalances from "../Models/Transaction.js"
+import Car from "../Models/Car.js"
 
-//admin create default cars
-export const carPlans = async(req,res)=>{
-    const {type,price,photos} = req.body
-    const savedAccount = cars({ photos: photos,price: price,type: type})
-    try{
-        const saved = await savedAccount.save()
-        // await users.findByIdAndUpdate(req.params.id,{$set: {carPlans:saved._id}},{new:true})
-        res.status(200).json(saved)
-    }catch(err){
-        res.status(500).json(err)
-    }
-}
-//get the cars
-export const getPlans = async(req,res)=>{
-    try{
-        const getplans = await cars.find().sort({_id: -1}).limit(4)
-        res.status(200).json(getplans)
-    }catch(err){
-        res.status(500).json(err)
-    }
-}
-
-//get the carsbyid
-export const getCarById = async(req,res)=>{
-    try{
-        const getCarsById = await cars.findById(req.params.id)
-        res.status(200).json(getCarsById)
-    }catch(err){
-        res.status(500).json(err)
-    }
-}
 
 //user create cars account
 export const createCarsSavings = async (req,res) =>{
@@ -45,8 +15,8 @@ export const createCarsSavings = async (req,res) =>{
     const UID = await users.findById(req.params.id)
     const uid = UID.uuid
 
-    const {amount} = req.body
-    const savedAccount = cars({ uuid: uuid,amount: amount})
+    const {amount,theCaridx} = req.body
+    const savedAccount = cars({ uuid: uuid,amount: amount,theCaridx})
     try{
         const createdAcc = await savedAccount.save()
 
@@ -62,7 +32,7 @@ export const createCarsSavings = async (req,res) =>{
 
             //update startamouny in savings
             await cars.findOneAndUpdate({uuid: createdAcc.uuid }, {$inc: {balance: amount}}, {new: true})
-            await users.findByIdAndUpdate(req.params.id, {$inc: {balance:-amount }},{new: true})
+            await accountBalances.findOneAndUpdate({uuid:uid}, {$inc: {balance:-amount }},{new: true})
 
             res.status(200).json(createdAcc)
         }
@@ -72,10 +42,38 @@ export const createCarsSavings = async (req,res) =>{
     }
 }
 
+//get the carsbyid
+export const getCarById = async(req,res)=>{
+    try{
+        const getCarsById = await cars.findById(req.params.id)
+        res.status(200).json(getCarsById)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+
+//fetch the createdCarAccount
+export const fetchCreatedCarAcc = async (req,res)=>{
+    try{
+        const user = await users.findById(req.params.id)
+        const carCreatedUid = user.cars
+        // console.log(carCreatedUid)
+        const fetchCarData = await cars.findOne({uuid:carCreatedUid})
+
+        //get the wxact details
+        const fetchCarDetail = await Car.findById(fetchCarData.theCaridx)
+        
+        res.status(200).json(fetchCarDetail)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+
+
 //transfer to the created cars account || from main to cars account
 export const startCarsSavings = async (req,res) =>{
    const {amount} = req.body
-// const amount="20"
+    // const amount="20"
     const carsUuid = await users.findById(req.params.id)
     const carsUID = carsUuid.cars
 
@@ -109,7 +107,6 @@ export const transferCarsSavings = async (req,res) =>{
      const uuid = carsUID
      try{
          const carsBalance = await cars.findOne({uuid: uuid}) 
-        //  console.log(carsBalance.balance)
          const currentBlance = carsBalance.balance
          if(currentBlance < amount) {
              res.status(400).json("insufficient funds")
@@ -128,6 +125,7 @@ export const transferCarsSavings = async (req,res) =>{
  export const fetchCarsBalance = async (req,res)=>{
     const carsId = await users.findById(req.params.id)
     const carsID = carsId.cars
+
     try{
         const getCarsbalance = await cars.findOne({uuid: carsID})
         const balance = getCarsbalance.balance

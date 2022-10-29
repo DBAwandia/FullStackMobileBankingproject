@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from "../Components/Navbar"
 import Footer from "../Components/Footer"
+import "./CreateCarFoodLeisureAccount.css"
 import { ArrowBack } from '@mui/icons-material'
 import { Link, useNavigate } from 'react-router-dom'
 import useFetchs from '../useFetch/useFetchs'
@@ -37,14 +38,14 @@ import { LoginContext } from '../Contexts/LoginContext'
 
 // ]
 function CreateCarAccount() {
-  const {data} = useFetchs("/Cars/getcarplans")
-  const name = data?.map(item => item.type)
-  
+  const {data} = useFetchs("/Car/getcarplans")
   const [amount, setAmount] = useState("")
   const [enable, setEnable] = useState(false)
   const { user} = useContext(LoginContext)
   const idx  = user._id
   const navigate = useNavigate()
+
+
 
   //validate form
   useEffect(()=>{
@@ -56,9 +57,12 @@ function CreateCarAccount() {
     }
   }, [amount,enable])
   
+
+
   const handleClick = async(id) =>{
-    await axiosInstance.post(`/Cars/createCarsSavings/${idx}`, {amount: amount,selectedCarId: id})
-    navigate("/carsavings", {state: {id}})
+
+    await axiosInstance.post(`/Cars/createCarsSavings/${idx}`, {amount: amount,theCaridx: id})
+    navigate("/carsavings")
   }
   return (
     <div className='CreateCarAccount'>
@@ -72,7 +76,7 @@ function CreateCarAccount() {
         <div className='CreateCarAccount_data'>
           {data?.map((item)=>(
             <div className='cars'>
-            <p>{item?.name}</p>
+            <p>{item?.type}</p>
             <img src={item?.photos } alt='' />
             <b>${item?.price}</b>
             <input type="number" placeholder="Enter starting $amount" onChange={e=> setAmount(e.target.value)} />

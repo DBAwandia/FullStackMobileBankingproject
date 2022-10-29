@@ -8,8 +8,6 @@ import SpinnerLoading from "./LoadingPages/SpinnerLoading";
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
 import ResetPassword from "./Pages/ResetPassword";
-import FoodAccount from "./SavingAccountTypes.js/FoodAccount";
-import LeisureAccount from "./SavingAccountTypes.js/LeisureAccount";
 import BitcoinPayment from "./Transactions/BitcoinPayment";
 import Confirmation from "./Transactions/Confirmation";
 import DepositType from "./Transactions/DepositType";
@@ -21,8 +19,7 @@ import CarsSavings from "./SavingAccountTypes.js/CarsSavings";
 import BuyMineAirtime from "./Airtime/BuyMineAirtime";
 import BuyOtherAirtime from "./Airtime/BuyOtherAirtime";
 import CreateCarAccount from "./SavingAccountTypes.js/CreateCarAccount";
-import CreateFoodAccount from "./SavingAccountTypes.js/CreateFoodAccount";
-import CreateLeisureAccount from "./SavingAccountTypes.js/CreateLeisureAccount";
+
 
 
 
@@ -45,15 +42,12 @@ function App() {
           <Route path="/mpesapay" element={<MpesaPayment/>} />
           <Route path="/bitcoinpay" element={<BitcoinPayment/>} />
           <Route path="/resetpassword" element={<ResetPassword/>} />
-          <Route path="/foodandclothing" element={<FoodAccount/>} />
-          <Route path="/leisureandtravel" element={<LeisureAccount/>} />
           <Route path="/carsavings" element={<CarsSavings/>} />
           <Route path="/moreitems" element={<MoreItems/>} />
           <Route path="/buymineairtime" element={<BuyMineAirtime/>} />
           <Route path="/buyotherairtime" element={<BuyOtherAirtime/>} />
           <Route path="/createcarsavings" element={<CreateCarAccount/>} />
-          <Route path="/createfoodsavings" element={<CreateFoodAccount/>} />
-          <Route path="/createleisureavings" element={<CreateLeisureAccount/>} />
+         
 
 
 
