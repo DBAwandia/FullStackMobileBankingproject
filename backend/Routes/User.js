@@ -4,7 +4,7 @@ const router = express.Router()
 import People from "../Models/User.js"
 import accountBalances from "../Models/Transaction.js"
 import CryptoJS from "crypto-js"
-import { findUser, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser} from "../Controllers/User.js"
+import { findUser, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser, getCarbyUid} from "../Controllers/User.js"
 //register
 router.post("/register", registerUser)
 
@@ -34,7 +34,8 @@ router.get("/findUuid", getUserbyUid)
 
 // router.put("/findz",findPer)
 
-
+//query saving
+router.get("/queryCarsSavings/:id",getCarbyUid)
 
 
 export default router

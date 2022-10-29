@@ -19,6 +19,9 @@ const carsSchema = new mongoose.Schema({
     },
     photos:{
         type: String
+    },
+    selectedCarId:{
+        type: String
     }
 },{timestamps: true})
 

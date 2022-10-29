@@ -38,8 +38,8 @@ import { LoginContext } from '../Contexts/LoginContext'
 // ]
 function CreateCarAccount() {
   const {data} = useFetchs("/Cars/getcarplans")
-  const name = data?.map(item => item.name)
-  console.log(name)
+  const name = data?.map(item => item.type)
+  
   const [amount, setAmount] = useState("")
   const [enable, setEnable] = useState(false)
   const { user} = useContext(LoginContext)
@@ -57,7 +57,7 @@ function CreateCarAccount() {
   }, [amount,enable])
   
   const handleClick = async(id) =>{
-    await axiosInstance.post(`/Cars/createCarsSavings/${idx}`, {amount: amount})
+    await axiosInstance.post(`/Cars/createCarsSavings/${idx}`, {amount: amount,selectedCarId: id})
     navigate("/carsavings", {state: {id}})
   }
   return (
@@ -73,7 +73,7 @@ function CreateCarAccount() {
           {data?.map((item)=>(
             <div className='cars'>
             <p>{item?.name}</p>
-            <img src={item?.img} alt='' />
+            <img src={item?.photos } alt='' />
             <b>${item?.price}</b>
             <input type="number" placeholder="Enter starting $amount" onChange={e=> setAmount(e.target.value)} />
             <button className={enable ? "enable" : "button_car"} disabled={enable} onClick={()=>handleClick(item._id)}>Select plan ${item?.price}</button>

@@ -8,6 +8,7 @@ export const carPlans = async(req,res)=>{
     const savedAccount = cars({ photos: photos,price: price,type: type})
     try{
         const saved = await savedAccount.save()
+        // await users.findByIdAndUpdate(req.params.id,{$set: {carPlans:saved._id}},{new:true})
         res.status(200).json(saved)
     }catch(err){
         res.status(500).json(err)
@@ -18,6 +19,16 @@ export const getPlans = async(req,res)=>{
     try{
         const getplans = await cars.find().sort({_id: -1}).limit(4)
         res.status(200).json(getplans)
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+
+//get the carsbyid
+export const getCarById = async(req,res)=>{
+    try{
+        const getCarsById = await cars.findById(req.params.id)
+        res.status(200).json(getCarsById)
     }catch(err){
         res.status(500).json(err)
     }
@@ -51,6 +62,8 @@ export const createCarsSavings = async (req,res) =>{
 
             //update startamouny in savings
             await cars.findOneAndUpdate({uuid: createdAcc.uuid }, {$inc: {balance: amount}}, {new: true})
+            await users.findByIdAndUpdate(req.params.id, {$inc: {balance:-amount }},{new: true})
+
             res.status(200).json(createdAcc)
         }
         

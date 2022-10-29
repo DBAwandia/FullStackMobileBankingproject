@@ -4,6 +4,8 @@ import People from "../Models/User.js"
 import CryptoJS from "crypto-js"
 import jwt from "jsonwebtoken";
 import accountBalances from "../Models/Transaction.js"
+import User from "../Models/User.js";
+import Cars from "../Models/Cars.js";
 let app = express();
 
 //response as Json
@@ -35,9 +37,9 @@ export const registerUser = async( req,res)=>{
                        await saveUuidToAccountSchema.save()
 
                        //bug ,returns undefined after console.log
-                    console.log(user.username)
+                  
 
-                       return  res.status(200).json(user)
+                         res.status(200).json(user)
        }
 
    }catch(err){
@@ -52,7 +54,7 @@ export const loginUser = async (req,res)=>{
         const user = await People.findOne({phonenumber: req.body.phonenumber})
         if(!user){
             res.status(400).json("please register")
-            return;
+            
         }else{
         
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
@@ -153,6 +155,19 @@ export const getPeople = async(req,res)=>{
     try{
         const getUser = await People.findOne({uuid: QUERYUID})
         res.status(200).json(getUser)
+        
+    }catch(err){
+        res.status(500).json(err)
+    }
+ }
+  //get car by their uuid
+  export const getCarbyUid = async (req,res)=>{
+    const carUuid=await User.findById(req.params.id)
+    const thecarUuid =carUuid.cars
+    console.log(thecarUuid)
+    try{
+        const getCar = await Cars.findOne({uuid: thecarUuid})
+        res.status(200).json(getCar)
         
     }catch(err){
         res.status(500).json(err)

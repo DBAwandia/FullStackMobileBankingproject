@@ -12,6 +12,9 @@ const userSchema = new mongoose.Schema({
     cars:{
         type: Number
     },
+    // carPlans:{
+    //     type: String
+    // },
     leisure:{
         type: Number
     },
