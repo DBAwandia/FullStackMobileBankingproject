@@ -77,10 +77,14 @@ function Transfer() {
         await axiosInstance.put(`/Transaction/savedamount/${id}`, {paymentReason: paymentReason})
        
         setLoadings(false)
+        alert("successfully sent")
         navigate("/sendconfirmtransfer", {state: {name,phonenumber,receiverNumber,receiverName,generateId,balance,uuid}})
 
        }catch(err){
         setOpen(false)
+        alert("incorect details or insufficient funds")
+        setLoadings(false)
+
        }
     }
   return (

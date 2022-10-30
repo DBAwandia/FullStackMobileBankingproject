@@ -47,7 +47,10 @@ function Navbar() {
                   <span>  UID:</span>
                   <p className='phonenumber_input'>{item?.uuid}</p>
                   <button className='logout_button' onClick={handleLogout}>Logout</button>
-                  <Notifications className='icons'/>
+                  <div className='notifications'>
+                    <Notifications className='iconss'/>
+                    <span className='number_span' style={{color: "white",opacity:"0.83", fontSize: "1.3rem"}}>+1</span>
+                  </div>
               </div>
           </div>
         </div>

@@ -14,8 +14,17 @@ function MpesaPayment() {
   const [phonenumber, setPhonenumber] = useState("")
   const [amount, setAmount] = useState("")
   const navigate = useNavigate()
+
+  //generate UUID
+  const Maxm = 99999999999
+  const Minm = 10000000000
+  const generatedUID = Math.floor(Math.random()* (Maxm - Minm +1) - Minm)
+
+
   //user id
   const {user} = useContext(LoginContext)
+  const type = "M-Pesa"
+  const name = "Deposit"
   const id = user._id
   //disable empty input for button
   useEffect(()=>{
@@ -37,9 +46,12 @@ function MpesaPayment() {
       try{
         
         await axiosInstance.put(`/Transaction/deposit/${id}`, {balance: amount})
+        await axiosInstance.post(`/HistoryData/savedDepohistory/${id}`,{transactNumber: generatedUID,amount: amount,type: type,name: name})
+        alert("Successfully deposited")
         navigate("/")
       }catch(err){
         setOpen(false)
+        alert("insufficent funds")
       }
   }
 

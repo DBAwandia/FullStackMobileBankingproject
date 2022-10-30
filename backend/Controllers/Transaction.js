@@ -28,6 +28,12 @@ export const withdraw = async (req,res) =>{
         const UID = users.uuid
         const balance = req.body.balance
         const UUID = req.body.uuid
+
+        //validate the user to send money
+        const usertOSENDMONEY = await User.findOne({uuid: UUID})
+        console.log(usertOSENDMONEY.uuid)
+        usertOSENDMONEY.uuid !== UUID || req.body.uuid && res.status(400).json(err + "err")
+         
         const getPrevbalance = await accountBalances.findOne({uuid: UID})
         const prevbalance = getPrevbalance.balance
         if(prevbalance < balance){

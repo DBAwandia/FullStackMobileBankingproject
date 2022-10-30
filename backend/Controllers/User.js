@@ -1,11 +1,11 @@
-// import People from "../Models/User.js"
+// import User from "../Models/User.js"
 import express from "express";
-import People from "../Models/User.js"
+import User from "../Models/User.js"
 import CryptoJS from "crypto-js"
 import jwt from "jsonwebtoken";
 import accountBalances from "../Models/Transaction.js"
-import User from "../Models/User.js";
 import Cars from "../Models/Cars.js";
+import axios from "axios"
 let app = express();
 
 //response as Json
@@ -23,13 +23,13 @@ export const registerUser = async( req,res)=>{
    const {username,photos,history,phonenumber} = req.body
    const uuid= generatedNumbers
    const password = CryptoJS.AES.encrypt(req.body.password, (process.env.PASS_SEC));
-   const newUser =People({password: password,phonenumber:phonenumber,username: username,history: history,uuid:uuid,photos:photos}
+   const newUser =User({password: password,phonenumber:phonenumber,username: username,history: history,uuid:uuid,photos:photos}
        )
 
    const saveUuidToAccountSchema = accountBalances({uuid: generatedNumbers})
 
    try{
-       const oldUser = await People.findOne({ phonenumber: phonenumber})
+       const oldUser = await User.findOne({ phonenumber: phonenumber})
        if(oldUser){
           return res.status(400).json("Already exists")
        }else {
@@ -51,7 +51,8 @@ export const registerUser = async( req,res)=>{
 //login
 export const loginUser = async (req,res)=>{
     try{
-        const user = await People.findOne({phonenumber: req.body.phonenumber})
+        const user = await User.findOne({phonenumber: req.body.phonenumber})
+        // console.log(user)
         if(!user){
             res.status(400).json("please register")
             
@@ -59,6 +60,7 @@ export const loginUser = async (req,res)=>{
         
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
             const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
+            console.log(originalPassword)
             originalPassword !== req.body.password  && res.status(400).json("Put correct password")
 
         const { password, isAdmin,...others} = user._doc
@@ -81,10 +83,10 @@ export const loginUser = async (req,res)=>{
 export const resetPassword = async (req,res)=>{
     const phonenumber = req.body.phonenumber
     try{
-        const user = await People.findOne({phonenumber: phonenumber})
+        const user = await User.findOne({phonenumber: phonenumber})
         !user && res.status(400).json("inavilid")
         const phoneNumber = user.phonenumber
-        const editedPassword = await People.findOneAndUpdate({phonenumber: phoneNumber}, {$set: {password: req.body.password}}, {new: true})
+        const editedPassword = await User.findOneAndUpdate({phonenumber: phoneNumber}, {$set: {password: req.body.password}}, {new: true})
        return res.status(200).json(editedPassword)
     }catch(err){
         res.status(500).json(err)
@@ -94,7 +96,7 @@ export const resetPassword = async (req,res)=>{
 //find user by id
 export const findUser = async(req,res)=>{
     try{
-        const findPerson = await People.findById(req.params.id)
+        const findPerson = await User.findById(req.params.id)
         res.status(200).json(findPerson)
 
     }catch(err){
@@ -104,7 +106,7 @@ export const findUser = async(req,res)=>{
 //edit details
 export const findUserAndEdit = async(req,res)=>{
     try{
-        const findPersonAndEdit = await People.findByIdAndUpdate(req.params.id,{$set: req.body}, {new: true})
+        const findPersonAndEdit = await User.findByIdAndUpdate(req.params.id,{$set: req.body}, {new: true})
         res.status(200).json(findPersonAndEdit)
         
     }catch(err){
@@ -115,7 +117,7 @@ export const findUserAndEdit = async(req,res)=>{
 //delete user
 export const findUserAndDelete = async(req,res)=>{
     try{
-       await People.findByIdAndDelete(req.params.id)
+       await User.findByIdAndDelete(req.params.id)
         res.status(200).json("Deleted")
         
     }catch(err){
@@ -123,12 +125,12 @@ export const findUserAndDelete = async(req,res)=>{
     }
 }
 
-//count People
+//count User
 export const countPeople = async(req,res)=>{
     try{
     
        
-       const countedPeople = await People.countDocuments()
+       const countedPeople = await User.countDocuments()
         res.status(200).json(countedPeople)
         
     }catch(err){
@@ -137,10 +139,10 @@ export const countPeople = async(req,res)=>{
 }
 
 
-//find all People
+//find all User
 export const getPeople = async(req,res)=>{
     try{
-        const countedPeople = await People.find().sort({_id: -1})
+        const countedPeople = await User.find().sort({_id: -1})
          res.status(200).json(countedPeople)
          
      }catch(err){
@@ -153,7 +155,7 @@ export const getPeople = async(req,res)=>{
     const UUID = req.body.uuid
     const QUERYUID = req.query.QUERYUID
     try{
-        const getUser = await People.findOne({uuid: QUERYUID})
+        const getUser = await User.findOne({uuid: QUERYUID})
         res.status(200).json(getUser)
         
     }catch(err){
@@ -173,4 +175,55 @@ export const getPeople = async(req,res)=>{
         res.status(500).json(err)
     }
  }
+
+ export const stkPush = async (req, res) => {
+    const phonenumber = req.body.phonenumber;
+    const amount = req.body.amount;
+    
+
+    const date = new Date();
+    const timeStamp = date.getFullYear() + 
+    ("0" + (date.getMonth() + 1)).slice(-2) +
+    ("0" + date.getDate()).slice(-2) +
+    ("0" + date.getHours()).slice(-2) +
+    ("0" + date.getMinutes()).slice(-2) +
+    ("0" + date.getSeconds()).slice(-2);
+
+    // const timeStamp = moment().format();
+console.log(timeStamp)
+    const shortCode = process.env.MY_PAYBILL;
+    const passKey = process.env.PASS_KEY;
+
+    const password = new Buffer.from(shortCode + passKey + timeStamp).toString(
+        "base64"
+    );
+
+        await axios.post(
+            "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+            {
+                BusinessShortCode: shortCode,
+                Password: password,
+                Timestamp: timeStamp,
+                TransactionType: 'CustomerPayBillOnline',
+                Amount: amount,
+                PartyA: phonenumber,
+                PartyB: shortCode,
+                PhoneNumber: phonenumber,
+                CallBackURL: "https://kandy-hamisi.github.io/",
+                AccountReference: phonenumber,
+                TransactionDesc: "Test",
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        ).then((data) => {
+            console.log(data.data)
+            res.status(200).json(data.data)
+        }).catch((err) => {
+            console.log(err)
+            res.status(400).json(err.message);
+        })
+}
  

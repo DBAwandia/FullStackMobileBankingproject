@@ -37,7 +37,7 @@ function ResetPassword() {
       
     }else{
       setEnabled(false)
-
+      setisPassOkay(false)
     }
   },[enabled,phonenumbers,password,cPassword,isPassOkay])
 
@@ -50,7 +50,6 @@ function ResetPassword() {
       window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
         'size': 'invisible',
         'callback': (response) => {
-          console.log(response)
         }
       }, auth);
       const appVerifier = window.recaptchaVerifier
@@ -74,8 +73,8 @@ function ResetPassword() {
       final.confirm(otp).then(async(result) => {
         setOpen(true)
         setLoading(false)
-        // await axiosInstance.put("/reset", {phonenumber: phonenumber, password: password})
-        navigate("/")
+        await axiosInstance.put("/User/reset", {phonenumber: phonenumber, password: password})
+        navigate("/login")
       }).catch((error) => {
         console.log(error)
        setOpens(true)
@@ -97,9 +96,9 @@ function ResetPassword() {
                 {isPassOkay ? <label style={{color: "red"}}>pass dont match</label>:""}
                 <input type="password" placeholder="Confirm password" name='cPassword' value={cPassword}  onChange={e=>setCpassword(e.target.value)} required />
                 <button className="otp_button"    onClick={sendOtp}>{loadings? "Requesting..." : "Request otp"}</button>
-                {!open && <label>Verify otp</label>}
-                {!open && <input type="number" placeholder="Verify otp sent" onChange={e=>setOtp(e.target.value)} required/>}
-                 <button  className={enabled ? "enabled_button" : "login_button"}  disabled={enabled }  onClick={handleClick}>{loading?"Loading...": "ResetPassword"}</button>
+                {open && <label>Verify otp</label>}
+                {open && <input type="number" placeholder="Verify otp sent" onChange={e=>setOtp(e.target.value)} required/>}
+                 <button  className="login_button"  onClick={handleClick}>{loading?"Loading...": "ResetPassword"}</button>
                 <label style={{ color: "teal", marginTop: 20}}>Remembred password <Link to="/login">Login</Link></label>
                  <div id='sign-in-button'/>
             </div>

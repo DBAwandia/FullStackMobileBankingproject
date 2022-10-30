@@ -60,34 +60,35 @@ export const VerifyTokenAdminOnly = (req,res,next)=>{
 //     }
 // }
 
-// export const generateToken = async(req,res,next) =>{
+export const generateToken = async(req,res,next) =>{
 
-//     const consumer_secret = process.env.CONSUMER_SECRET
-//     const consumer_key = process.env.CONSUMER_KEY
-//     const Authorization = `Basic ${new Buffer.from(
-//         `${consumer_key}:${consumer_secret}`,
-//         'utf-8'
-//       ).toString('base64')}`;
-//     try{
+    const consumer_secret = process.env.CONSUMER_SECRET
+    const consumer_key = process.env.CONSUMER_KEY
+    const Authorization = `Basic ${new Buffer.from(
+        `${consumer_key}:${consumer_secret}`,
+        'utf-8'
+      ).toString('base64')}`;
+    try{
         
-//         await  axios
-//             .get("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
-//               headers: {
-//                 authorization: Authorization
-//               }
-//             })
-//             .then((response) => {
-//               // Handle Success
-//             //   console.log(response.data.access_token)
-//               const token = response.data.access_token
-//               next()
-//             })
-//             .catch((error) => {
-//                //Handle your error
-//                console.log(error)
-//             });
-//     }catch(err){
-//         res.status(500).json(err)
-//     }
-// }
+        await  axios
+            .get("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
+              headers: {
+                authorization: Authorization
+              }
+            })
+            .then((response) => {
+              // Handle Success
+            //   console.log(response.data.access_token)
+              const token = response.data.access_token
+              console.log(token)
+              next()
+            })
+            .catch((error) => {
+               //Handle your error
+               console.log(error)
+            });
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
 

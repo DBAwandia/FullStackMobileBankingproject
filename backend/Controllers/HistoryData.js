@@ -2,8 +2,47 @@ import historys from "../Models/HistoryData.js"
 import HistoryData from "../Models/HistoryData.js"
 import User from "../Models/User.js"
 
-//transaction history
-export const saveTransaction = async (req,res)=>{
+//deposit history
+export const saveDepoTransaction = async (req,res)=>{
+    const name = req.body.name
+    // const receiverName = req.body.receiverName
+    // const senderNumber = req.body.senderNumber
+    // const receiverNumber = req.body.receiverNumber
+    const transactNumber = req.body.transactNumber
+    const type = req.body.type
+    const amount = req.body.amount
+    const uuid = req.body.uuid
+
+    const newTransaction =historys({
+         
+            transactNumber: transactNumber,
+            amount: amount,
+            type: type,
+            uuid:uuid,
+            name: name
+
+        })
+    try{
+        const saved = await newTransaction.save()
+
+        try{
+
+         await User.findByIdAndUpdate(req.params.id, {$push: {history: saved.transactNumber}})
+
+        }catch(err){
+        res.status(500).json(err)
+        }
+
+        res.status(200).json(saved)
+    
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+
+
+//withdraw
+export const saveWithdrawTransaction = async (req,res)=>{
     const name = req.body.name
     const receiverName = req.body.receiverName
     const senderNumber = req.body.senderNumber
@@ -13,27 +52,25 @@ export const saveTransaction = async (req,res)=>{
     const amount = req.body.amount
     const uuid = req.body.uuid
 
-   
-
     const newTransaction =historys({
-            name: name, 
-            receiverName: receiverName,
-            senderNumber: senderNumber,
-            receiverNumber: receiverNumber,
+         
             transactNumber: transactNumber,
             amount: amount,
             type: type,
-            uuid:uuid
+            uuid:uuid,
+            name: name,
+            receiverName: receiverName,
+            senderNumber: senderNumber,
+            receiverNumber: receiverNumber,
+
 
         })
     try{
         const saved = await newTransaction.save()
 
         try{
-            const receiverUuid = saved.uuid
-         await User.findByIdAndUpdate(req.params.id, {$push: {history: saved.transactNumber}})
-         await User.findOneAndUpdate({uuid: receiverUuid}, {$push: {history: saved.transactNumber}})
 
+         await User.findByIdAndUpdate(req.params.id, {$push: {history: saved.transactNumber}})
 
         }catch(err){
         res.status(500).json(err)

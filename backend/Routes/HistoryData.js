@@ -1,9 +1,12 @@
 import express from "express"
-import { getallTransaction, saveTransaction, usertransactionhistory } from "../Controllers/HistoryData.js"
+import { getallTransaction, saveDepoTransaction, saveWithdrawTransaction, usertransactionhistory } from "../Controllers/HistoryData.js"
 const router = express.Router()
 
-//savetransaction
-router.post("/savedhistory/:id", saveTransaction)
+//saveDeositTransaction
+router.post("/savedDepohistory/:id", saveDepoTransaction)
+
+//saveWithdrawTransaction
+router.post("/savedWithdrawhistory/:id",saveWithdrawTransaction )
 
 //get all transactions
 router.get("/getallhistory", getallTransaction)
@@ -12,5 +15,10 @@ router.get("/getallhistory", getallTransaction)
 //get each user transaction
 router.get("/gethistory/:id", usertransactionhistory)
 
+
+//deposit history
+
+
+//withdraw history
 
 export default router

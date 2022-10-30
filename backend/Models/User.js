@@ -12,9 +12,9 @@ const userSchema = new mongoose.Schema({
     cars:{
         type: Number
     },
-    // carPlans:{
-    //     type: String
-    // },
+    amount:{
+        type: Number
+    },
     leisure:{
         type: Number
     },
