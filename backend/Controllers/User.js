@@ -176,6 +176,8 @@ export const getPeople = async(req,res)=>{
     }
  }
 
+
+ //stk push
  export const stkPush = async (req, res) => {
     const phonenumber = req.body.phonenumber;
     const amount = req.body.amount;

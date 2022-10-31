@@ -119,7 +119,7 @@ function CarsSavings() {
             </div>
             <div className='FoodAccount_container_animate'>
                 <div className='FoodAccount_container_body'>
-                    <p className="vmove">Welcome Keniko to your Car savings account</p>
+                    <p className="vmove">Welcome {user.username} to your Car savings account</p>
                     <p className="vmove">Only {100 - percentageChange}% left, continue saving more!!!</p>
                     {/* <p className="vmove">46h</p>
                     <p className="vmove">45h</p>

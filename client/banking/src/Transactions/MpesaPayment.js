@@ -7,14 +7,16 @@ import { ArrowBackIos } from '@mui/icons-material'
 import { axiosInstance } from '../Config/Baseurl'
 import { LoginContext } from '../Contexts/LoginContext'
 import SpinnerLoading from '../LoadingPages/SpinnerLoading'
+import { NotificationContext } from '../Contexts/NotificationContext'
 
 function MpesaPayment() {
   const [enabled, setEnabled] = useState(false)
   const [open, setOpen] = useState(false)
   const [phonenumber, setPhonenumber] = useState("")
   const [amount, setAmount] = useState("")
-  const navigate = useNavigate()
+  const [ countNotifications,setCountNotifications] = useState(0)
 
+  const navigate = useNavigate()
   //generate UUID
   const Maxm = 99999999999
   const Minm = 10000000000
@@ -23,22 +25,26 @@ function MpesaPayment() {
 
   //user id
   const {user} = useContext(LoginContext)
+  // const {dispatch} = useContext(NotificationContext)
+
+  //disable empty input for button
+    useEffect(()=>{
+      if(phonenumber.length === "" || 
+        phonenumber.length < 10 ||
+        amount.length === "" ||
+        amount.length < 2
+        ){
+          setEnabled(true)
+        }
+        else{
+          setEnabled(false)
+
+        }
+    },[enabled,phonenumber,amount])
   const type = "M-Pesa"
   const name = "Deposit"
   const id = user._id
-  //disable empty input for button
-  useEffect(()=>{
-    if(phonenumber.length === "" || 
-       phonenumber.length < 10 ||
-       amount.length === "" ||
-       amount.length < 2
-      ){
-        setEnabled(true)
-      }else{
-        setEnabled(false)
-      }
-  },[enabled,phonenumber,amount])
-  console.log(id)
+  
   //pay configur
   const handlePay = async(e) =>{
     e.preventDefault()
@@ -47,7 +53,12 @@ function MpesaPayment() {
         
         await axiosInstance.put(`/Transaction/deposit/${id}`, {balance: amount})
         await axiosInstance.post(`/HistoryData/savedDepohistory/${id}`,{transactNumber: generatedUID,amount: amount,type: type,name: name})
+    
+        // dispatch({type: "INCRIMENT", payload: {countNotifications} })
         alert("Successfully deposited")
+        setCountNotifications(countNotifications+1 )
+        console.log(countNotifications)
+
         navigate("/")
       }catch(err){
         setOpen(false)
