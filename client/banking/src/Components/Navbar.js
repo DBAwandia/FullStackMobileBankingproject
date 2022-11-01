@@ -7,7 +7,7 @@ import { axiosInstance } from '../Config/Baseurl';
 import useFetchs from '../useFetch/useFetchs';
 import Photos from './Photos';
 import NotificationHistory from './NotificationHistory';
-import { NotificationContext } from '../Contexts/NotificationContext';
+// import { NotificationContext } from '../Contexts/NotificationContext';
 function Navbar() {
   // const[data, setData] = useState([])
   const [open, setOpen] = useState(false)
@@ -15,7 +15,7 @@ function Navbar() {
   // const [countNotification, setCountNotification] = useState(0)
   const navigate = useNavigate()
   const {user,dispatch} = useContext(LoginContext)
-  const {countNotification} = useContext(NotificationContext)
+  // const {countNotification} = useContext(NotificationContext)
   const handleLogout = () =>{
     dispatch({type: "LOGOUT"})
     navigate("/login")
@@ -48,7 +48,7 @@ function Navbar() {
                   <button className='logout_button' onClick={handleLogout}>Logout</button>
                   <div className='notifications' onClick={handleNotification}>
                     <Notifications  className='iconss'/>
-                    <span className='number_span' style={{color: "white",opacity:"0.83", fontSize: "1.3rem"}}>+{countNotification}</span>
+                    <span className='number_span' style={{color: "white",opacity:"0.83", fontSize: "1.3rem"}}>1</span>
                   </div>
               </div>
           </div>

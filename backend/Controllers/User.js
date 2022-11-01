@@ -37,8 +37,6 @@ export const registerUser = async( req,res)=>{
                        await saveUuidToAccountSchema.save()
 
                        //bug ,returns undefined after console.log
-                  
-
                          res.status(200).json(user)
        }
 
@@ -52,7 +50,6 @@ export const registerUser = async( req,res)=>{
 export const loginUser = async (req,res)=>{
     try{
         const user = await User.findOne({phonenumber: req.body.phonenumber})
-        // console.log(user)
         if(!user){
             res.status(400).json("please register")
             
@@ -60,7 +57,6 @@ export const loginUser = async (req,res)=>{
         
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
             const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
-            console.log(originalPassword)
             originalPassword !== req.body.password  && res.status(400).json("Put correct password")
 
         const { password, isAdmin,...others} = user._doc
@@ -140,7 +136,8 @@ export const countPeople = async(req,res)=>{
 
 
 //find all User
-export const getPeople = async(req,res)=>{
+export const getUsers = async(req,res)=>{
+
     try{
         const countedPeople = await User.find().sort({_id: -1})
          res.status(200).json(countedPeople)

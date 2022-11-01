@@ -14,7 +14,7 @@ function MpesaPayment() {
   const [open, setOpen] = useState(false)
   const [phonenumber, setPhonenumber] = useState("")
   const [amount, setAmount] = useState("")
-  const [ countNotifications,setCountNotifications] = useState(0)
+  // const [ countNotifications,setCountNotifications] = useState(0)
 
   const navigate = useNavigate()
   //generate UUID
@@ -56,8 +56,8 @@ function MpesaPayment() {
     
         // dispatch({type: "INCRIMENT", payload: {countNotifications} })
         alert("Successfully deposited")
-        setCountNotifications(countNotifications+1 )
-        console.log(countNotifications)
+        // setCountNotifications(countNotifications+1 )
+        // console.log(countNotifications)
 
         navigate("/")
       }catch(err){

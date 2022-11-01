@@ -1,38 +1,65 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { LoginContext } from '../Contexts/LoginContext'
-import useFetchs from '../useFetch/useFetchs'
+// import useFetchs from '../useFetch/useFetchs'
 import "./NotificationHistory.css"
 import ReactPaginate from "react-paginate"
+import { axiosInstance } from '../Config/Baseurl'
+import Moment from "react-moment"
+
 function NotificationHistory({setOpenNotification}) {
   const {user} = useContext(LoginContext)
   const id = user._id
+  const [dataz,setDataz] = useState([])
+  const [currentData,setCurrentData] = useState(null)
+  const [pageCount,setPageCount] = useState(0)
+  const [searchs, setSearchs] = useState("")
+  const [offset,setOffset] = useState(0)
+  const itemPerPage = 2
+  const dataArr = dataz
 
-  //data
-  const {data, loading} = useFetchs(`/HistoryData/gethistory/${id}`)
-  const dataz = [data]
+  //fetchdata
+const URL =`/HistoryData/gethistory/${id}`
+useEffect(()=>{
+  const fetchData = async(URL)=>{
+    try{
+      const res  = await axiosInstance.get(URL)
+      setDataz(res.data)
+    }catch(err){
+    alert("err")
+    }
+  }
+  fetchData(URL)
+},[URL])
+
+//search logic
+const KEYS =["amount","type","name","transactNumber"]
+const Search = (dataz) =>{
+  return dataz.filter((item)=> { return KEYS.some((key)=> item[key].includes(searchs))})
+}
+console.log(dataz)
 
   //pagination
-  const [pageCount,setPageCount] = useState(0)
-  const [offset,setOffset] = useState(0)
-  const [currentData,setCurrentData] = useState(null)
-  const itemPerPage = 2
+    useEffect(()=>{
+      const endOffset = itemPerPage + offset
+      setCurrentData(Search(dataArr).slice(offset,endOffset))
+      setPageCount(Math.ceil(dataArr.length/itemPerPage))
+    },[offset,itemPerPage,currentData])
 
-  useEffect(()=>{
-    const endOffset = itemPerPage + offset
-    setCurrentData(dataz.slice(offset,endOffset))
-    setPageCount(Math.ceil(data.length/itemPerPage))
-  },[offset,itemPerPage])
-  console.log(currentData,dataz)
-
+//event next page
   const handlePageClick = (event) =>{
-    // setOffset(event.selected * itemPerPage)
+    const newOffset = (event.selected * itemPerPage);
+    console.log(handlePageClick)
+    setOffset(newOffset)
   }
 
   return (
-    <div className='NotificationHistory' onClick={()=>setOpenNotification(false)}>
-      <div className='NotificationHistory_container'>
-        <h1 className='NotificationHistory_container_header'>All transactions</h1>
-        {currentData.map((item)=>{
+    <div className='NotificationHistorys' >
+        <div className='NotificationHistory_container'>
+          <div className='search'>
+            <h1 className='NotificationHistory_container_header'>All transactions</h1>
+            <input className='search_notification' type="text" placeholder="search" onChange={(e)=>setSearchs(e.target.value.toLowerCase())}/>
+          </div>
+        {currentData?.map((item)=>{
           return <div className='NotificationHistory_container_printable'>
           <div className='history'>
             <span className='hitory_name'>
@@ -46,18 +73,18 @@ function NotificationHistory({setOpenNotification}) {
             </span>
             <p> {user.phonenumber}</p>
           </div>
-          <div className='history'>
+          {/* <div className='history'>
             <span className='hitory_name'>
             Receiver:
             </span>
             <p> {item?.receiverNumber}</p>
-          </div>
-          <div className='history'>
+          </div> */}
+          {/* <div className='history'>
             <span className='hitory_name'>
               Name:
             </span>
             <p> {item?.receiverName}</p>
-          </div>
+          </div> */}
           <div className='history'>
             <span className='hitory_name'>
             Amount:
@@ -86,19 +113,37 @@ function NotificationHistory({setOpenNotification}) {
             <span className='hitory_name'>
             Period:
             </span>
-            <p> {item.createdAt}</p>
+
+            {/* generate date and time */}
+            <p> 
+              <Moment format="YYYY-MM-DD   HH:mm:ss">
+                {item.createdAt}
+              </Moment>
+            </p>
+
+
           </div>
         </div>
         })}
+        <div className='reactPaginate'>
         <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
+            nextLabel="next >"
+            breakLabel="..."
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+            containerClassName="pagination"
+            pageLinkClassName="page-nums"
+            previousLinkClassName="page-num"
+            nextLinkClassName="page-num"
+            activeLinkClassName="activee-boxx"
+            breakClassName="breakClassName"
+          />
+        </div>
+      </div>
+      <div className='NotificationHistory' onClick={()=>setOpenNotification(false)}>
       </div>
     </div>
   )

@@ -4,16 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { LoginContextProvider } from './Contexts/LoginContext';
-import { NotificationContextProvider } from './Contexts/NotificationContext';
+// import { NotificationContextProvider } from './Contexts/NotificationContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <NotificationContextProvider>
+    {/* <NotificationContextProvider> */}
       <LoginContextProvider>
         <App />
       </LoginContextProvider>
-    </NotificationContextProvider>
+    {/* </NotificationContextProvider> */}
   </React.StrictMode>
 );
 

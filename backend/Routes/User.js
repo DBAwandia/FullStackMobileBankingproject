@@ -1,10 +1,7 @@
 import express from "express"
 import { VerifyTokenAdminOnly, VerifyToken, VerifyTokenUserAndAdmin, generateToken } from "../Authentication/VerifyToken.js"
 const router = express.Router()
-import People from "../Models/User.js"
-import accountBalances from "../Models/Transaction.js"
-import CryptoJS from "crypto-js"
-import { findUser, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser, getCarbyUid, stkPush} from "../Controllers/User.js"
+import { findUser,getUsers, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser, getCarbyUid, stkPush} from "../Controllers/User.js"
 //register
 router.post("/register", registerUser)
 
@@ -27,7 +24,7 @@ router.delete("/findAndDelete/:id", findUserAndDelete)
 // router.get("/countUsers", countUsers)
 
 //find all users
-// router.get("/findUsers", getUsers)
+router.get("/findUsers", getUsers)
 
 //get user by uuid
 router.get("/findUuid", getUserbyUid)
