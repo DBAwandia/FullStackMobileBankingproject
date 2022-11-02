@@ -15,7 +15,7 @@ function NotificationHistory({setOpenNotification}) {
   const [searchs, setSearchs] = useState("")
   const [offset,setOffset] = useState(0)
   const itemPerPage = 2
-  const dataArr = dataz
+  // const dataArr =dataz
 
   //fetchdata
 const URL =`/HistoryData/gethistory/${id}`
@@ -32,23 +32,28 @@ useEffect(()=>{
 },[URL])
 
 //search logic
-const KEYS =["amount","type","name","transactNumber"]
+const Keys =["type"
+// ,"amount",
+// "transactNumber"
+]
+// const letKeys = [Keys]
 const Search = (dataz) =>{
-  return dataz.filter((item)=> { return KEYS.some((key)=> item[key].includes(searchs))})
+  return dataz.filter((item) =>{
+    return Keys.some((key) =>  item[key].toLowerCase().includes(searchs))
+  } )
 }
-console.log(dataz)
+// console.log(dataz)
 
   //pagination
     useEffect(()=>{
       const endOffset = itemPerPage + offset
-      setCurrentData(Search(dataArr).slice(offset,endOffset))
-      setPageCount(Math.ceil(dataArr.length/itemPerPage))
+      setCurrentData(Search(dataz).slice(offset,endOffset))
+      setPageCount(Math.ceil(Search(dataz).length/itemPerPage))
     },[offset,itemPerPage,currentData])
 
 //event next page
   const handlePageClick = (event) =>{
     const newOffset = (event.selected * itemPerPage);
-    console.log(handlePageClick)
     setOffset(newOffset)
   }
 
