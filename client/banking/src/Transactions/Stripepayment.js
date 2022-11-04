@@ -6,54 +6,29 @@ import Navbar from '../Components/Navbar'
 import { LoginContext } from '../Contexts/LoginContext'
 import "./Stripepayment.css"
 import axios from "axios"
-import StripeCheckout from 'react-stripe-checkout';
 import { axiosInstance } from '../Config/Baseurl'
 import SpinnerLoading from '../LoadingPages/SpinnerLoading'
+import {PaymentElement} from '@stripe/react-stripe-js';
 
-function Stripepayment() {
+function Stripepayment({amountz}) {
     const {user } = useContext(LoginContext)
     const [amount, setAmount] = useState("")
     const [ opens ,setOpens] = useState(false)
     const [loading, setLoading ] = useState(false)
-    const [stripeToken, setStripeToken] = useState("")
     const location = useLocation()
     const id = location.pathname.split("/")[2]
     const numb1 = 100000000
     const numb2 = 999999999
     const added = (Math.floor(Math.random()*(numb2-numb1+1) + numb1))
-    console.log(added)
     const navigate = useNavigate()
-    // const amountz = 
 
-    // const handleClick = async()=>{
-    //     await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
-    //     navigate("/confirmtransfer",{state:  {amount,added}})
-    // }
-    const onToken = (token) =>{
-     setStripeToken(token)
+    //save to localStorage first
+    const amounts =localStorage.setItem("amount", JSON.stringify(amount))
+    console.log(amountz)
+    const handleClick = async()=>{
+       const res = await axiosInstance.post("/Transaction/stripepays", {amount: amounts})
     }
 
-   
-    useEffect(()=>{
-        const makeRequest = async()=>{
-        setOpens(true)
-        try{
-            const res = await axiosInstance.post("/Transaction/stripepays",{
-              tokenId: stripeToken.id,
-              amount: amount * 100
-            })
-            // await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
-            // navigate("/",{state:  {amount}})
-      
-            }catch(err){
-                setOpens(false)
-    }
-          }
-            stripeToken && makeRequest()
-      
-      },[stripeToken, amount,navigate])
-  
-    // console.log(stripeTokens)
   return (
     <div className='stripepayment'>
         <Navbar />
@@ -83,25 +58,14 @@ function Stripepayment() {
                     <input  type="number" min="1" max="10" placeholder="Deposit amount" onChange={(e)=> setAmount(e.target.value)} />
                 </div>
                 <div className="stripe_input_button">
-                    
-                <button 
-                // onClick={handleClick}
-                >
-                    <StripeCheckout
-                        name="Complete payment"
-                        image="/images/login.jpg"
-                        token={onToken}
-                        stripeKey="pk_test_51LHrwyBVP5viye6wD4xBD8eSEKWLQTdrIdicuDlnosQ4XSvKIUMKJqwq3fOAPa03FSJHqGBdI07jIgzEToSxoFGh00Q4WdAkbQ"
-                        currency='USD'
-                        amount={amount * 100}
-                        billingAddress
-                        ComponentClass='stripe_colore'
-                    >
-                            {loading ? "loading..." : "Deposit"}
-                    </StripeCheckout>
-                    DEPOSIT
-                </button>
-
+                    {/* <PaymentElement> */}
+                        <button 
+                        onClick={handleClick}
+                        disabled={amount.length === ""}
+                        >
+                            DEPOSIT
+                        </button>
+                    {/* </PaymentElement> */}
                 </div>
            </div>
         <Footer/>

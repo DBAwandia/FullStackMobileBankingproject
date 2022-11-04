@@ -15,7 +15,7 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    z-index: 9999999999;
+    z-index: 99999999999999999;
     top: 0;
     background-color: rgba(255, 255, 255,0.7);
     
@@ -25,15 +25,17 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+    margin-top: 1.8rem;
+    padding: 0rem 1rem;
 }
 .search_notification{
-    width: 40%;
+    width: 36%;
     height: 2.5rem;
     border: 0;
     outline: 0;
     border-radius: 0.3rem;
     font-size: 1.4rem;
-    padding-left: 2rem;
+    padding-left: 5rem;
 }
 .NotificationHistory_container_header{
     font-size: 2.2rem;
@@ -47,7 +49,7 @@
     flex-direction: column;
     gap: 1.6rem;
     padding: 2rem 4rem;
-    margin: 1.5rem 1rem;
+    margin: 7.5rem 1rem;
     border-bottom: 0.5px solid rgba(128, 128, 128,0.2);
 }
 .history{
@@ -63,6 +65,7 @@
 .reactPaginate{
     width: 100%;
     padding: 1rem 0.5rem;
+    margin-top: -6rem;
 
 }
 .pagination{
@@ -95,4 +98,45 @@
     background-color: rgba(0, 128, 128,0.7);
     padding: 2px 9px;
     border-radius: 2px;
+}
+.react_to_print{
+    position: absolute;
+    z-index: 9999999999;
+    bottom: 18rem;
+    display: flex;
+    align-items: center;
+    left: 1.5rem;
+    gap: 1rem;
+    cursor: pointer;
+}
+.react_to_print >p{
+    color: blue;
+    font-size: 2.3rem;
+
+}
+.react_to_prints{
+    position: absolute;
+    z-index: 9999999999;
+    bottom: 14rem;
+    display: flex;
+    align-items: center;
+    left: 1.5rem;
+    gap: 1rem;
+    cursor: pointer;
+}
+.react_to_prints> p{
+    color: blue;
+    font-size: 2.3rem;
+}
+.react_to_print> p:hover{
+    color: orangered;
+    opacity: 0.88;
+}
+.react_to_prints> p:hover{
+    color: orangered;
+    opacity: 0.88;
+}
+.print{
+    font-size: 2.5rem !important;
+    color: gray;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Home from "./Components/Home";
 import Profile from "./Components/Profile";
@@ -20,10 +20,37 @@ import BuyMineAirtime from "./Airtime/BuyMineAirtime";
 import BuyOtherAirtime from "./Airtime/BuyOtherAirtime";
 import CreateCarAccount from "./SavingAccountTypes.js/CreateCarAccount";
 
-
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import { axiosInstance } from "./Config/Baseurl";
+const stripePromise = loadStripe('pk_test_51LHrwyBVP5viye6wD4xBD8eSEKWLQTdrIdicuDlnosQ4XSvKIUMKJqwq3fOAPa03FSJHqGBdI07jIgzEToSxoFGh00Q4WdAkbQ');
 
 
 function App() {
+
+  //STRIPE PAYMENT CLIENT SECRET
+
+  //initiate paymentIntent and client_secret
+  const [data,setData] = useState([])
+
+  //get amount from localStorage {I SET IT WHEN USER INPUTS AMOUNT in StripePayment Component}
+  const amountz = JSON.parse (localStorage.getItem("amount"))
+  useEffect(()=>{
+    const fetchData = async()=>{
+        try{
+          const res = await axiosInstance.post("/Transaction/payintent",{amount: amountz})
+          setData(res.data)
+
+        }catch(err){}
+    }
+    fetchData()
+  },[data,amountz])
+
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: `${data}`,
+  };
+  console.log(options.clientSecret)
   return (
     <div className="App">
       <Router>
@@ -35,7 +62,11 @@ function App() {
           <Route path="/transfer/:id" element={<Transfer />} />
           <Route path="/confirmtransfer" element={<Confirmation/>} />
           <Route path="/sendconfirmtransfer" element={<SendConfirmation/>} />
-          <Route path="/deposit/:id" element={<Stripepayment />} />
+          <Route path="/deposit/:id" element={
+            <Elements stripe={stripePromise} options={options}>
+                <Stripepayment />
+            </Elements>
+              } />
           <Route path="/loadingdemo" element={<HomeLoading />} />
           <Route path="/loadingspin" element={<SpinnerLoading/>} />
           <Route path="/depotype" element={<DepositType/>} />

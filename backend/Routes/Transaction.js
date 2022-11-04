@@ -1,6 +1,6 @@
 import express from "express"
 // import { generateToken } from "../Authentication/VerifyToken.js"
-import { deposits, getBalance, savedReason, stripePayment, withdraw } from "../Controllers/Transaction.js"
+import { deposits, getBalance, payIntent, savedReason, stripePayment, withdraw } from "../Controllers/Transaction.js"
 const router = express.Router()
 
 
@@ -15,6 +15,9 @@ router.put("/deposit/:id", deposits)
 
 //getbalance
 router.get("/balance/:id", getBalance)
+
+//payment intent
+router.post("/payintent", payIntent)
 
 //stripepayment
 router.post("/stripepays", stripePayment)

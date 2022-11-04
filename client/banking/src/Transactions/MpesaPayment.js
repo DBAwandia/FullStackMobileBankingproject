@@ -14,7 +14,9 @@ function MpesaPayment() {
   const [open, setOpen] = useState(false)
   const [phonenumber, setPhonenumber] = useState("")
   const [amount, setAmount] = useState("")
-  // const [ countNotifications,setCountNotifications] = useState(0)
+  const [ countNotifications,setCountNotifications] = useState({
+    counts: 0
+  })
 
   const navigate = useNavigate()
   //generate UUID
@@ -41,31 +43,41 @@ function MpesaPayment() {
 
         }
     },[enabled,phonenumber,amount])
+    // console.log(countNotifications)
+
   const type = "M-Pesa"
   const name = "Deposit"
   const id = user._id
   
   //pay configur
-  const handlePay = async(e) =>{
-    e.preventDefault()
+  const handlePay = async(namez, operation) =>{
+    // e.preventDefault()
     setOpen(true)
       try{
         
         await axiosInstance.put(`/Transaction/deposit/${id}`, {balance: amount})
-        await axiosInstance.post(`/HistoryData/savedDepohistory/${id}`,{transactNumber: generatedUID,amount: amount,type: type,name: name})
-    
+        const res =  await axiosInstance.post(`/HistoryData/savedDepohistory/${id}`,{transactNumber: generatedUID,amount: amount,type: type,name: name})
         // dispatch({type: "INCRIMENT", payload: {countNotifications} })
+        console.log()
+        if(res.config.url === "/HistoryData/savedDepohistory/635ce73bd5cf20be981c6a4d"){
+          setCountNotifications(5)
+        }else{
+          setCountNotifications(null)
+        }
+      
         alert("Successfully deposited")
-        // setCountNotifications(countNotifications+1 )
-        // console.log(countNotifications)
-
-        navigate("/")
+        // setCountNotifications((prev)=>{
+        //   return{
+        //     ...prev,
+        //     [namez]:operation === "add" ?countNotifications[namez] + 1:countNotifications[namez] - 1
+        // }
+        // })
+        navigate("/bitcoinpay",{state: countNotifications.counts})
       }catch(err){
         setOpen(false)
         alert("insufficent funds")
       }
   }
-
 
   return (
     <div className='mpesa_payment'>

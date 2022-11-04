@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { LoginContext } from '../Contexts/LoginContext'
 // import useFetchs from '../useFetch/useFetchs'
 import "./NotificationHistory.css"
 import ReactPaginate from "react-paginate"
+import {Print} from "@mui/icons-material"
 import { axiosInstance } from '../Config/Baseurl'
 import Moment from "react-moment"
+import ReactToPrint from 'react-to-print';
 
 function NotificationHistory({setOpenNotification}) {
   const {user} = useContext(LoginContext)
@@ -14,8 +16,7 @@ function NotificationHistory({setOpenNotification}) {
   const [pageCount,setPageCount] = useState(0)
   const [searchs, setSearchs] = useState("")
   const [offset,setOffset] = useState(0)
-  const itemPerPage = 2
-  // const dataArr =dataz
+  const itemPerPage = 1
 
   //fetchdata
 const URL =`/HistoryData/gethistory/${id}`
@@ -31,18 +32,13 @@ useEffect(()=>{
   fetchData(URL)
 },[URL])
 
-//search logic
-const Keys =["type"
-// ,"amount",
-// "transactNumber"
-]
-// const letKeys = [Keys]
-const Search = (dataz) =>{
-  return dataz.filter((item) =>{
-    return Keys.some((key) =>  item[key].toLowerCase().includes(searchs))
-  } )
-}
-// console.log(dataz)
+  //search logic
+  const Keys =["type"]
+  const Search = (dataz) =>{
+    return dataz.filter((item) =>{
+      return (Keys).some((key) =>  item[key].toLowerCase().includes(searchs))
+    } )
+  }
 
   //pagination
     useEffect(()=>{
@@ -57,15 +53,35 @@ const Search = (dataz) =>{
     setOffset(newOffset)
   }
 
+  //print logic
+  const componentRef = useRef()
+
   return (
     <div className='NotificationHistorys' >
         <div className='NotificationHistory_container'>
           <div className='search'>
             <h1 className='NotificationHistory_container_header'>All transactions</h1>
-            <input className='search_notification' type="text" placeholder="search" onChange={(e)=>setSearchs(e.target.value.toLowerCase())}/>
+            <input className='search_notification' type="text" placeholder="Search deposit method..." onChange={(e)=>setSearchs(e.target.value.toLowerCase())}/>
           </div>
+
+          {/* //print code */}
+          <div className='react_to_print'>
+            <Print className='print' />
+            <ReactToPrint
+              trigger={() => <p>Print</p>}
+              content={() => componentRef.current}
+            />
+          </div>
+          <div className='react_to_prints'>
+            <Print className='print' />
+            <ReactToPrint
+              trigger={() => <p>Retrieve receipt</p>}
+              content={() => componentRef.current}
+            />
+          </div>
+
         {currentData?.map((item)=>{
-          return <div className='NotificationHistory_container_printable'>
+          return <div className='NotificationHistory_container_printable' ref={componentRef}>
           <div className='history'>
             <span className='hitory_name'>
               Name:
@@ -150,6 +166,7 @@ const Search = (dataz) =>{
       </div>
       <div className='NotificationHistory' onClick={()=>setOpenNotification(false)}>
       </div>
+      
     </div>
   )
 }

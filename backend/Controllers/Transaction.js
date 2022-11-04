@@ -2,9 +2,9 @@ import accountBalances from "../Models/Transaction.js"
 import User from "../Models/User.js"
 // import axios from "axios"
 // import moment from "moment"
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const stripe = require("stripe")(process.env.STRIPE_KEY)
+import Stripe from "stripe"
+const Stripetok = Stripe("sk_test_51LHrwyBVP5viye6wmhsWZItJJbT27wFLjOeYTPHmll3Jq3It0fsuN5DeXVx7tPgy0va95bJ0VBvsg7yO2LNeae4900PAfSisDx")
+
 // const tokens = response.data.access_token
 
 // save data
@@ -86,21 +86,47 @@ export const getBalance = async (req,res)=>{
     }
 }
 
+//stripe payment intent {id}
+export const payIntent = async (req,res)=>{
+
+
+    try{
+        const paymentIntent = await Stripetok.paymentIntents.create({
+            amount: req.body.amount,
+            currency: 'usd',
+            payment_method_types: ['card'],
+          })
+          
+          res.status(200).json(paymentIntent.client_secret)
+    }catch(err){
+        res.status(500).json(err)
+    }
+      
+}
+
 //stripe payment
 export const stripePayment = async(req,res)=>{
 
+    //GENERATE idempotencyKey
+    const minm = 1000000000000
+    const maxm = 9999999999999
+    const key = Math.floor(Math.random()* (maxm - minm + 1) -minm)
+
     try{
-        await stripe.charges.create({
-            source : req.body.tokenId,
-            amount : req.body.amount,
-            currency: "usd"
-        },(stripeRes , stripeErr)=>{
+        Stripetok.charges.create({
+            amount: req.body.amount,
+            currency: "usd",
+            source: req.body.tokenID, // obtained with Stripe.js
+          }, {
+            idempotencyKey:`${key}`
+          }, (stripeErr,stripeRes) => {
+            // asynchronously called
             if(stripeErr){
-                res.status(401).json("Error" + stripeErr)
+                res.status(401).json(stripeErr + "Error")
             }else{
                 res.status(200).json(stripeRes)
             }
-        })
+          });
 
     }catch(err){
         res.status(500).json(err)
