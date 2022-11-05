@@ -86,6 +86,35 @@ export const getBalance = async (req,res)=>{
     }
 }
 
+//STRIPE SESSION
+export const startSession = async (req,res)=>{
+    //dormain to redirect after successfull
+    const success_url = "http://localhost:3000/createcarsavings"
+    const cancel_url = "http://localhost:3000/moreitems"
+
+    const {line_items,customer_email} = req.body
+    //validate req.body
+    if(!line_items || !customer_email){
+        return res.status(403).json("Inavlid paramaters")
+    }else{
+    try{
+        const session = await Stripetok.checkout.sessions.create({
+            payment_method_types:['card'],
+            customer_email, 
+            line_items,
+            success_url: `${success_url}?sessionId={CHECKOUT_SESSION_ID}`,
+            cancel_url:  `${cancel_url}`,
+            mode: 'payment',
+          });
+          res.status(200).json(session)
+    }catch(err){
+        res.status(500).json(err)
+        console.log("err")
+    }
+} 
+}
+
+
 //stripe payment intent {id}
 export const payIntent = async (req,res)=>{
 

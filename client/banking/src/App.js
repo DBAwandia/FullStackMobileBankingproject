@@ -31,26 +31,27 @@ function App() {
   //STRIPE PAYMENT CLIENT SECRET
 
   //initiate paymentIntent and client_secret
-  const [data,setData] = useState([])
+  // const [data,setData] = useState([])
 
   //get amount from localStorage {I SET IT WHEN USER INPUTS AMOUNT in StripePayment Component}
-  const amountz = JSON.parse (localStorage.getItem("amount"))
-  useEffect(()=>{
-    const fetchData = async()=>{
-        try{
-          const res = await axiosInstance.post("/Transaction/payintent",{amount: amountz})
-          setData(res.data)
+  // const amountz = JSON.parse (localStorage.getItem("amount"))
 
-        }catch(err){}
-    }
-    fetchData()
-  },[data,amountz])
+  // useEffect(()=>{
+  //   const fetchData = async()=>{
+  //       try{
+  //         const res = await axiosInstance.post("/Transaction/payintent",{amount: amountz})
+  //         setData(res.data)
 
-  const options = {
-    // passing the client secret obtained from the server
-    clientSecret: `${data}`,
-  };
-  console.log(options.clientSecret)
+  //       }catch(err){}
+  //   }
+  //   fetchData()
+  // },[amountz])
+
+  // const options = {
+  //   // passing the client secret obtained from the server
+  //   clientSecret: `${data}`,
+  // };
+  // console.log(options)
   return (
     <div className="App">
       <Router>
@@ -63,7 +64,7 @@ function App() {
           <Route path="/confirmtransfer" element={<Confirmation/>} />
           <Route path="/sendconfirmtransfer" element={<SendConfirmation/>} />
           <Route path="/deposit/:id" element={
-            <Elements stripe={stripePromise} options={options}>
+            <Elements stripe={stripePromise} >
                 <Stripepayment />
             </Elements>
               } />

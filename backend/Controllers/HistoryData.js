@@ -11,14 +11,12 @@ export const saveDepoTransaction = async (req,res)=>{
     const transactNumber = req.body.transactNumber
     const type = req.body.type
     const amount = req.body.amount
-    const uuid = req.body.uuid
 
     const newTransaction =historys({
          
             transactNumber: transactNumber,
             amount: amount,
             type: type,
-            uuid:uuid,
             name: name
 
         })
