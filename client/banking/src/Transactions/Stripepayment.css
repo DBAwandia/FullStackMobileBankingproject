@@ -129,7 +129,7 @@ a{
     border-color: red;
 }
 .stripe_input_button > button:hover{
-    background-color: white;
+    background-color: lightgray;
     color: teal;
 }
 .stripe_colore{

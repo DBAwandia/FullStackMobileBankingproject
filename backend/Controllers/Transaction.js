@@ -5,7 +5,33 @@ import User from "../Models/User.js"
 import Stripe from "stripe"
 const Stripetok = Stripe("sk_test_51LHrwyBVP5viye6wmhsWZItJJbT27wFLjOeYTPHmll3Jq3It0fsuN5DeXVx7tPgy0va95bJ0VBvsg7yO2LNeae4900PAfSisDx")
 
-// const tokens = response.data.access_token
+//STRIPE SESSION
+export const startSession = async (req,res)=>{
+    //dormain to redirect after successfull
+    const success_url = "http://localhost:3000/createcarsavings"
+    const cancel_url = "http://localhost:3000/"
+
+    const {line_items,customer_email} = req.body
+    //validate req.body
+    if(!line_items || !customer_email){
+        return res.status(403).json("Inavlid paramaters")
+    }else{
+    try{
+        const session = await Stripetok.checkout.sessions.create({
+            payment_method_types:['card'],
+            customer_email, 
+            line_items,
+            success_url: `${success_url}?sessionId={CHECKOUT_SESSION_ID}`,
+            cancel_url:  `${cancel_url}`,
+            mode: 'payment',
+          });
+          res.status(200).json(session.id)
+    }catch(err){
+        res.status(500).json(err)
+        console.log("err")
+    }
+} 
+}
 
 // save data
 export const savedReason = async (req,res)=>{
@@ -54,7 +80,7 @@ export const deposits = async (req,res) =>{
     try{
         const users = await User.findById(req.params.id)
         const UID = users.uuid
-        // const balance = req.body.balance
+        const balance = req.body.balance
         // const getPrevbalance = await accountBalances.findOne({uuid:UID})
         // const ids = getPrevbalance._id
         // const prevbalance = getPrevbalance.balance
@@ -62,7 +88,7 @@ export const deposits = async (req,res) =>{
 
 
 
-        const deposited = await accountBalances.findOneAndUpdate({uuid: UID}, {$inc: {balance: req.body.balance}},{new: true})
+        const deposited = await accountBalances.findOneAndUpdate({uuid: UID}, {$inc: {balance: req.body.balance || balance}},{new: true})
         res.status(201).json(deposited)
 
     }catch(err){
@@ -86,81 +112,8 @@ export const getBalance = async (req,res)=>{
     }
 }
 
-//STRIPE SESSION
-export const startSession = async (req,res)=>{
-    //dormain to redirect after successfull
-    const success_url = "http://localhost:3000/createcarsavings"
-    const cancel_url = "http://localhost:3000/moreitems"
-
-    const {line_items,customer_email} = req.body
-    //validate req.body
-    if(!line_items || !customer_email){
-        return res.status(403).json("Inavlid paramaters")
-    }else{
-    try{
-        const session = await Stripetok.checkout.sessions.create({
-            payment_method_types:['card'],
-            customer_email, 
-            line_items,
-            success_url: `${success_url}?sessionId={CHECKOUT_SESSION_ID}`,
-            cancel_url:  `${cancel_url}`,
-            mode: 'payment',
-          });
-          res.status(200).json(session)
-    }catch(err){
-        res.status(500).json(err)
-        console.log("err")
-    }
-} 
-}
 
 
-//stripe payment intent {id}
-export const payIntent = async (req,res)=>{
-
-
-    try{
-        const paymentIntent = await Stripetok.paymentIntents.create({
-            amount: req.body.amount,
-            currency: 'usd',
-            payment_method_types: ['card'],
-          })
-          
-          res.status(200).json(paymentIntent.client_secret)
-    }catch(err){
-        res.status(500).json(err)
-    }
-      
-}
-
-//stripe payment
-export const stripePayment = async(req,res)=>{
-
-    //GENERATE idempotencyKey
-    const minm = 1000000000000
-    const maxm = 9999999999999
-    const key = Math.floor(Math.random()* (maxm - minm + 1) -minm)
-
-    try{
-        Stripetok.charges.create({
-            amount: req.body.amount,
-            currency: "usd",
-            source: req.body.tokenID, // obtained with Stripe.js
-          }, {
-            idempotencyKey:`${key}`
-          }, (stripeErr,stripeRes) => {
-            // asynchronously called
-            if(stripeErr){
-                res.status(401).json(stripeErr + "Error")
-            }else{
-                res.status(200).json(stripeRes)
-            }
-          });
-
-    }catch(err){
-        res.status(500).json(err)
-    }
-}
 
 //generate authToken
 // export const generateToken = async(req,res,next) =>{

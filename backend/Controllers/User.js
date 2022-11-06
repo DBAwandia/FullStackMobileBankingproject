@@ -101,8 +101,9 @@ export const findUser = async(req,res)=>{
 }
 //edit details
 export const findUserAndEdit = async(req,res)=>{
+    let params = req.params
     try{
-        const findPersonAndEdit = await User.findByIdAndUpdate(req.params.id,{$set: req.body}, {new: true})
+        const findPersonAndEdit = await User.findByIdAndUpdate(params.id,{$set: req.body}, {new: true})
         res.status(200).json(findPersonAndEdit)
         
     }catch(err){

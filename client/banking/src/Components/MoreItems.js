@@ -54,7 +54,9 @@ function MoreItems({setOpen}) {
     return (
     <div className='MoreItems' >
         <div className="cancels">
-            <Cancel sx={{fontSize:' 45px',color: "red"}} onClick={()=>setOpen(false)}/>
+            <Cancel sx={{fontSize:' 45px',color: "red"}} onClick={()=>{
+                navigate("/")
+            }}/>
         </div>
         <div className='MoreItems_container'>
                    <div className='more_items_objects'>

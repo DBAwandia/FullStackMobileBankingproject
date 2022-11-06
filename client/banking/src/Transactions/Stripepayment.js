@@ -17,27 +17,35 @@ function Stripepayment() {
     const [loading, setLoading ] = useState(false)
     const location = useLocation()
     const id = location.pathname.split("/")[2]
+    console.log(id)
     const numb1 = 100000000
     const numb2 = 999999999
     const added = (Math.floor(Math.random()*(numb2-numb1+1) + numb1))
     const navigate = useNavigate()
-   const amountz = amount * 100
+    const amountz = amount * 100
+
+    //stripe
     const stripe = useStripe();
-   console.log(stripe)
-    //save to localStorage first
-    // const amounts =localStorage.setItem("amount", JSON.stringify(amount)) 
+
+    //generate id
+    const maxm = 999999999999999
+    const minm = 100000000000000
+    const generateID = Math.floor(Math.random()* (maxm - minm + 1) - minm)
+
     const itemCart = [{
-        "quantity": 1,
-        "currency": "usd",
-        "name":"Bank Deposit"
+        quantity: 1,
+        currency: "usd",
+        name:"Bank Deposit"
     }]
+    const type = itemCart.map(item => item.name)
+    const name = "Deposit"
     const handleClick = async(e)=>{
        e.preventDefault()
        const line_items = itemCart.map((item)=>{
         return{
             quantity: item.quantity,
             price_data:{
-                unit_amount: `${amountz}`,
+                unit_amount: amountz,
                 currency: item.currency ,
                 product_data:{
                             name: item.name
@@ -50,18 +58,22 @@ function Stripepayment() {
         
     try{
         const response = await axiosInstance.post("/Transaction/stripesession",{line_items:line_items,customer_email: emailz})
-        //sesiion_id
-        console.log(response)
-        const {sessionId} = response
-        console.log(sessionId)
-        const {error} = await stripe.redirectToCheckout({sessionId})
-        if(error){
-            alert("Errorssssssssssss")
-            console.log(error)
+        //session_id
+        const sessionId = response.data
+        const result = await stripe.redirectToCheckout({sessionId})
+        // const res =await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amount})
+        // await axiosInstance.post(`/HistoryData/savedDepohistory/${id}`, {transactNumber: generateID,amount: amount,type: type,name: name})
+        // console.log(res)
+        // navigate("/")
+
+        // navigate("/")
+        if(result.error){
+            alert("Inputs error")
+            console.log("error")
         }
     }catch(err){
         console.log(err)
-        alert("errzzzzzzzz")
+        // alert("Please put correct or all details")
     }
          
     }
@@ -99,7 +111,6 @@ function Stripepayment() {
                 <div className="stripe_input_button">
                         <button 
                         onClick={handleClick}
-                        
                         >
                             DEPOSIT
                         </button>

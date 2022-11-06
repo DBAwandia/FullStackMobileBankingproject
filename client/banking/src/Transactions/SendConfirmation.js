@@ -20,7 +20,9 @@ function SendConfirmation() {
   const receiverName = location.state.receiverName
   const userUuid = location.state.uuid
   const amount = location.state.balance
-  console.log(userUuid)
+  // const maxm = 999999999999999
+  // const minm = 100000000000000
+  // const generateID = Math.floor(Math.random()* (maxm - minm + 1) - minm)
 
   const navigate = useNavigate()
     const handleClick = async() =>{

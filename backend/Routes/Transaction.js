@@ -1,8 +1,10 @@
 import express from "express"
 // import { generateToken } from "../Authentication/VerifyToken.js"
-import { deposits, getBalance, payIntent,startSession, savedReason, stripePayment, withdraw } from "../Controllers/Transaction.js"
+import { deposits, getBalance, startSession, savedReason, withdraw } from "../Controllers/Transaction.js"
 const router = express.Router()
 
+//stripepayment  SESSION
+router.post("/stripesession", startSession)
 
 //save amount
 router.put("/savedamount/:id", savedReason)
@@ -16,15 +18,7 @@ router.put("/deposit/:id", deposits)
 //getbalance
 router.get("/balance/:id", getBalance)
 
-//payment intent
-router.post("/payintent", payIntent)
 
-
-//stripepayment
-router.post("/stripepays", stripePayment)
-
-//stripepayment  SESSION
-router.post("/stripesession", startSession)
 
 //lipanampesa
 // router.post("/lipanampesa",generateToken, lipanaMpesa)
