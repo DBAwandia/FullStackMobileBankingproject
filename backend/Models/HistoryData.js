@@ -7,7 +7,9 @@ const histSchema = new mongoose.Schema({
     senderNumber:{
         type: Number
     },
-  
+    email:{
+        type: String
+    },
     receiverNumber:{
         type: Number
     },

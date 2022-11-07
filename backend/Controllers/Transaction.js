@@ -8,8 +8,8 @@ const Stripetok = Stripe("sk_test_51LHrwyBVP5viye6wmhsWZItJJbT27wFLjOeYTPHmll3Jq
 //STRIPE SESSION
 export const startSession = async (req,res)=>{
     //dormain to redirect after successfull
-    const success_url = "http://localhost:3000/createcarsavings"
-    const cancel_url = "http://localhost:3000/"
+    const success_url = "http://localhost:3000/confirmtransfer"
+    const cancel_url = "http://localhost:3000/depotype"
 
     const {line_items,customer_email} = req.body
     //validate req.body

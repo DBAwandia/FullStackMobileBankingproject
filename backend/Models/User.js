@@ -5,6 +5,9 @@ const userSchema = new mongoose.Schema({
     history:{
         type: [String]
     },
+    // _id:{
+        // type: String
+    // },
     food:{
         type: Number
     },

@@ -1,17 +1,53 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Confirmation.css"
 import Navbar from "../Components/Navbar"
 import Footer from '../Components/Footer'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AddBoxRounded, ArrowBackIos } from '@mui/icons-material'
 import SpinnerLoading from '../LoadingPages/SpinnerLoading'
+import { axiosInstance } from '../Config/Baseurl'
+import { LoginContext } from '../Contexts/LoginContext'
 function Confirmation() {
-  const location = useLocation()
-  const [open, setOpen] = useState(false)
-  const amounts = location.state.amount
-  const addeds = location.state.added
-
   
+  //fetch userID from localStorage
+  const {user} = useContext(LoginContext)
+  const id = user._id
+  console.log(id)
+  //open loading modal
+  const [open, setOpen] = useState(false)
+
+
+  //fetch deposit details from localStorage
+   const res = JSON.parse(localStorage.getItem("details"))
+
+  // const amounts = res.map(item => item.amount)
+  // const email = res.map(item => item.email)
+  // const UID = res.map(item => item.generateID)
+  // const methodDeposit = res.map(item => item.name)
+  // const bank_type = res?.map(item => item.type)
+  
+  const amounts = res.amount
+  const email =res.email
+  const UID =res.generateID
+  const methodDeposit =res.name
+  const bank_type ="Bank Deposit"
+  console.log(res)
+  console.log(amounts,email,methodDeposit)
+  //naviage
+  const navigate = useNavigate()
+
+  const saveHistory = async()=>{
+    setOpen(true)
+    try{
+      await axiosInstance.post(`/HistoryData/savedDepohistory/${id}`,{transactNumber: UID,amount: amounts,name: bank_type,type: methodDeposit, email: email})
+      navigate("/")
+
+    }catch(err){
+      alert("Error")
+      setOpen(false)
+    }
+  }
+
   return (
     <div className="confirmation_header">
         <Navbar />
@@ -29,7 +65,7 @@ function Confirmation() {
                 <h1  className='payment_sucss'>Payment successfull!!</h1>
                 <div className='transaction_number'>
                   <p>Transaction id: </p> 
-                  <span>{addeds}</span>
+                  <span>{UID}</span>
                 </div>
               </div>
               <div className='lower_confirmation_block'>
@@ -40,16 +76,16 @@ function Confirmation() {
                   </div>
                   <div className='bank_detail_block'>
                     <h1>Email:</h1>
-                    <span className='transaction_email'>wadda@gmail.com</span>
+                    <span className='transaction_email'>{email}</span>
                   </div>
                   <div className='bank_detail_block'>
                     <h1>Bank</h1>
-                    <span style={{marginLeft: "10%"}}  className='bankz_type'>Equity</span>
+                    <span  className='bankz_type'>{bank_type}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <button className='continue_button'>Continue</button>
+            <button className='continue_button' onClick={saveHistory}>Continue</button>
 
         </div>
         <Footer />

@@ -6,13 +6,8 @@ import jwt from "jsonwebtoken";
 import accountBalances from "../Models/Transaction.js"
 import Cars from "../Models/Cars.js";
 import axios from "axios"
-let app = express();
+import mongoose from "mongoose";
 
-//response as Json
-app.use(express.json()); 
-
-//Parse x-www-form-urlencoded request into req.body
-app.use(express.urlencoded({ extended: true }));  
 
 //register
 export const registerUser = async( req,res)=>{
@@ -101,14 +96,18 @@ export const findUser = async(req,res)=>{
 }
 //edit details
 export const findUserAndEdit = async(req,res)=>{
-    let params = req.params
-    try{
-        const findPersonAndEdit = await User.findByIdAndUpdate(params.id,{$set: req.body}, {new: true})
-        res.status(200).json(findPersonAndEdit)
-        
-    }catch(err){
-        res.status(500).json(err)
-    }
+    const id = req.params.userid
+    const idz = id.trim()
+    console.log(idz)
+
+             try{
+                const findPersonAndEdit = await User.findByIdAndUpdate(idz,{$set: req.body}, {new: true})
+                res.status(200).json(findPersonAndEdit)
+                
+            }catch(err){
+                res.status(500).json(err)
+            }
+ 
 }
 
 //delete user

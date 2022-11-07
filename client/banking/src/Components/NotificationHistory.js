@@ -86,13 +86,13 @@ useEffect(()=>{
             <span className='hitory_name'>
               Name:
             </span>
-            <p> {user?.username}</p>
+            <p className='itemusername'> {user?.username}</p>
           </div>
           <div className='history'>
             <span className='hitory_name'>
             Phone:
             </span>
-            <p> {user.phonenumber}</p>
+            <p className='itemphonenumber'> {user.phonenumber}</p>
           </div>
           {/* <div className='history'>
             <span className='hitory_name'>
@@ -110,25 +110,32 @@ useEffect(()=>{
             <span className='hitory_name'>
             Amount:
             </span>
-            <p> $ {item?.amount}</p>
+            <p className='itemamount'> $ {item?.amount}</p>
           </div>
           <div className='history'>
             <span className='hitory_name'>
             Transaction ID:
             </span>
-            <p> {item.transactNumber}</p>
+            <p className='itemtransact'> {item.transactNumber}</p>
           </div>
           <div className='history'>
             <span className='hitory_name'>
             Method:
             </span>
-            <p> {item?.type}</p>
+            <p className='itemtype'> {item?.type}</p>
           </div>
           <div className='history'>
             <span className='hitory_name'>
             Type:
             </span>
-            <p> {item?.name}</p>
+            <p className='itemname'> {item?.name}</p>
+          </div>
+          <div className='history'>
+            <span className='hitory_name'>
+            Email:
+            </span>
+            
+            <p className='itememail'> {item?.email}</p>
           </div>
           <div className='history'>
             <span className='hitory_name'>
@@ -136,7 +143,7 @@ useEffect(()=>{
             </span>
 
             {/* generate date and time */}
-            <p> 
+            <p className='itemtime'> 
               <Moment format="YYYY-MM-DD   HH:mm:ss">
                 {item.createdAt}
               </Moment>

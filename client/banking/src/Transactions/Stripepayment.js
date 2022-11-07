@@ -17,10 +17,7 @@ function Stripepayment() {
     const [loading, setLoading ] = useState(false)
     const location = useLocation()
     const id = location.pathname.split("/")[2]
-    console.log(id)
-    const numb1 = 100000000
-    const numb2 = 999999999
-    const added = (Math.floor(Math.random()*(numb2-numb1+1) + numb1))
+
     const navigate = useNavigate()
     const amountz = amount * 100
 
@@ -32,6 +29,7 @@ function Stripepayment() {
     const minm = 100000000000000
     const generateID = Math.floor(Math.random()* (maxm - minm + 1) - minm)
 
+
     const itemCart = [{
         quantity: 1,
         currency: "usd",
@@ -39,6 +37,21 @@ function Stripepayment() {
     }]
     const type = itemCart.map(item => item.name)
     const name = "Deposit"
+
+      //save transactions details to localStorage
+        const details = {
+        amount: amount,
+        email: email,
+        generateID:generateID,
+        type: type,
+        name: name
+
+    }
+    useEffect(()=>{
+        localStorage.setItem("details", JSON.stringify(details))
+    },[details])
+
+    //deposit event
     const handleClick = async(e)=>{
        e.preventDefault()
        const line_items = itemCart.map((item)=>{

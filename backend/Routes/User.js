@@ -11,17 +11,8 @@ router.post("/login", loginUser)
 //reset password
 router.put("/reset", resetPassword)
 
-//find user by id
-router.get("/find/:id", findUser)
-
-//edit user
-router.put("/findAndEdit/:id", findUserAndEdit)
-
-//delete user
-router.delete("/findAndDelete/:id", findUserAndDelete)
-
-//count users
-// router.get("/countUsers", countUsers)
+//saf generate token
+router.post("/gettoken",generateToken,stkPush)
 
 //find all users
 router.get("/findUsers", getUsers)
@@ -29,13 +20,24 @@ router.get("/findUsers", getUsers)
 //get user by uuid
 router.get("/findUuid", getUserbyUid)
 
+//find user by id
+router.get("/find/:id", findUser)
+
+//edit user
+router.put("/findAndEdit/:userid", findUserAndEdit)
+
+//delete user
+router.delete("/findAndDelete/:id", findUserAndDelete)
+
+//count users
+// router.get("/countUsers", countUsers)
+
+
 // router.put("/findz",findPer)
 
 //query saving
 router.get("/queryCarsSavings/:id",getCarbyUid)
 
-//saf generate token
-router.post("/gettoken",generateToken,stkPush)
 
 
 export default router

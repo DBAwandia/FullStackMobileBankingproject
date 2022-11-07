@@ -140,3 +140,29 @@
     font-size: 2.5rem !important;
     color: gray;
 }
+
+.itemamount{
+    margin-left: 1rem;
+}
+.itemtransact{
+    margin-left: -3.3rem;
+}
+.itemtype{
+    margin-left: 1.3rem;
+}
+.itemname{
+    margin-left: 2.7rem;
+}
+.itememail{
+    margin-left: 2rem;
+    font-size: 1rem;
+}
+.itemtime{
+    margin-left: 2rem;
+}
+.itemusername{
+    margin-left: 2rem;
+}
+.itemphonenumber{
+    margin-left: 2rem;
+}
