@@ -86,7 +86,7 @@ function Stripepayment() {
         }
     }catch(err){
         console.log(err)
-        // alert("Please put correct or all details")
+        alert("Please put correct or all details")
     }
          
     }

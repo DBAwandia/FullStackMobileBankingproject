@@ -1,10 +1,16 @@
 import express from "express"
 // import { generateToken } from "../Authentication/VerifyToken.js"
-import { deposits, getBalance, startSession, savedReason, withdraw } from "../Controllers/Transaction.js"
+import { deposits, getBalance, startSession, savedReason, withdraw, payoutSession, stripeConnectId } from "../Controllers/Transaction.js"
 const router = express.Router()
 
 //stripepayment  SESSION
 router.post("/stripesession", startSession)
+
+//stripePayout  SESSION
+router.put("/stripepayout/:id", payoutSession)
+
+//fetch connect acc id  
+router.get("/connect/:id", stripeConnectId)
 
 //save amount
 router.put("/savedamount/:id", savedReason)

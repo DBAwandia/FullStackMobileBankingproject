@@ -23,6 +23,7 @@ import CreateCarAccount from "./SavingAccountTypes.js/CreateCarAccount";
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import { axiosInstance } from "./Config/Baseurl";
+import BankWithdraw from "./Transactions/BankWithdraw";
 const stripePromise = loadStripe('pk_test_51LHrwyBVP5viye6wD4xBD8eSEKWLQTdrIdicuDlnosQ4XSvKIUMKJqwq3fOAPa03FSJHqGBdI07jIgzEToSxoFGh00Q4WdAkbQ');
 
 
@@ -79,6 +80,7 @@ function App() {
           <Route path="/buymineairtime" element={<BuyMineAirtime/>} />
           <Route path="/buyotherairtime" element={<BuyOtherAirtime/>} />
           <Route path="/createcarsavings" element={<CreateCarAccount/>} />
+          <Route path="/bankwithdraw" element={<BankWithdraw/>} />
          
 
 

@@ -1,6 +1,6 @@
 import accountBalances from "../Models/Transaction.js"
 import User from "../Models/User.js"
-// import axios from "axios"
+import axios from "axios"
 // import moment from "moment"
 import Stripe from "stripe"
 const Stripetok = Stripe("sk_test_51LHrwyBVP5viye6wmhsWZItJJbT27wFLjOeYTPHmll3Jq3It0fsuN5DeXVx7tPgy0va95bJ0VBvsg7yO2LNeae4900PAfSisDx")
@@ -31,6 +31,64 @@ export const startSession = async (req,res)=>{
         console.log("err")
     }
 } 
+}
+
+//payouts
+export const payoutSession = async (req,res)=>{
+  
+    const { email} =req.body
+    
+    //get date for TOR stripe_date
+    const tos_acceptance_date = Math.floor(Date.now()/ 1000)
+
+    //fetch user IP_address
+    const ipAddress = await axios.get("https://hutils.loxal.net/whois")
+    const ip = ipAddress.data.ip
+    
+    try{
+        const account = await Stripetok.accounts.create({
+            country:"US",
+            type: 'custom',
+            email,
+            capabilities: {card_payments: {requested: true}, transfers: {requested: true}},
+          });
+          const id = account.id
+          
+
+          //save the CONNECT_ACC ID TO DATABASE
+          try{
+            await User.findByIdAndUpdate(req.params.id,{$set: {stripeID: id}},{new: true})
+          }catch(err){
+            console.log(err)
+          }
+          const accounts = await Stripetok.accounts.update(
+            // '{{CONNECTED_STRIPE_ACCOUNT_ID}}',
+            id,
+            {tos_acceptance: {date: tos_acceptance_date, ip: ip}}
+          );
+          res.status(200).json({details: {accounts},id})
+    }catch(err){
+        res.status(500).json(err)
+        console.log("err")
+    }
+}
+
+//get then stripe_connect_id
+export const stripeConnectId = async(req,res)=>{
+  try{
+
+    const stripe_conect_id = await User.findById(req.params.id)
+    const ACC_ID =stripe_conect_id.stripeID
+
+    //retrieve account details using connect id
+    const account = await Stripetok.accounts.retrieve(
+        ACC_ID
+      );
+    res.status(200).json(account)
+
+  }catch(err){
+    res.status(500).json(err)
+  }
 }
 
 // save data

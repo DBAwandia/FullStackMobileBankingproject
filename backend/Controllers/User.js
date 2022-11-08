@@ -51,9 +51,8 @@ export const loginUser = async (req,res)=>{
         }else{
         
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
-            const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8)
+            const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8).trim()
             originalPassword !== req.body.password  && res.status(400).json("Put correct password")
-
         const { password, isAdmin,...others} = user._doc
 
         const token = jwt.sign(

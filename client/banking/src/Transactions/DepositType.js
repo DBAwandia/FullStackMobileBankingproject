@@ -8,12 +8,14 @@ function DepositType({setOpenDeposit}) {
     const navigate = useNavigate()
     const {user} = useContext(LoginContext)
     const id = user._id
+    const handleClick = () =>{
+        navigate("/profile")
+   
+    }
   return (
     <div className='DepositType'>
         <div className='close_icon'>
-            <CloseOutlined onClick={()=>{
-                navigate("/")
-            }} sx={{fontSize:"3.3rem",color: "blue"}}/>
+            <CloseOutlined onClick={handleClick} sx={{fontSize:"3.3rem",color: "blue"}}/>
         </div>
         <div className='DepositType_container'>
             <div className='DepositType_objects'>

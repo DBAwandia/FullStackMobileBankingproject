@@ -36,6 +36,10 @@ const userSchema = new mongoose.Schema({
     uuid:{
         type: Number
     },
+    //stripe connect id
+    stripeID:{
+        type: String,
+    },
     isAdmin:{
         type: Boolean,
         default: false
