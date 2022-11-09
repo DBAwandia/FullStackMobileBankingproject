@@ -1,12 +1,45 @@
 import accountBalances from "../Models/Transaction.js"
 import User from "../Models/User.js"
 import axios from "axios"
+
 // import moment from "moment"
 import Stripe from "stripe"
 const Stripetok = Stripe("sk_test_51LHrwyBVP5viye6wmhsWZItJJbT27wFLjOeYTPHmll3Jq3It0fsuN5DeXVx7tPgy0va95bJ0VBvsg7yO2LNeae4900PAfSisDx")
 
+//twilio
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+import  Twilio  from "twilio";
+const client = new Twilio("ACedfb52c1fe7c0c43ace05a14f68088e6","95627a76d1b3c41c3b0a9b74d8b914d4");
+
+// twilio send message to 
+export const twilioWhatsapp = async (req,res) =>{
+        // //fetch userbalance
+        const paramsID =req.params.id
+        const paramsIDtrim = paramsID.trim()
+        const registeredUser = await User.findById(paramsIDtrim)
+
+        // // accoutBalanceUID same as user UUID
+        const accoutBalanceUID = registeredUser.uuid
+
+        const {amount} = req.body
+
+        // //get balance
+        const accountBalance = await accountBalances.findOne({uuid: accoutBalanceUID})
+        const accBalance = accountBalance.balance
+        
+        try{
+            const message = await client.messages
+             .create({body: `CONGRATULATIONS !!!!! You have SUCCESSFULLY DEPOSITED ${amount} :) your available balance is ${accBalance}`, from: '+18148592232', to: '+254794770857'})
+             res.status(200).json(message)
+            }catch(err){
+                res.status(500).json(err)
+            }   
+}
+
 //STRIPE SESSION
 export const startSession = async (req,res)=>{
+
     //dormain to redirect after successfull
     const success_url = "http://localhost:3000/confirmtransfer"
     const cancel_url = "http://localhost:3000/depotype"

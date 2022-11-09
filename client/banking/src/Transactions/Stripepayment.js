@@ -70,7 +70,7 @@ function Stripepayment() {
        const emailz = `${email}`
         
     try{
-        const response = await axiosInstance.post("/Transaction/stripesession",{line_items:line_items,customer_email: emailz})
+        const response = await axiosInstance.post(`/Transaction/stripesession/${id}`,{line_items:line_items,customer_email: emailz})
         //session_id
         const sessionId = response.data
         const result = await stripe.redirectToCheckout({sessionId})

@@ -39,7 +39,16 @@ function Confirmation() {
   const saveHistory = async()=>{
     setOpen(true)
     try{
+      
+      //update history
       await axiosInstance.post(`/HistoryData/savedDepohistory/${id}`,{transactNumber: UID,amount: amounts,name: bank_type,type: methodDeposit, email: email})
+
+      //update database
+      await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amounts})
+
+      //send sms notofication
+      await axiosInstance.post(`/Transaction/whatsapp/${id}`,{amount: amounts})
+      
       navigate("/")
 
     }catch(err){
