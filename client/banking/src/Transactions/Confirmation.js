@@ -31,8 +31,8 @@ function Confirmation() {
   const UID =res.generateID
   const methodDeposit =res.name
   const bank_type ="Bank Deposit"
-  console.log(res)
-  console.log(amounts,email,methodDeposit)
+  // console.log(res)
+  // console.log(amounts,email,methodDeposit)
   //naviage
   const navigate = useNavigate()
 
@@ -47,8 +47,8 @@ function Confirmation() {
       await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amounts})
 
       //send sms notofication
-      await axiosInstance.post(`/Transaction/whatsapp/${id}`,{amount: amounts})
-      
+      await axiosInstance.post(`/Transaction/whatsapp/${id}`,{amount: amounts, uid: UID})
+
       navigate("/")
 
     }catch(err){

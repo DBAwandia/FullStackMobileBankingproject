@@ -10,9 +10,9 @@ const Stripetok = Stripe("sk_test_51LHrwyBVP5viye6wmhsWZItJJbT27wFLjOeYTPHmll3Jq
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 import  Twilio  from "twilio";
-const client = new Twilio("ACedfb52c1fe7c0c43ace05a14f68088e6","95627a76d1b3c41c3b0a9b74d8b914d4");
+const client = new Twilio("ACedfb52c1fe7c0c43ace05a14f68088e6","44dcee57ad196994b2a3b8a292603f80");
 
-// twilio send message to 
+// twilio send message to user after deposit
 export const twilioWhatsapp = async (req,res) =>{
         // //fetch userbalance
         const paramsID =req.params.id
@@ -22,7 +22,7 @@ export const twilioWhatsapp = async (req,res) =>{
         // // accoutBalanceUID same as user UUID
         const accoutBalanceUID = registeredUser.uuid
 
-        const {amount} = req.body
+        const {amount,uid} = req.body
 
         // //get balance
         const accountBalance = await accountBalances.findOne({uuid: accoutBalanceUID})
@@ -30,7 +30,10 @@ export const twilioWhatsapp = async (req,res) =>{
         
         try{
             const message = await client.messages
-             .create({body: `CONGRATULATIONS !!!!! You have SUCCESSFULLY DEPOSITED ${amount} :) your available balance is ${accBalance}`, from: '+18148592232', to: '+254794770857'})
+             .create({
+                body: `DEPOSITED SUCCESSFULLY OF $${amount}. Your available balance is $${accBalance}. TRANSACTION ID: ${uid}`,
+                 from: '+18148592232', 
+                 to: '+254794770897'})
              res.status(200).json(message)
             }catch(err){
                 res.status(500).json(err)
@@ -148,7 +151,7 @@ export const withdraw = async (req,res) =>{
 
         //validate the user to send money
         const usertOSENDMONEY = await User.findOne({uuid: UUID})
-        console.log(usertOSENDMONEY.uuid)
+        // console.log(usertOSENDMONEY.uuid)
         usertOSENDMONEY.uuid !== UUID || req.body.uuid && res.status(400).json(err + "err")
          
         const getPrevbalance = await accountBalances.findOne({uuid: UID})
