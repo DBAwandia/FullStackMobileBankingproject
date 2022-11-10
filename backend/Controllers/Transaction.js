@@ -2,7 +2,7 @@ import accountBalances from "../Models/Transaction.js"
 import User from "../Models/User.js"
 import axios from "axios"
 
-// import moment from "moment"
+import moment from "moment"
 import Stripe from "stripe"
 const Stripetok = Stripe("sk_test_51LHrwyBVP5viye6wmhsWZItJJbT27wFLjOeYTPHmll3Jq3It0fsuN5DeXVx7tPgy0va95bJ0VBvsg7yO2LNeae4900PAfSisDx")
 
@@ -22,18 +22,21 @@ export const twilioWhatsapp = async (req,res) =>{
         // // accoutBalanceUID same as user UUID
         const accoutBalanceUID = registeredUser.uuid
 
-        const {amount,uid} = req.body
+        const {amount,uid,phonenumber} = req.body
 
         // //get balance
         const accountBalance = await accountBalances.findOne({uuid: accoutBalanceUID})
         const accBalance = accountBalance.balance
-        
+
+        //get timestamp pm or aMm
+        const date = new Date()
+        const timestamp = moment(date).format("DD/MM/YYYY  HH:mm A" )
         try{
             const message = await client.messages
              .create({
-                body: `DEPOSITED SUCCESSFULLY OF $${amount}. Your available balance is $${accBalance}. TRANSACTION ID: ${uid}`,
+                body: `QK${uid} DEPOSIT CONFIRMED. $${amount} paid to your accoount. on ${timestamp}. Balance is $${accBalance}. Transaction cost $0.00. We are happy to serve you!! `,
                  from: '+18148592232', 
-                 to: '+254794770897'})
+                 to: `+${phonenumber}`})
              res.status(200).json(message)
             }catch(err){
                 res.status(500).json(err)

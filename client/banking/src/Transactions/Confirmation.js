@@ -12,6 +12,7 @@ function Confirmation() {
   //fetch userID from localStorage
   const {user} = useContext(LoginContext)
   const id = user._id
+  const phonenumber = user.phonenumber
   console.log(id)
   //open loading modal
   const [open, setOpen] = useState(false)
@@ -47,7 +48,7 @@ function Confirmation() {
       await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amounts})
 
       //send sms notofication
-      await axiosInstance.post(`/Transaction/whatsapp/${id}`,{amount: amounts, uid: UID})
+      await axiosInstance.post(`/Transaction/whatsapp/${id}`,{amount: amounts, uid: UID, phonenumber: phonenumber})
 
       navigate("/")
 

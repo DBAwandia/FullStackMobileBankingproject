@@ -25,8 +25,8 @@ function Stripepayment() {
     const stripe = useStripe();
 
     //generate id
-    const maxm = 999999999999999
-    const minm = 100000000000000
+    const maxm = 999999999999
+    const minm = 100000000000
     const generateID = Math.floor(Math.random()* (maxm - minm + 1) - minm)
 
 

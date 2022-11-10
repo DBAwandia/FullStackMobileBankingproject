@@ -6,8 +6,9 @@ import jwt from "jsonwebtoken";
 import accountBalances from "../Models/Transaction.js"
 import Cars from "../Models/Cars.js";
 import axios from "axios"
-import mongoose from "mongoose";
-
+import  Twilio  from "twilio";
+import moment from "moment";
+const client = new Twilio("ACedfb52c1fe7c0c43ace05a14f68088e6","44dcee57ad196994b2a3b8a292603f80");
 
 //register
 export const registerUser = async( req,res)=>{
@@ -22,6 +23,10 @@ export const registerUser = async( req,res)=>{
        )
 
    const saveUuidToAccountSchema = accountBalances({uuid: generatedNumbers})
+   
+   //generate timestamp
+   const date = new Date()
+   const timeStamp = moment(date).format("DD/MM/YYYY  HH:mm:ss a")
 
    try{
        const oldUser = await User.findOne({ phonenumber: phonenumber})
@@ -29,10 +34,22 @@ export const registerUser = async( req,res)=>{
           return res.status(400).json("Already exists")
        }else {
                        const user = await newUser.save()
-                       await saveUuidToAccountSchema.save()
+                       const bal =  await saveUuidToAccountSchema.save()
+                       console.log(bal)
+                       //send message to user after registering
+                       try{
+                        await  client.messages
+                           .create({
+                               body: `CONGRATULATIONS ${user.username}. Account created. on ${timeStamp}. Your account number is ${user.uuid}. Availabale balnce is $${bal.balance}. We are happy serving you !!!!`,
+                               from: '+18148592232', 
+                               to: `+${phonenumber}`}).then((message)=> console.log(message.body))
+                
+                        }catch(err){
+                            res.status(500).json(err)
+                        }
 
-                       //bug ,returns undefined after console.log
-                         res.status(200).json(user)
+                        //registration response
+                        res.status(200).json(user)
        }
 
    }catch(err){
@@ -53,6 +70,7 @@ export const loginUser = async (req,res)=>{
             const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC);
             const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8).trim()
             originalPassword !== req.body.password  && res.status(400).json("Put correct password")
+            console.log(originalPassword)
         const { password, isAdmin,...others} = user._doc
 
         const token = jwt.sign(
@@ -69,6 +87,13 @@ export const loginUser = async (req,res)=>{
         res.status(500).json(err)
     }
 }
+
+//notify user with success on account registration
+export const sendMessage = async (req,res)=>{
+    // const
+        
+}
+
 //reset password
 export const resetPassword = async (req,res)=>{
     const phonenumber = req.body.phonenumber

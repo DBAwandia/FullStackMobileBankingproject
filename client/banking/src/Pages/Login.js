@@ -22,6 +22,7 @@ function Login() {
       }catch(err){
         dispatch({type:"LOGIN_ERROR"})
         // setOpen(false)
+        alert("wrong password or phonenumber")
         console.log("err" + err)
       }
     }
