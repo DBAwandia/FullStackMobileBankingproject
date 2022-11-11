@@ -39,9 +39,9 @@
     opacity: 0.8;
 }
 .EEdit_input_container > input{
-    height: 3.3rem;
+    height: 3.9rem;
     border-radius: 3px;
-    font-size: 18px;
+    font-size: 1.3rem;
     caret-color: blue;
     color: teal;
     padding: 0px 1.2rem;
@@ -51,8 +51,8 @@
     align-items: center;
     color: white;
     opacity: 0.7;
-    height: 3.4rem;
-    font-size: 19px;
+    height: 4.4rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -63,50 +63,4 @@
     transition-delay: 0.45s;
     transition-duration: 0.8s;
 
-}
-@media screen and (max-width: 768px) {
-    .profile_container{
-        gap: 0;
-    }
-    .EEdit_input_container{
-        width: 100%;
-        margin-top: 2rem;
-        gap: 1rem;
-    }
-    .EEdit_input_container > label{
-        font-size: 1.2rem;
-        padding-left: 0.8rem;
-    }
-    .EEdit_input_container > input{
-        margin:0px 0.8rem ;
-        height: 3rem;
-        font-size: 15px;
-    }
-    .EEdit_input_container > button{
-        margin:0px 0.8rem ;
-        height: 3rem;
-        font-size: 15px;
-    }
-
-}
-@media screen  and (max-width: 992px) and (min-width: 768px) {
-    
-    .EEdit_input_container{
-        width: 100%;
-        padding: 0px 8rem;
-        margin-top: 2rem;
-        gap: 1.6rem;
-    }
-    .EEdit_input_container > label{
-        font-size: 1.2rem;
-        padding-left: 0.7rem;
-    }
-    .EEdit_input_container > input{
-        height: 3.1rem;
-        font-size: 16px;
-    }
-    .EEdit_input_container > button{
-        height: 3.1rem;
-        font-size: 17px;
-    }
 }

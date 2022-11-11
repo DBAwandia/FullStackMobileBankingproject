@@ -37,7 +37,7 @@
     border-radius: 50%;
 }
 .phonenumber_input{
-    font-size: 21px;
+    font-size: 1.4rem;
     color: white;
     letter-spacing: 1px;
     font-weight: 500;
@@ -48,7 +48,7 @@
     cursor: pointer;
     color: white;
     background: crimson;
-    font-size: 17px;
+    font-size: 1.1rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
 }
@@ -91,74 +91,43 @@
     color: white;
 }
 
-@media screen and (max-width: 768px) {
-    .logoutAndPhone_container{
-        padding: 2rem 2rem;
-        gap: 1.5rem;
-        justify-content: space-between;
-    }
-    .icons{
-        display: none !important;
-    }
-    .navbar_container{
-        padding: 0px 2.2rem ;
-    }
+@media screen  and (max-width: 420px){
     .Navbar{
-        height: 5rem;
+        height: 4.5rem;
+    }
+    .logoutAndPhone_container{
+        gap: 1rem;
+        margin-right: 0;
     }
     .avatar_img{
-        display: none;
+        width: 2rem;
+        height: 2rem;
+        margin: 0.5rem 0rem;
     }
     .phonenumber_input{
-        font-size: 15px;
-        font-weight: 450;
+        font-size: 0.67rem ;
     }
     .logout_button{
-        width: 4.4rem;
-        opacity: 1.5;
-        height: 2rem;
-        font-size: 11px;
+        width: 3.5rem;
+        height: 1.4rem;
+        font-size: 0.4rem;
+        letter-spacing: 1px;
+        margin-left: 0.3rem;
+        border-radius: 10px;
     }
     .logoutAndPhone_container > span{
-        margin-right: -1.5rem;
-        font-size: 16px;
-    }
-   
-    
-}
-@media screen  and (max-width: 992px) and (min-width: 768px) {
-    .logoutAndPhone_container{
-        padding: 2rem 2rem;
-        gap:1.5rem;
-        justify-content: space-between;
-    }
-    .icons{
-        font-size: 29px !important;
-    }
-    .navbar_container{
-        padding: 0px 2.2rem ;
-    }
-    .Navbar{
-        height: 5rem;
-    }
-    .avatar_img{
-        width: 2.8rem;
-        height: 2.8rem;
-        margin: 0;
-    }
-    .phonenumber_input{
-        font-size: 15px;
-        font-weight: 450;
-    }
-    .logout_button{
-        width: 4.4rem;
-        opacity: 1.5;
-        height: 2rem;
-        font-size: 11px;
-    }
-    .logoutAndPhone_container > span{
-        margin-right: -1.5rem;
-        font-size: 16px;
-    }
+        font-size: 0.6rem;
+        margin-right: -0.5rem;
 
+    }
+    .iconss{
+        font-size: 1.5rem !important;
+        margin-left: 0.8rem;
+    }
+    .number_span{
+        font-size: 0.7rem !important;
+        padding: 3px;
+        right: -0.1rem;
+    }
 }
+    

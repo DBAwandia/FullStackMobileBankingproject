@@ -144,6 +144,85 @@ export const savedReason = async (req,res)=>{
     }
 }
 
+//sms77io RAPID API docs
+export const sms77io = async(req,res)=>{
+    const encodedParams = new URLSearchParams();
+encodedParams.append("to", "+491771783130");
+encodedParams.append("p", "e27f35633emshd4906d1f252d8d9p1d5dddjsnd00b28b8e51b");
+encodedParams.append("text", "Dear customer. We want to say thanks for your trust. Use code MINUS10 for 10 % discount on your next order!");
+
+const options = {
+  method: 'POST',
+  url: 'https://sms77io.p.rapidapi.com/sms',
+  headers: {
+    'content-type': 'application/x-www-form-urlencoded',
+    'X-RapidAPI-Key': 'e27f35633emshd4906d1f252d8d9p1d5dddjsnd00b28b8e51b',
+    'X-RapidAPI-Host': 'sms77io.p.rapidapi.com'
+  },
+  data: encodedParams
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data);
+}).catch(function (error) {
+	console.error(error);
+});
+}
+
+
+//twilio transfer sms to the two users transacting
+export const twilioTransfers = async (req,res)=>{
+    try{
+        //req.body
+        const {receiveruid, amount ,transactID} = req.body
+
+        //timestamp
+        const date = new Date()
+        const timeStamp = moment(date).format("DD/MM/YYYY  HH:mm A")
+
+        //sender balance
+        const user = await User.findById(req.params.id)
+        const sender_name = user.username
+        const sender_phonenumber = user.phonenumber
+        const UUID = user.uuid
+        const balance = await accountBalances.findOne({uuid: UUID})
+        const accbal = balance.balance
+
+        //receiver balance
+        const receiver_nameANDnumber = await User.findOne({uuid: receiveruid})
+        const receiver_his_name = receiver_nameANDnumber.username
+        const receiver_phonenumber = receiver_nameANDnumber.phonenumber
+        const receiver = await accountBalances.findOne({uuid: receiveruid})
+        const receivebal = receiver.balance
+
+        //sender message send after transaction
+        try{
+            await client.message.create({
+                body:`QK${transactID} TRANSFER SUCCESSFUL !!!. Sent $${amount} to ${receiver_his_name}, phonenumber ${receiver_phonenumber}. on ${timeStamp}.New balance is ${accbal}.We are always ready to serve you!!`,
+                from:"+18148592232",
+                to:`+${sender_phonenumber}`
+            })
+
+          //receiver message send after transaction
+          try{
+            const message = await client.message.create({
+                body:`QK${transactID} DEPOSIT SUCCESSFUL !!!. Received $${amount} from ${sender_name}, phonenumber ${sender_phonenumber}. on ${timeStamp}.New balance is ${receivebal}.We are always ready to serve you!!`,
+                from:"+18148592232",
+                to:`+${receiver_phonenumber}`
+            })
+        }catch(err){
+            res.status(500).json(err)
+        }
+
+        }catch(err){
+            res.status(500).json(err)
+        }
+
+    }catch(err){
+        res.status(500).json(err)
+    }
+}
+
 //withdraw
 export const withdraw = async (req,res) =>{
     try{

@@ -62,6 +62,7 @@ function Register() {
       }).catch((error) => {
         console.log(error)
        setOpens(true)
+       alert("Image is required")
        setLoading(false)
       });
      
@@ -73,7 +74,7 @@ function Register() {
             <div className='login_container2'>
                 <div className='avatar_container'>
                     <img className='avatar_image' src={image ? URL.createObjectURL(image): "/images/login.jpg"} alt=''/>
-                    <input className='file_image' type='file'  onChange={(e)=>setImage(e.target.files[0])} required/>
+                    <input className='file_image' placeholder='Upload profile pic' type='file'  onChange={(e)=>setImage(e.target.files[0])} required/>
                 </div>
                 {opens && <p style={{color:"red",fontSize: "18px", margin:"10px 0px"}}>Wrong code!!!</p>}
                 {open && <p style={{color: "green",fontSize: "18px", margin:"10px 0px"}}  >succesfull!!!</p>}

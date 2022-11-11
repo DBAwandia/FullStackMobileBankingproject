@@ -20,8 +20,6 @@ function Footer() {
             >
           <DashboardRounded 
             className="icons"
-            sx={{fontSize: "2.1rem"}}
-          
           />
           <p style={{color: "black"}}>Dashboard</p>
         </div>
@@ -30,9 +28,7 @@ function Footer() {
          
             >
           <AddCardRounded 
-            className="icons"
-            sx={{fontSize: "2.5rem", color: "teal"}}
-
+            className="iconsz"
           />
           <p style={{color: "teal"}}>Cards</p>
         </div>
@@ -40,9 +36,8 @@ function Footer() {
           
         >
           <SupportAgentRounded 
-            className="icons"
-            sx={{fontSize: "2.5rem", color: "blue"}}
-
+            className="iconsz"
+            sx={{color:"gray"}}
           />
           <p style={{color: "blue", opacity:"0.8"}}>Support</p>
         </div>
@@ -56,9 +51,8 @@ function Footer() {
          >
           <PersonOutlineOutlined 
               className="icons"
-              sx={{fontSize: "2.5rem", color: "gray"}}
             />
-            <p style={{color: "gray"}}>Profile</p>
+            <p style={{color: "gray"}} className="profile_profile">Profile</p>
          </NavLink>
         </div>
       </div>

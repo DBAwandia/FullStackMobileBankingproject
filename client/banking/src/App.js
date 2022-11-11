@@ -24,6 +24,8 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import { axiosInstance } from "./Config/Baseurl";
 import BankWithdraw from "./Transactions/BankWithdraw";
+import NotificationHistory from "./Components/NotificationHistory";
+import Photos from "./Components/Photos";
 const stripePromise = loadStripe('pk_test_51LHrwyBVP5viye6wD4xBD8eSEKWLQTdrIdicuDlnosQ4XSvKIUMKJqwq3fOAPa03FSJHqGBdI07jIgzEToSxoFGh00Q4WdAkbQ');
 
 
@@ -81,6 +83,10 @@ function App() {
           <Route path="/buyotherairtime" element={<BuyOtherAirtime/>} />
           <Route path="/createcarsavings" element={<CreateCarAccount/>} />
           <Route path="/bankwithdraw" element={<BankWithdraw/>} />
+          <Route path="/notify" element={<NotificationHistory/>} />
+          <Route path="/photo" element={<Photos/>} />
+
+
          
 
 

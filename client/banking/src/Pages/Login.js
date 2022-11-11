@@ -39,8 +39,8 @@ function Login() {
                 <label>Enter password</label>
                 <input type="password" placeholder="Enter password" onChange={e=>setPassword(e.target.value)} required/>
                 <button className='login_button'  onClick={handleClick}>{loadings?"Loading...": "Login"}</button>
-                <label className='loginLink' style={{ color: "gray", marginTop:39}}>can't remember password? <Link to="/resetpassword">Forgotpassword</Link></label>
-                <label className='loginLink' style={{ color: "teal", marginTop:39}}>create acc <Link to="/register">Register</Link></label>
+                <label className='loginLink' style={{ color: "gray"}}>can't remember password? <Link to="/resetpassword">Forgotpassword</Link></label>
+                <label className='loginLink' style={{ color: "teal"}}>create acc <Link to="/register">Register</Link></label>
             </div>
           </div>
     </div>

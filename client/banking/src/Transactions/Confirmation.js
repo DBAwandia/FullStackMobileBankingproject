@@ -48,7 +48,7 @@ function Confirmation() {
       await axiosInstance.put(`/Transaction/deposit/${id}`,{balance: amounts})
 
       //send sms notofication
-      await axiosInstance.post(`/Transaction/whatsapp/${id}`,{amount: amounts, uid: UID, phonenumber: phonenumber})
+      // await axiosInstance.post(`/Transaction/whatsapp/${id}`,{amount: amounts, uid: UID, phonenumber: phonenumber})
 
       navigate("/")
 

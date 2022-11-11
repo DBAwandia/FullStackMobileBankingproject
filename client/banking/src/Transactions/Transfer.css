@@ -14,16 +14,16 @@
     background-position: center;
     object-fit: cover;
 }
-.enable{
-    background-color: rgba(211, 211, 211,0.4);
+.enablez{
+    background-color: rgba(211, 211, 211,0.6);
     cursor:not-allowed;
      width: 73%;
-    height: 3.5rem;
+    height: 4.5rem;
     margin-top: 1.2rem;
     color: rgba(220, 20, 60,0.65);
     text-transform: capitalize;
     border-radius: 4px;
-    font-size: 22px;
+    font-size: 1.5rem;
 }
 .spinner_transfer{
     position: absolute;
@@ -110,7 +110,7 @@ span{
     border: 0;
     outline: 0;
     border-radius: 4px;
-    height: 3.1rem;
+    height: 3.7rem;
     width: 100%;
     font-size: 1.2rem;
     letter-spacing: 1.3px;
@@ -119,13 +119,14 @@ span{
 }
 .submitt_button{
     width: 73%;
-    height: 3.5rem;
+    height: 4.5rem;
     margin-top: 1.2rem;
     background-color: rgba(220, 20, 60,0.6);
     cursor: pointer;
     color: white;
+    letter-spacing: 2px;
     border-radius: 4px;
-    font-size: 22px;
+    font-size: 1.5rem;
 }
 .submitt_button:active{
     background-color: white;

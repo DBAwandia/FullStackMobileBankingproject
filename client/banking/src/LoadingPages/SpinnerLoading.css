@@ -33,18 +33,10 @@
     width: 70%;
     height: 75%;
     border-radius: 50%;
-  
-}
-.inner_circle{
     font-size: 2.3rem;
     font-weight: 500;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: crimson;
-    /* animation-name: spin;
-    animation-timing-function: linear;
-    animation-delay: 0.7s;
-    animation-iteration-count: infinite;
-    animation-duration: 1s; */
 }
 .inner_circle > p{
     
@@ -132,5 +124,11 @@
         transition: all 0.1s ease-in-out;
         opacity: 0;
         /* color: teal; */
+    }
+}
+@media screen  and (max-width: 420px){
+    .inner_circle{
+        margin-left: -3.6rem;
+        font-size: 1.2rem;
     }
 }

@@ -2,6 +2,7 @@
     width: 100%;
     height: 100vh;
     position: relative;
+    overflow: hidden;
 }
 .NotificationHistory{
     width: 100%;
@@ -30,12 +31,12 @@
 }
 .search_notification{
     width: 36%;
-    height: 2.5rem;
+    height: 2rem;
     border: 0;
     outline: 0;
     border-radius: 0.3rem;
-    font-size: 1.4rem;
-    padding-left: 5rem;
+    font-size: 1.2rem;
+    padding-left: 4rem;
 }
 .NotificationHistory_container_header{
     font-size: 2.2rem;
@@ -165,4 +166,75 @@
 }
 .itemphonenumber{
     margin-left: 2rem;
+}
+
+@media screen and (max-width: 420px) {
+    .NotificationHistory_container{
+       width: 80%;
+       /* right: 0rem; */
+       margin-right: 0;
+    }
+    .search{
+        margin-right: 0px !important;
+    }
+    .NotificationHistory_container_header{
+        display: none;
+    }
+    .search_notification{
+    width: 80%;
+    height: 3rem;
+    font-size: 1.2rem;
+    margin-right: 1.6rem;
+    padding-left: 3rem;
+}
+.NotificationHistory_container_printable{
+    margin: 3rem 0.5rem;
+    gap: 1rem;
+    padding: 0.9rem 0.2rem;
+}
+.history{
+    gap: 4rem;
+}
+.history > p{
+    font-size: 0.85rem;
+}
+.hitory_name{
+    font-size: 1.1rem;
+    margin-left: 0.3rem;
+}
+.reactPaginate{
+    margin-top: -3rem;
+}
+.pagination{
+    gap: 1.5rem;
+    font-size: 1.3rem;
+    margin: 1rem 2.5rem;
+}
+.page-nums{
+    font-size: 1.1rem;
+}
+.breakClassName{
+    font-size: 1.4rem;
+}
+.activee-boxx{
+    padding: 1.7px 6px;
+}
+.react_to_print{
+    bottom: 12rem;
+}
+.react_to_print >p{
+    font-size: 1.2rem;
+}
+.react_to_prints{
+    bottom: 7rem;
+}
+.react_to_prints >p{
+    font-size: 1.1rem;
+}
+.print{
+    font-size: 1.5rem !important;
+}
+.itemtransact{
+    margin-left: -2.3rem;
+}
 }

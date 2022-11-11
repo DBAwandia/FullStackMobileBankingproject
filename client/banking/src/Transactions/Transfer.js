@@ -124,7 +124,7 @@ function Transfer() {
                     </div>
 
                 </div>
-                    <button className={enable ? ("enable") : ("submitt_button")} disabled={enable}  onClick={handleClick}>{loadings ? "loading..." : "Send Money"}</button>
+                    <button className={enable ? ("enablez") : ("submitt_button")} disabled={enable}  onClick={handleClick}>{loadings ? "loading..." : "Send Money"}</button>
         </div>
         <Footer />
     </div>
