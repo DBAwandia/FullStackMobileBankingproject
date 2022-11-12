@@ -135,3 +135,52 @@ a{
 .stripe_colore{
     color: white;
 }
+@media screen and (max-width: 420px) {
+    .stripe_payment_container{
+        gap: 10px !important;
+    }
+    .payment_header_object{
+        gap: 0.8rem !important;
+    }
+    .payment_header_object > h1{
+        font-size: 1rem !important;
+        line-height: 30px !important;
+
+    }
+    .payment_header_object > h1 >span{
+        font-size: 0.7rem !important;
+        margin-left: 0.6rem;
+    }
+    .payment_header_object > p{
+        font-size: 1rem !important;
+        letter-spacing: 1px !important;
+    }
+    .payment_header_object > p > b{
+        font-size: 1.1rem !important;
+    }
+    .piggyimg{
+        width: 40% !important;
+        height: 30% !important;
+    }
+    .stripe_input_amount{
+        gap: 1rem !important;
+    }
+    .label_icons{
+        margin-left: 11% !important;
+    }
+    .label_icons > label{
+        font-size: 0.9rem !important;
+    }
+    .stripe_input_amount > input{
+        width: 70% !important;
+        height: 3rem !important;
+        font-size: 1rem !important;
+        margin-left: 10% !important;
+    }
+    .stripe_input_button > button{
+        width: 70% !important;
+        height: 3rem !important;
+        font-size: 1rem !important;
+        padding-left: 0rem !important;
+    }
+}

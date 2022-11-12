@@ -17,6 +17,9 @@
     place-items: center;
     align-items: center;
 }
+.closex_icon{
+    font-size: 3.3rem !important;
+}
 .DepositType_objects{
     width: 50%;
     height: 60vh;
@@ -94,4 +97,60 @@
     letter-spacing: 2px;
     font-family: Arial, Helvetica, sans-serif;
     color: #f2a900;
+}
+
+@media screen and (max-width: 420px) {
+    .DepositType_container{
+        padding: 1rem;
+    }
+    .closex_icon{
+        font-size: 2.4rem !important;
+    }
+    .close_icon{
+        top: 2.2rem;
+        right: 7%;
+    }
+    .DepositType{
+        overflow: hidden;
+    }
+    .DepositType_objects{
+        padding: 1rem 1.5rem !important;
+        width: 100%;
+        margin-top: 6rem;
+
+    }
+    .deposit_method{
+        margin-left: 1.3rem;
+        gap: 1.5rem;
+    }
+    .depo_method_type{
+        gap: 2rem;
+    }
+    .mpesa{
+        font-size: 1.2rem;
+        letter-spacing: 1.1px;
+    }
+    .bank_pay{
+        font-size: 1.2rem;
+        letter-spacing: 1.1px;
+    }
+    .bitcoin{
+        font-size: 1.2rem;
+        letter-spacing: 1.1px;
+    }
+    .arrow_right_button1{
+        font-size: 2.3rem !important;
+        margin-left: 6.7rem !important;
+
+    }
+    .arrow_right_button2{
+        font-size: 2.3rem !important;
+        margin-left: 8.2rem !important;
+
+    }
+    .arrow_right_button3{
+        font-size: 2.3rem !important;
+        margin-left: 1.5rem !important;
+    }
+
 }

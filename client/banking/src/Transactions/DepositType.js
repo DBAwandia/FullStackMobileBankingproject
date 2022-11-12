@@ -15,7 +15,7 @@ function DepositType({setOpenDeposit}) {
   return (
     <div className='DepositType'>
         <div className='close_icon'>
-            <CloseOutlined onClick={handleClick} sx={{fontSize:"3.3rem",color: "blue"}}/>
+            <CloseOutlined onClick={handleClick} className="closex_icon" sx={{color: "blue"}}/>
         </div>
         <div className='DepositType_container'>
             <div className='DepositType_objects'>
@@ -24,21 +24,21 @@ function DepositType({setOpenDeposit}) {
                     <div className='depo_method_type'>
                             <img className='mpesa_image' src="/images/mpesa.png" />
                             <p className='mpesa'>M-Pesa</p>
-                            <KeyboardArrowRight sx={{fontSize: "3rem", marginLeft:"7.8rem", color:"gray"}} />
+                            <KeyboardArrowRight className='arrow_right_button1' sx={{fontSize: "3rem", marginLeft:"7.8rem", color:"gray"}} />
                         </div>
                    </Link>
                    <Link to={`/deposit/${id}`}>
                     <div className='depo_method_type'>
                             <img className='bank_image' src="/images/banklogo.webp" />
                             <p className='bank_pay'>Bank</p>
-                            <KeyboardArrowRight sx={{fontSize: "3rem", marginLeft:"10rem", color:"gray"}} />
+                            <KeyboardArrowRight className='arrow_right_button2' sx={{fontSize: "3rem", marginLeft:"10rem", color:"gray"}} />
                         </div>
                    </Link>
                    <Link to="/bitcoinpay">
                     <div className='depo_method_type'>
                             <img className='bitcoin_image' src="/images/Bitcoin.png" />
                             <p className='bitcoin'>Crypto (Bitcoin)</p>
-                            <KeyboardArrowRight sx={{fontSize: "3rem",color:"gray"}} />
+                            <KeyboardArrowRight className='arrow_right_button3' sx={{fontSize: "3rem",color:"gray"}} />
                         </div>
                    </Link>
                 </div>

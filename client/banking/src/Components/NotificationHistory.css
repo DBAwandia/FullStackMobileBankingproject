@@ -227,14 +227,31 @@
 }
 .react_to_prints{
     bottom: 7rem;
+    display: none;
 }
 .react_to_prints >p{
     font-size: 1.1rem;
+    display: none;
+
 }
 .print{
     font-size: 1.5rem !important;
 }
 .itemtransact{
     margin-left: -2.3rem;
+}
+.footer_links > a {
+    margin-top: -0.8rem !important;
+} 
+.icons1{
+    margin-top: 1.35rem !important;
+}
+.support_app{
+    margin-left: -0.4rem !important;
+    font-size: 0.8rem !important;
+    margin-top: 0.1rem !important;
+}
+.profile_profile{
+    margin-top: -0.4rem;
 }
 }

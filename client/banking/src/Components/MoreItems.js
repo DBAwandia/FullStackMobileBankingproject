@@ -54,8 +54,8 @@ function MoreItems({setOpen}) {
     return (
     <div className='MoreItems' >
         <div className="cancels">
-            <Cancel sx={{fontSize:' 45px',color: "red"}} onClick={()=>{
-                navigate("/")
+            <Cancel className='cncel_x' sx={{color: "red"}} onClick={()=>{
+                navigate("/profile")
             }}/>
         </div>
         <div className='MoreItems_container'>
@@ -69,10 +69,12 @@ function MoreItems({setOpen}) {
                         }}
                     >
                         <AddIcCall 
+                        className='save_icon'
                          sx={{ color: "green",marginLeft:"4rem",fontSize:"2.5rem"}}
                         />
                         <p> Buy Airtime</p>
                         <KeyboardArrowRight 
+                         className='save_iconz1'
                             sx={{marginLeft:"0.5rem"}}
                         />
                     </div>
@@ -100,10 +102,12 @@ function MoreItems({setOpen}) {
                         setOpenStartSavings(true)
                     }}>
                         <Savings 
+                         className='save_icon'
                          sx={{ color: "pink",marginLeft:"4rem",fontSize:"2.8rem"}}
                         />
                         <p>Start Savings</p>
                        {!openStartSavings && <KeyboardArrowRight 
+                         className='save_iconz2'
                             sx={{marginLeft:"0.1rem"}}
                         />}
                     </div>
@@ -132,10 +136,12 @@ function MoreItems({setOpen}) {
                             }
                         }>
                             <Savings 
+                             className='save_icon'
                             sx={{ color: "gray",marginLeft:"4rem",fontSize:"2.5rem"}}
                             />
                             <p>My Savings</p>
                             <KeyboardArrowRight 
+                             className='save_iconz3'
                                 sx={{marginLeft:"1.9rem"}}
                             />
 
@@ -158,10 +164,12 @@ function MoreItems({setOpen}) {
                     <Link to="/profile">
                         <div className='icons_resp_names'>
                             <Settings 
+                             className='save_icon'
                             sx={{ color: "gray",marginLeft:"4rem",fontSize:"2.5rem"}}
                             />
                             <p>Settings</p>
                             <KeyboardArrowRight 
+                             className='save_iconz4'
                                 sx={{marginLeft:"1.9rem"}}
                             />
 
@@ -169,10 +177,12 @@ function MoreItems({setOpen}) {
                     </Link>
                     <div className='icons_resp_names_logout' onClick={handleClick}>
                         <PowerSettingsNew  
+                         className='save_icon'
                             sx={{ color: "red",marginLeft:"4rem",fontSize:"2.2rem"}}
                         />
                         <p>Logout</p>
                         <KeyboardArrowRight 
+                         className='save_iconz5'
                             sx={{marginLeft:"0.5rem"}}
                         />
 

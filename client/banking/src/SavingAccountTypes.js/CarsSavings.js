@@ -3,7 +3,7 @@ import Footer from '../Components/Footer'
 import "./FoodAccount.css"
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { ArrowUpward } from '@mui/icons-material';
+import { ArrowUpward, Dehaze } from '@mui/icons-material';
 import useFetchs from '../useFetch/useFetchs';
 import { LoginContext } from '../Contexts/LoginContext';
 import { axiosInstance } from '../Config/Baseurl';
@@ -17,6 +17,7 @@ function CarsSavings() {
     const  [loadSpinner,setLoadSpinner] =useState(false)
     const  [openDeposit,setOpenDeposit] =useState(false)
     const  [openWithdraw,setOpenWithdraw] =useState(false)
+    const  [openWithdrawAndDeposit, setOpenWithdrawAndDeposit] = useState(false)
     const  [Enable,setEnable] =useState(false)
 
 
@@ -89,6 +90,34 @@ function CarsSavings() {
         {loadSpinner && <div class="spinner">
             <SpinnerLoading/>
         </div> }
+        <div className='dehaze_icon'
+            onClick={()=> setOpenWithdrawAndDeposit(true)}
+        >
+            <Dehaze />
+        </div>
+
+        {/* withdraw modal */}
+        {openWithdrawAndDeposit && <div className='hide_modal'>
+            <div className='balck_modal' onClick={()=> setOpenWithdrawAndDeposit(false)}>
+            </div>
+            <div className='withdraw_deposit_modal'>
+            <p style={{color: "orange",opacity: "0.89",fontWeight:"bolder",cursor:"pointer"}}  onClick={()=>{
+                            setOpenWithdraw(false)
+                            setOpenDeposit(true)
+                        }
+                            }>Deposit </p>
+                {openDeposit && <input  onChange={(e)=>setDepositAmount(e.target.value)} type="text" placeholder="deposit"  />}
+                {openDeposit && <button  onClick={handleDeposit}>Deposit</button>}
+                <p style={{color: "red",opacity: "0.89",fontWeight:"bolder",cursor:"pointer"}}  onClick={()=>{
+                            setOpenDeposit(false)
+                           setOpenWithdraw(true)
+                        }
+                            }>Withdraw </p>
+                {openWithdraw && <input onChange={(e)=>setWithdrawalAmount(e.target.value)} type="text" placeholder="withdraw" />}
+                {openWithdraw && <button  onClick={handleWithdraw}>Withdraw</button>}
+            </div>
+        </div>}
+        
         <div className="FoodAccount_container">
             <div className="FoodAccount_container_header">
                 <Link  to="/">
@@ -100,7 +129,7 @@ function CarsSavings() {
                         setOpenDeposit(true)
                     }
                         }>Deposit </p>
-                   {openDeposit && <input className='savings_car_input' onChange={(e)=>setDepositAmount(e.target.value)} type="text" placeholder="deposit"  />}
+                   {openDeposit && <input  className="savings_car_input" onChange={(e)=>setDepositAmount(e.target.value)} type="text" placeholder="deposit"  />}
                 </div>
                 {openDeposit && <button className='deposit_button' onClick={handleDeposit}>Deposit</button>}
                 <div className='foodandhealth_balance'>
@@ -115,7 +144,7 @@ function CarsSavings() {
                 </div>
                {openWithdraw && <button disabled={Enable} className={Enable ? "blocked_withdraw_button":"withdraw_button"} onClick={handleWithdraw}>Withdraw</button>}
 
-                <div className='foodandhealth_balance'>
+                <div className='foodandhealth_balances'>
                     <p>Balance :</p>
                     <span>${data}</span>
                 </div>
@@ -133,9 +162,9 @@ function CarsSavings() {
             </div>
             <div className='photos'>
                 {carDatas.map(items=>(
-                    <div className='immage'>
+                 <div className='immage'>
                     <img  src={items?.photos} alt=""/>
-                </div>
+                 </div>
                 ))}
             </div>
             <div className="center_message_foodaccount">
@@ -151,8 +180,8 @@ function CarsSavings() {
               <div className='circular_chart_model'>
                 <CircularProgressbar className="circulchartbar" value={percentageChange} text={`${percentageChange}%`} />;
                 <div className="icon_paragraph_chart">
-                    <ArrowUpward sx={{color:"green",fontSize: "40px"}}/>
-                    <p>Percentage increase in past two days</p>
+                    <ArrowUpward className='arrow_up_icon' sx={{color:"green",fontSize: "40px"}}/>
+                    <p>Make sure your savings increases🎯</p>
                 </div>
               </div>
             </div>

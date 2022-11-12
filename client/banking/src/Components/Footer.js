@@ -33,13 +33,14 @@ function Footer() {
           <p style={{color: "teal"}}>Cards</p>
         </div>
         <div className='footer_links'
-          
         >
-          <SupportAgentRounded 
-            className="iconsz"
-            sx={{color:"gray"}}
-          />
-          <p style={{color: "blue", opacity:"0.8"}}>Support</p>
+          <a href="https://wa.me/254794770857?text=Thanks%20for%20joining">
+            <SupportAgentRounded 
+              className="iconsz"
+              sx={{color:"gray"}}
+            />
+            <p className='support_app' style={{color: "blue", opacity:"0.9", fontSize:"1.1rem"}}>Support</p>
+          </a>
         </div>
         <div className='footer_links'
                    
@@ -50,7 +51,8 @@ function Footer() {
             }
          >
           <PersonOutlineOutlined 
-              className="icons"
+              className="icons1"
+              sx={{fontSize: "3rem"}}
             />
             <p style={{color: "gray"}} className="profile_profile">Profile</p>
          </NavLink>

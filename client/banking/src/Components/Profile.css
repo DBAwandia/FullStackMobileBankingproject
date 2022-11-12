@@ -64,3 +64,23 @@
     transition-duration: 0.8s;
 
 }
+@media screen and (max-width: 420px) {
+    .EEdit_input_container{
+        width: 80%;
+        margin-top: 2rem;
+        gap: 1.2rem;
+    }
+    .EEdit_input_container > label{
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+    .EEdit_input_container > input{
+        height: 3.3rem;
+        width: 90%;
+        font-size: 0.9rem;
+    }
+    .EEdit_input_container > button{
+        height: 3.5rem;
+        font-size: 1.3rem;
+    }
+}

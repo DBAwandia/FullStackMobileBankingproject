@@ -132,3 +132,66 @@
     color: whitesmoke;
     border-radius: 20px;
 }
+@media screen and (max-width: 420px) {
+    .confirmation_object{
+        width: 80% !important;
+        height: 40% !important;
+        left: 2% !important;
+        padding: 2rem !important;
+    }
+    .confirmation_object_container{
+        gap: 0.3rem !important;
+    }
+    .upper_confirmation_block{
+        gap: 0.2rem !important;
+    }
+    .done_svg{
+        width: 12% !important;
+        height: 12% !important;
+    }
+    .payment_sucss{
+        font-size: 1.3rem !important;
+        letter-spacing: 0.2px !important;
+        margin-left: -2% !important;
+    }
+    .transaction_number{
+        margin: 0.7rem 1.5rem !important;
+        gap: 2rem !important;
+        width: 100% !important;
+    }
+    .transaction_number > p{
+        font-size: 1rem !important;
+    }
+    .transaction_number > span{
+        font-size: 1rem !important;
+    }
+    .payment_block{
+        margin: 0.7rem 1.5rem !important;
+        gap: 2rem !important;
+        width: 100% !important;
+    }
+    .bank_detail_block{
+        gap: 2rem !important;
+    }
+    .bank_detail_block > h1{
+        font-size: 1rem !important;
+    }
+    .transaction_amount{
+        font-size: 0.95rem !important;
+    }
+    .transaction_email{
+        font-size: 0.95rem !important;
+        margin-left: 3rem !important;
+    }
+    .bankz_type{
+        font-size: 0.95rem !important;
+        margin-left: 4rem !important;
+    }
+    .continue_button{
+        width: 100% !important;
+        height: 3.5rem !important;
+        margin-left: 0rem !important;
+        margin-top: 9rem !important;
+    }
+
+}

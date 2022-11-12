@@ -95,3 +95,41 @@ a{
     color: crimson;
     opacity: 0.84;
 }
+@media screen and (max-width: 420px) {
+    .arrow_left_button{
+        font-size: 20px !important;
+    }
+    .arrow-left{
+        left: 4%;
+        top: 9%;
+    }
+    .cars_header_top{
+        font-size: 1.3rem;
+        margin-top: 1.4rem;
+    }
+    .CreateCarAccount_data{
+        margin-left: 43%;
+        grid-template-columns: 1fr;
+    }
+    .cars{
+        gap: 1.5rem;
+    }
+    .cars > p{
+        font-size: 0.85rem;
+    }
+    .cars > b{
+        font-size: 0.89rem;
+    }
+    .cars > input{
+        width: 57%;
+        font-size: 0.8rem;
+    }
+    .button_car{
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+    .enable{
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
+}

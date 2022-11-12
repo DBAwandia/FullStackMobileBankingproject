@@ -69,7 +69,7 @@ function CreateCarAccount() {
       <Navbar />
       <div className="arrow-left">
         <Link to="/">
-          <ArrowBack sx={{fontSize: '35px'}}/>
+          <ArrowBack className='arrow_left_button' sx={{fontSize: '35px'}}/>
         </Link>
       </div>
       <h1 className='cars_header_top'>Choose your type</h1>
