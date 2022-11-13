@@ -35,9 +35,9 @@ function DepositType({setOpenDeposit}) {
                         </div>
                    </Link>
                    <Link to="/bitcoinpay">
-                    <div className='depo_method_type'>
+                    <div className='depo_method_type' >
                             <img className='bitcoin_image' src="/images/Bitcoin.png" />
-                            <p className='bitcoin'>Crypto (Bitcoin)</p>
+                            <p className='bitcoin'>(coming soon)</p>
                             <KeyboardArrowRight className='arrow_right_button3' sx={{fontSize: "3rem",color:"gray"}} />
                         </div>
                    </Link>

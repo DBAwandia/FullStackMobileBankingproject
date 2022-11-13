@@ -13,7 +13,7 @@ function Transfer() {
     const [balance, setBalance] = useState("")
     const [ open, setOpen] = useState(false)
     const [openReceivername, setOpenReceivername] = useState(false)
-    const [userData, setUserData] = useState([])
+    const [userData, setUserData] = useState("")
     const [loadings, setLoadings] = useState(false)
     const [paymentReason, setPaymentReason] = useState("")
     const [uuid, setUuid] = useState("")
@@ -108,7 +108,7 @@ function Transfer() {
                 <section className='account_balance' disabled>Available balance is <span>${data}</span></section>
                 </div>
                {openReceivername && <div className='account_details'>
-               <p style={{color: "gray"}}>{receiverNumber}    {receiverName}</p>
+               <p style={{color: "crimson"}}>{receiverNumber}    {receiverName}</p>
                 </div>}
                 <div className='account_details'>
                     <p style={{color: "green"}}>Send to</p>

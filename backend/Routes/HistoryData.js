@@ -6,7 +6,7 @@ const router = express.Router()
 router.post("/savedDepohistory/:id", saveDepoTransaction)
 
 //saveWithdrawTransaction
-router.post("/savedWithdrawhistory/:id",saveWithdrawTransaction )
+router.put("/savedWithdrawhistory/:id",saveWithdrawTransaction )
 
 //get all transactions
 router.get("/getallhistory", getallTransaction)

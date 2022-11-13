@@ -1,7 +1,7 @@
 import express from "express"
 import { VerifyTokenAdminOnly, VerifyToken, VerifyTokenUserAndAdmin, generateToken } from "../Authentication/VerifyToken.js"
 const router = express.Router()
-import { findUser,getUsers, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser, getCarbyUid, stkPush} from "../Controllers/User.js"
+import { findUser,getUsers, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser, getCarbyUid, stkPush, getUserbyUuid} from "../Controllers/User.js"
 //register
 router.post("/register", registerUser)
 
@@ -17,8 +17,11 @@ router.post("/gettoken",generateToken,stkPush)
 //find all users
 router.get("/findUsers", getUsers)
 
-//get user by uuid
+//get user by uuid query
 router.get("/findUuid", getUserbyUid)
+
+//get user by uuid body
+router.get("/finduseruuid", getUserbyUuid)
 
 //find user by id
 router.get("/find/:id", findUser)

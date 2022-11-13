@@ -171,9 +171,8 @@ export const getUsers = async(req,res)=>{
      }
  }
 
- //get user by their uuid
+ //get user by their uuid query
  export const getUserbyUid = async (req,res)=>{
-    const UUID = req.body.uuid
     const QUERYUID = req.query.QUERYUID
     try{
         const getUser = await User.findOne({uuid: QUERYUID})
@@ -183,6 +182,19 @@ export const getUsers = async(req,res)=>{
         res.status(500).json(err)
     }
  }
+
+  //get user by their uuid body
+  export const getUserbyUuid = async (req,res)=>{
+    const uuid = req.body.uuid
+    try{
+        const getUser = await User.findOne({uuid: uuid})
+        res.status(200).json(getUser)
+        
+    }catch(err){
+        res.status(500).json(err)
+    }
+ }
+
   //get car by their uuid
   export const getCarbyUid = async (req,res)=>{
     const carUuid=await User.findById(req.params.id)

@@ -42,36 +42,39 @@ export const saveDepoTransaction = async (req,res)=>{
 }
 
 
-//withdraw
+//withdraw //Imternal transfer to users
 export const saveWithdrawTransaction = async (req,res)=>{
     const name = req.body.name
-    const receiverName = req.body.receiverName
     const senderNumber = req.body.senderNumber
-    const receiverNumber = req.body.receiverNumber
     const transactNumber = req.body.transactNumber
     const type = req.body.type
+    const receiverNumber = req.body.receiverNumber
     const amount = req.body.amount
-    const uuid = req.body.uuid
 
+    //update receiver name
+    const receiverNames = await User.findOne({uuid: receiverNumber})
+    const isReceiverName = receiverNames.username
+    const isReceiverNumber = receiverNames.uuid
+
+    //save to db
     const newTransaction =historys({
          
             transactNumber: transactNumber,
             amount: amount,
             type: type,
-            uuid:uuid,
             name: name,
-            receiverName: receiverName,
+            receiverName: isReceiverName,
             senderNumber: senderNumber,
-            receiverNumber: receiverNumber,
+            receiverNumber: isReceiverNumber,
 
 
         })
     try{
         const saved = await newTransaction.save()
-
         try{
 
          await User.findByIdAndUpdate(req.params.id, {$push: {history: saved.transactNumber}})
+         await User.findOneAndUpdate({uuid:receiverNumber}, {$push: {history: saved.transactNumber}})
 
         }catch(err){
         res.status(500).json(err)

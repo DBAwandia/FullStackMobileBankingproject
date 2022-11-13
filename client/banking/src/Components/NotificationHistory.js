@@ -3,7 +3,7 @@ import { LoginContext } from '../Contexts/LoginContext'
 // import useFetchs from '../useFetch/useFetchs'
 import "./NotificationHistory.css"
 import ReactPaginate from "react-paginate"
-import {Print} from "@mui/icons-material"
+import {Print, SentimentVeryDissatisfied} from "@mui/icons-material"
 import { axiosInstance } from '../Config/Baseurl'
 import Moment from "react-moment"
 import ReactToPrint from 'react-to-print';
@@ -39,23 +39,23 @@ useEffect(()=>{
       return (Keys).some((key) =>  item[key].toLowerCase().includes(searchs))
     } )
   }
-
   //pagination
     useEffect(()=>{
       const endOffset = itemPerPage + offset
       setCurrentData(Search(dataz).slice(offset,endOffset))
       setPageCount(Math.ceil(Search(dataz).length/itemPerPage))
     },[offset,itemPerPage,currentData])
+    
+    const isLength = dataz.length === 0
 
 //event next page
   const handlePageClick = (event) =>{
     const newOffset = (event.selected * itemPerPage);
     setOffset(newOffset)
   }
-
+console.log(dataz)
   //print logic
   const componentRef = useRef()
-
   return (
     <div className='NotificationHistorys' >
         <div className='NotificationHistory_container'>
@@ -94,18 +94,18 @@ useEffect(()=>{
             </span>
             <p className='itemphonenumber'> {user.phonenumber}</p>
           </div>
-          {/* <div className='history'>
+          <div className='history'>
             <span className='hitory_name'>
-            Receiver:
+            Receiver number:
             </span>
-            <p> {item?.receiverNumber}</p>
-          </div> */}
-          {/* <div className='history'>
-            <span className='hitory_name'>
-              Name:
+           {item?.receiverNumber ? <p className='nullify' style={{color:"crimson"}}> {item?.receiverNumber}</p>:  <p className='Null1'>Not internal transfer</p>}
+          </div>
+          <div className='history'>
+           <span className='hitory_name'>
+              Receiver name:
             </span>
-            <p> {item?.receiverName}</p>
-          </div> */}
+            {item?.receiverName ? <p className='nulity'> {item?.receiverName}</p> : <p className='Null2'>Not internal transfer</p>}
+          </div>
           <div className='history'>
             <span className='hitory_name'>
             Amount:
@@ -131,9 +131,9 @@ useEffect(()=>{
             <p className='itemname'> {item?.name}</p>
           </div>
           <div className='history'>
-            <span className='hitory_name'>
+            {item.email && <span className='hitory_name'>
             Email:
-            </span>
+            </span>}
             
             <p className='itememail'> {item?.email}</p>
           </div>
@@ -152,7 +152,13 @@ useEffect(()=>{
 
           </div>
         </div>
-        })}
+        }) }
+        {isLength && 
+          <div className='emoji_empty_history'>
+            <p className='show_empty_on_no_transaction'>No transactions</p>
+            <SentimentVeryDissatisfied className='emoji_empty'/>
+          </div>
+        }
         <div className='reactPaginate'>
         <ReactPaginate
             nextLabel="next >"

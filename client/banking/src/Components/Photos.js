@@ -12,7 +12,7 @@ function Photos({setOpen}) {
   return (
     <div className='photoss'>
         <div className='photos_container'>
-            <img src={photo} alt="" />
+            <img src={photo?photo: "/images/login.jpg"} alt="" />
         </div>
         <div className='cancel_send'>
             <div className='cancel_send_container'>

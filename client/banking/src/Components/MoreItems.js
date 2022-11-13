@@ -79,19 +79,21 @@ function MoreItems({setOpen}) {
                         />
                     </div>
                     {openBuyAirtime && <div className='savings_type_select' >
-                        <select placeholder='select type' onChange={e=>setOptions(e.target.value)}>
+                        <select placeholder='select type' onChange={e=>setOptions(e.target.value)}
+                        >
                             <option className='select_type_option'
                             >
                                SELECT
                             </option>
                             <option className='select_type_option'
+                                disabled
                             >
-                                My Phone
+                                My Phone (Coming soon)
                             </option>
                             <option className='select_type_option'
-                                // onClick={handleOther}
+                                disabled
                             >
-                                Other Phone
+                                Other Phone (Coming soon)
 
                             </option>
                         </select>

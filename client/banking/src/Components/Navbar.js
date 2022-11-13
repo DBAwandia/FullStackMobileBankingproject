@@ -40,7 +40,7 @@ function Navbar() {
         return <div className='navbar_container' key={i}>
               <div className='nabvar_objects'>
                 <div onClick={openProfile}>
-                  <img  className='avatar_img' src={item?.photos} alt='' />
+                  <img  className='avatar_img' src={item.photos?item?.photos : "/images/login.jpg"} alt='' />
                 </div>
               <div className='logoutAndPhone_container'>
                   <span>  UID:</span>

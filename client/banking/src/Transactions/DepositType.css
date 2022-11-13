@@ -107,8 +107,8 @@
         font-size: 2.4rem !important;
     }
     .close_icon{
-        top: 2.2rem;
-        right: 7%;
+        top: 2rem;
+        right: 10%;
     }
     .DepositType{
         overflow: hidden;
@@ -116,7 +116,7 @@
     .DepositType_objects{
         padding: 1rem 1.5rem !important;
         width: 100%;
-        margin-top: 6rem;
+        margin-top: 5rem;
 
     }
     .deposit_method{
@@ -127,30 +127,30 @@
         gap: 2rem;
     }
     .mpesa{
-        font-size: 1.2rem;
-        letter-spacing: 1.1px;
+        font-size: 1rem;
+        letter-spacing: 1px;
     }
     .bank_pay{
-        font-size: 1.2rem;
-        letter-spacing: 1.1px;
+        font-size: 1rem;
+        letter-spacing: 1px;
     }
     .bitcoin{
-        font-size: 1.2rem;
-        letter-spacing: 1.1px;
+        font-size: 1rem;
+        letter-spacing: 1px;
     }
     .arrow_right_button1{
-        font-size: 2.3rem !important;
+        font-size: 2rem !important;
         margin-left: 6.7rem !important;
 
     }
     .arrow_right_button2{
-        font-size: 2.3rem !important;
+        font-size: 2rem !important;
         margin-left: 8.2rem !important;
 
     }
     .arrow_right_button3{
-        font-size: 2.3rem !important;
-        margin-left: 1.5rem !important;
+        font-size: 2rem !important;
+        margin-left: 3.3rem !important;
     }
 
 }

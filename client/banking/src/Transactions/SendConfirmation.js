@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./SendConfirmation.css"
 import Navbar from "../Components/Navbar"
 import Footer from '../Components/Footer'
@@ -7,37 +7,57 @@ import { AddBoxRounded, ArrowBackIos } from '@mui/icons-material'
 import SpinnerLoading from '../LoadingPages/SpinnerLoading'
 import { axiosInstance } from '../Config/Baseurl'
 import { LoginContext } from '../Contexts/LoginContext'
+import useFetchs from '../useFetch/useFetchs'
 function SendConfirmation() {
   const location = useLocation()
   const {user} = useContext(LoginContext)
+  const [ data,setData ] = useState([])
   const id = user._id
   const [open, setOpen] = useState(false)
   const generateID = location.state.generateId
+
+  //sender details
   const phonenumber = location.state.phonenumber
   const name = location.state.name
-  const type = "Sent"
-  const receiverNumber = location.state.receiverNumber
-  const receiverName = location.state.receiverName
-  const userUuid = location.state.uuid
+
+  const type = "Internal Transfer"
+  
+
+  const userUuid = location.state.uuid.trim()
   const amount = location.state.balance
-  // const maxm = 999999999999999
-  // const minm = 100000000000000
-  // const generateID = Math.floor(Math.random()* (maxm - minm + 1) - minm)
+
+  const dataz = [data]
+  
+  //fetch sender name and phonenumber
+  const URL = `/User/findUuid?QUERYUID=${userUuid}`
+  useEffect(()=>{
+    const fetchData = async(URL) =>{
+      const res = await axiosInstance.get(URL)
+      setData(res.data)
+    }
+
+    fetchData(URL)
+
+  },[userUuid])
+
+  // receiver details
+  // const receiverName = dataz.map(item => item?.username)
+  const receiverNumber = dataz.map(item => item?.uuid)
+  // console.log(receiverNumber)
 
   const navigate = useNavigate()
-    const handleClick = async() =>{
+
+  const handleClick = async() =>{
         setOpen(true)
         try{
-            await axiosInstance.post(`/HistoryData/savedhistory/${id}`, {
+            await axiosInstance.put(`/HistoryData/savedWithdrawhistory/${id}`, {
                 name: name,
                 senderNumber: phonenumber,
                 receiverNumber: receiverNumber,
-                receiverName:  receiverName,
-                uuid: userUuid,
+                // receiverName:  receiverName,
                 transactNumber: generateID,
                 amount: amount,
                 type: type,
-                uuid: "4030769"
             })
             navigate("/")
         }catch(err){
