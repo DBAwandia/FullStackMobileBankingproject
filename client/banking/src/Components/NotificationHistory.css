@@ -462,3 +462,133 @@
     color: rgba(220, 20, 60,0.3) !important;
 }
 }
+@media screen and (min-width: 770px) and (max-width: 1024px) {
+    .NotificationHistory_container{
+       width: 54%;
+       /* right: 0rem; */
+       height: 100vh;
+       margin-right: 0;
+    }
+    .search{
+        margin-right: 0px !important;
+    }
+    .NotificationHistory_container_header{
+        display: none;
+    }
+    .search_notification{
+    width: 65%;
+    height: 2.7rem;
+    font-size: 1.1rem;
+    margin-left: 2rem;
+    padding-left: 3.3rem;
+}
+.NotificationHistory_container_printable{
+    margin: 3.3rem 4rem;
+    gap: 1rem;
+    padding: 0.9rem 0.2rem;
+}
+.history{
+    gap: 4.5rem;
+}
+.history > p{
+    font-size: 1.1rem;
+}
+.hitory_name{
+    font-size: 1.34rem;
+    margin-left: 0.3rem;
+}
+.reactPaginate{
+    margin-top: -1.6rem;
+    padding: 1rem 0rem;
+    margin-left: 1.5rem;
+}
+.pagination{
+    gap: 1.2rem;
+    font-size: 1.1rem;
+    margin: 0.5rem 2.5rem;
+}
+.page-nums{
+    font-size: 1.1rem;
+}
+.breakClassName{
+    font-size: 1.2rem;
+}
+.activee-boxx{
+    padding: 1.7px 6px;
+}
+.react_to_print{
+    bottom: 9rem;
+    margin-left: 2rem;
+}
+.react_to_print >p{
+    font-size: 1.4rem;
+}
+.react_to_prints{
+    bottom: -14rem;
+    display: none;
+}
+.react_to_prints >p{
+    font-size: 1.1rem;
+    display: none;
+
+}
+.print{
+    font-size: 1.4rem !important;
+}
+.itemtransact{
+    margin-left: -2.4rem;
+}
+.itemname{
+    margin-left: 2.6rem;
+}
+.itemtime{
+    margin-left: 1.8rem;
+}
+.itememail{
+    margin-left: 1.95rem;
+}
+.Null2{
+    margin-left: -2.7rem !important;
+    color: crimson !important;
+}
+.Null1{
+    margin-left: -3.67rem !important;
+    color: crimson !important;
+}
+.nulity{
+    margin-left: -0.85rem !important;
+    color: crimson !important;
+}
+.nullify{
+    margin-left: -1.4rem !important;
+    color: crimson !important;
+}
+.footer_links > a {
+    margin-top: -0.8rem !important;
+} 
+.icons1{
+    margin-top: 1.3rem !important;
+}
+.support_app{
+    margin-left: -0.4rem !important;
+    font-size: 0.7rem !important;
+    margin-top: 0.1rem !important;
+}
+.profile_profile{
+    margin-top: -0.4rem;
+}
+.emoji_empty_history{
+    top: 36%;
+    left: 19%;
+    gap: 1.5rem;
+}
+.show_empty_on_no_transaction{
+    font-size: 1.5rem;
+    color: lightgray;
+  
+}
+.emoji_empty{
+    font-size: 2.5rem !important;
+    color: rgba(220, 20, 60,0.3) !important;
+}
+}

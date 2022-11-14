@@ -107,3 +107,26 @@
         margin-top: 0.5rem;
     }
 }
+@media screen and (min-width: 770px) and (max-width: 1024px) {
+    .EEdit_input_container{
+        width: 80%;
+        margin-top: 0.7rem;
+        gap: 1.5rem;
+        margin-left: 0.5rem;
+    }
+    .EEdit_input_container > label{
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+    }
+    .EEdit_input_container > input{
+        height: 3rem;
+        width: 90%;
+        font-size: 1.1rem;
+    }
+    .EEdit_input_container > button{
+        height: 3.5rem;
+        font-size: 1.3rem;
+        width: 96.3%;
+        margin-top: 0.5rem;
+    }
+}

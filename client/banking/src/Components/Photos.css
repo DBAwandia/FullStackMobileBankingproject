@@ -87,3 +87,24 @@
         font-size: 15px;
     }
 }
+@media screen and (min-width: 430px) and (max-width: 768px){
+    .photos_container{
+        width: 70%;
+        top: 24%;
+    }
+    .photos_container > img {
+        width: 46rem;
+        height: 46rem;
+
+    }
+    .edit{
+        padding: 6px 14px;
+        font-size: 15px;
+        top: 5.3% !important;
+    }
+    .cancel{
+        top: 5.3% !important;
+        padding: 6px 14px;
+        font-size: 15px;
+    }
+}

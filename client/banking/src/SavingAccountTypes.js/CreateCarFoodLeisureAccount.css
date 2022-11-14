@@ -116,7 +116,7 @@ a{
         gap: 1.5rem;
     }
     .cars > p{
-        font-size: 0.85rem;
+        font-size: 1.1rem;
     }
     .cars > b{
         font-size: 0.89rem;
@@ -132,5 +132,84 @@ a{
     .enable{
         font-size: 0.8rem;
         margin-bottom: 1rem;
+    }
+}
+@media screen and (min-width: 450px) and (max-width: 768px) {
+    .arrow_left_button{
+        font-size: 25px !important;
+    }
+    .arrow-left{
+        left: 6%;
+        top: 9%;
+    }
+    .cars_header_top{
+        font-size: 1.5rem;
+        margin-top: 1.4rem;
+    }
+    .CreateCarAccount_data{
+        margin-left: 41.7%;
+        grid-template-columns: 1fr;
+    }
+    .cars{
+        gap: 1.7rem;
+    }
+    .cars > p{
+        font-size: 1.1rem;
+    }
+    .cars > b{
+        font-size: 1.3rem;
+    }
+    .cars > input{
+        width: 57%;
+        font-size: 1rem;
+    }
+    .button_car{
+        width: 59%;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    .enable{
+        width: 59%;
+        font-size: 1.1rem;
+    }
+}
+@media screen and (min-width: 770px) and (max-width: 1024px) {
+    .arrow_left_button{
+        font-size: 35px !important;
+    }
+    .arrow-left{
+        left: 6%;
+        top: 12%;
+    }
+    .cars_header_top{
+        font-size: 1.5rem;
+        margin-top: 1.4rem;
+    }
+    .CreateCarAccount_data{
+        margin-left: 20%;
+        grid-template-columns: 1fr 1fr;
+    }
+    .cars{
+        gap: 1.7rem;
+    }
+    .cars > p{
+        font-size: 1.1rem;
+    }
+    .cars > b{
+        font-size: 1.3rem;
+    }
+    .cars > input{
+        width: 57%;
+        font-size: 1rem;
+    }
+    .button_car{
+        width: 60%;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    .enable{
+        width: 60%;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
     }
 }

@@ -93,7 +93,7 @@ function CarsSavings() {
         <div className='dehaze_icon'
             onClick={()=> setOpenWithdrawAndDeposit(true)}
         >
-            <Dehaze />
+            <Dehaze className='dehazee' />
         </div>
 
         {/* withdraw modal */}

@@ -461,3 +461,262 @@ a{
     font-size: 0.8rem;
   }
 }
+@media screen and (min-width: 450px) and (max-width: 768px) {
+    .FoodAccount_container_header{
+        height: 6rem;
+    }
+    .hide_modal{
+        display: block;
+    }
+    .deposit_button{
+        display: none;
+    }
+    .dehazee{
+        font-size: 2.7rem !important;
+    }
+    .dehaze_icon{
+        display: block;
+        position: absolute;
+        top: 2.7%;
+        left: 5%;
+        color: whitesmoke;
+        cursor: pointer;
+        z-index: 999999999999999999;
+    }
+    .dehaze_icon:hover{
+        color: orange;
+    }
+    .FoodAccount_container_header > a > h1{
+       font-size: 1.3rem;
+       color: wheat;
+       letter-spacing: 0.8px;
+       margin-left: 9.5rem;
+       margin-top: -1.8rem;
+    }
+    
+    .foodandhealth_balance >span{
+        font-size: 1.5rem;
+    }
+    .foodandhealth_balance{
+        display: none;
+    }
+    .blocked_withdraw_button{
+        display: none;
+    }
+    .foodandhealth_balances{
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin: 0.4px 3rem;
+    }
+    .foodandhealth_balances > p{
+        font-size: 1.2rem;
+    }
+    .foodandhealth_balances >span{
+        font-size: 1.5rem;
+        color: green;
+        opacity: 0.97;
+        margin-top: 0.1rem;
+    }
+   .FoodAccount_container_animate{
+        height: 1.9rem;
+   }
+  .FoodAccount_container_body > p{
+    font-size: 1.1rem !important;
+  }
+  .photos{
+    top: 14%;
+    left: 18%;
+  }
+  .immage{
+    margin-left: 8%;
+  }
+  .immage>img{
+    width: 50%;
+    height: 35%;
+  }
+  .center_message_foodaccount{
+    top: 40%;
+    width: 100%;
+    left: 26%;
+  }
+  .center_message_foodaccount > p{
+    font-size: 1.2rem;
+    line-height: 23px;
+  }
+  .foodbalance{
+    font-size: 1.2rem ;
+    margin: 0px 0.8rem;
+  }
+  .FoodAccount_container_circularbar > p{
+    font-size: 1.3rem;
+    right: 31%;
+    margin-top: 43em;
+  }
+  hr{
+    display: none;
+  }
+  .circular_chart_model{
+    margin-top: 26.5rem;
+  }
+  .circulchartbar{
+    width:48% !important;
+    height:48% !important;
+    margin-left: -16%;
+  }
+  .arrow_up_icon{
+    font-size: 25px !important;
+  }
+  .icon_paragraph_chart{
+    width: 100%;
+    margin-top: 4rem;
+    margin-left: -7.5rem;
+  }
+  .icon_paragraph_chart > p{
+    font-size: 1rem;
+  }
+  .withdraw_deposit_modal > p{
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+  .withdraw_deposit_modal > input{
+    width: 75.5%;
+    height: 2.1rem;
+    font-size: 1rem;
+  }
+  .withdraw_deposit_modal > button{
+    width: 80%;
+    height: 2.1rem;
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 770px) and (max-width: 1024px) {
+    .FoodAccount_container_header{
+        height: 6rem;
+    }
+    .hide_modal{
+        display: block;
+    }
+    .deposit_button{
+        display: none;
+    }
+    .dehazee{
+        font-size: 2.5rem !important;
+    }
+    .dehaze_icon{
+        display: block;
+        position: absolute;
+        top: 2.7%;
+        left: 5%;
+        color: whitesmoke;
+        cursor: pointer;
+        z-index: 999999999999999999;
+    }
+    .dehaze_icon:hover{
+        color: orange;
+    }
+    .FoodAccount_container_header > a > h1{
+       font-size: 1.5rem;
+       color: wheat;
+       letter-spacing: 0.8px;
+       margin-left: 9.5rem;
+       margin-top: -2.4rem;
+    }
+    
+    .foodandhealth_balance >span{
+        font-size: 1.4rem;
+    }
+    .foodandhealth_balance{
+        display: none;
+    }
+    .blocked_withdraw_button{
+        display: none;
+    }
+    .foodandhealth_balances{
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin: 0.4px 5rem;
+    }
+    .foodandhealth_balances > p{
+        font-size: 1.2rem;
+    }
+    .foodandhealth_balances >span{
+        font-size: 1.5rem;
+        color: green;
+        opacity: 0.97;
+        margin-top: 0.1rem;
+    }
+   .FoodAccount_container_animate{
+        height: 2.1rem;
+   }
+  .FoodAccount_container_body > p{
+    font-size: 1.1rem !important;
+  }
+  .photos{
+    top: 20%;
+    left: 18%;
+  }
+  .immage{
+    margin-left: -12%;
+  }
+  .immage>img{
+    width: 30%;
+    height: 20%;
+  }
+  .center_message_foodaccount{
+    top: 43%;
+    width: 100%;
+    left: 5%;
+  }
+  .center_message_foodaccount > p{
+    font-size: 1.2rem;
+    line-height: 29px;
+  }
+  .foodbalance{
+    font-size: 1.2rem ;
+    margin: 0px 0.8rem;
+  }
+  .FoodAccount_container_circularbar > p{
+    font-size: 1.3rem;
+    right: 6%;
+    margin-top: 3em;
+  }
+  hr{
+    display: none;
+  }
+  .circular_chart_model{
+    margin-top: 0.5rem;
+  }
+  .circulchartbar{
+    width:44% !important;
+    height:44% !important;
+    margin-left: 65%;
+  }
+  .arrow_up_icon{
+    font-size: 35px !important;
+  }
+  .icon_paragraph_chart{
+    width: 100%;
+    margin-top: 7rem;
+    margin-left: 4.5rem;
+  }
+  .icon_paragraph_chart > p{
+    font-size: 1.3rem;
+    margin-left: 3rem;
+  }
+  .withdraw_deposit_modal > p{
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+  .withdraw_deposit_modal > input{
+    width: 75.5%;
+    height: 2rem;
+    font-size: 1.2rem;
+  }
+  .withdraw_deposit_modal > button{
+    width: 79%;
+    height: 2.2rem;
+    font-size: 1.2rem;
+  }
+}

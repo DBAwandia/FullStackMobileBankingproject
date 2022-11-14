@@ -482,3 +482,114 @@
         top: 32px;
     }
 }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .transaction_container{
+        gap: 10px;
+    }
+    .transaction_text{
+        margin-left: 5.7rem;
+    }
+    .transaction_text > p{
+        font-size: 1.2rem;
+        letter-spacing: 0.8px;
+    }
+    .transaction_text > h1{
+        font-size: 1.6rem;
+        letter-spacing: 1.1px;
+    }
+    .transaction_page{
+        padding: 1.3rem;
+    }
+    .transaction_balance{
+        gap: 3.4rem;
+    }
+    .transcation_wallet{
+        margin-left: 1rem;
+        gap: 1rem;
+        margin-top: 0.7rem;
+    }
+    .transcation_wallet > p{
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+    .transcation_wallet > h1{
+        font-size: 1.4rem;
+    }
+    .country_flag{
+        right: 1rem;
+        top: 0.7rem;
+    }
+    .flags{
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+    .transaction_payments{
+        height: 2.5rem;
+        top: 11rem;
+        left: 1.7rem;
+    }
+    .send_receive_button{
+        width: 85%
+    }
+    .center_button > p{
+        font-size: 1.2rem;
+        margin-top: 0.4rem;
+        letter-spacing: 0;
+        opacity: 0.8;
+        margin-left: 0.35rem;
+    }
+    .iconss{
+        font-size: 1.6rem !important;
+    }
+    .iconssz{
+        margin-top: -2rem !important;
+        font-size: 1.6rem !important;
+    }
+    .Quick_send{
+        margin: 0.3rem 3.6rem;
+    }
+    .Quick_sendContainer{
+        padding: 1.2rem;
+    }
+    .Quick_sendContainer > h1{
+        font-size: 1.1rem;
+    }
+    .transaction_avatars{
+        gap: 1.2rem;
+        margin: 0;
+    }
+    .rounded_borders{
+        border: 0;
+        width: 4rem;
+        height: 4rem;
+    }
+    .avatar_datails{
+        gap: 0.7rem;
+    }
+    .avatar_datails > p{
+        font-size: 1.1rem;
+        letter-spacing: 0.7px;
+        margin-top: -1rem;
+    }
+    .avatar_datails > img{
+        width: 3rem;
+        height: 3rem;
+        margin: 0.7rem 3.5rem;
+    }
+    .send_now{
+        display: none;
+    }
+    .img_avatar{
+        margin-left: 1.7rem;
+        gap: 1rem;
+    }
+    .rounded_borders{
+        display: block;
+        width: 6rem;
+        height: 6rem;
+    }
+    .add{
+        left: 16.5px;
+        top: 32px;
+    }
+}
