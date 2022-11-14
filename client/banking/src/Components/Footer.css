@@ -62,3 +62,32 @@
         letter-spacing: 0.5px;
     }
 }
+@media screen and (min-width: 450px) and (max-width: 768px) {
+    .footer_container{
+        height: 7.8rem !important;
+    }
+    .icons{
+        font-size: 2.5rem !important;
+    }
+    .iconsz{
+        font-size: 2.5rem !important;
+        margin-top: 2.4rem !important;
+    }
+    .icons1{
+        font-size: 2.6rem !important;
+        margin-top: 1rem !important;
+    }
+    .footer_links > p{
+        font-size: 1.2rem !important;
+        letter-spacing: 1px !important;
+    }
+    .support_appz{
+        margin-right: 0.5rem !important;
+        margin-top: 0.5rem !important;
+        font-size: 1.4rem !important;
+    }
+    .profile_profile{
+        margin-top: 2rem !important;
+
+    }
+}

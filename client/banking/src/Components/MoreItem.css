@@ -160,3 +160,64 @@ a{
     }
  
 }
+@media screen and (min-width: 450px) and (max-width: 768px) {
+    .cncel_x{
+        font-size: 35px !important;
+        left: 8% !important;
+    }
+    .more_items_objects{
+        width: 70%;
+    }
+    .more_items_icons_area{
+        gap: 3.5rem;
+        margin: 3rem 0rem;
+    }
+    .icons_resp_names{
+        gap: 5.2rem;
+        padding: 0.5rem 0.9rem;
+    }
+    .icons_resp_names > p{
+        font-size: 1.2rem;
+    }
+    .save_icon{
+        font-size: 2.1rem !important;
+        margin-left: 2rem !important;
+    }
+    .save_iconz1{
+        font-size: 1.9rem !important;
+        margin-left: 2.3rem !important;
+    }
+    .save_iconz2{
+        font-size: 1.9rem !important;
+        margin-left: 2rem !important;
+    }
+    .save_iconz3{
+        font-size: 1.9rem !important;
+        margin-left: 2.8rem !important;
+    }
+    .save_iconz4{
+        font-size: 1.9rem !important;
+        margin-left: 4rem !important;
+    }
+    .save_iconz5{
+        font-size: 1.9rem !important;
+        margin-left: 3.4rem !important;
+    }
+    .icons_resp_names_logout{
+        gap: 5.2rem;
+    }
+    .icons_resp_names_logout > p{
+        font-size: 1.2rem;
+
+    }
+    .savings_type_select{
+        margin-top: -2.9rem;
+        margin-left: 2.7rem;
+        width: 72%;
+    }
+    .savings_type_select > select{
+        height: 1.5rem;
+        font-size: 0.8rem;
+    }
+ 
+}

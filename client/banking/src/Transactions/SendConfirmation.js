@@ -21,6 +21,7 @@ function SendConfirmation() {
   const name = location.state.name
 
   const type = "Internal Transfer"
+  const send = "SEND"
   
 
   const userUuid = location.state.uuid.trim()

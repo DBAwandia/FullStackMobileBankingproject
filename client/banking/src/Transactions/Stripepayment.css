@@ -184,3 +184,53 @@ a{
         padding-left: 0rem !important;
     }
 }
+@media screen and (min-width: 450px) and (max-width: 768px) {
+    .stripe_payment_container{
+        gap: 15px !important;
+    }
+    .payment_header_object{
+        gap: 1rem !important;
+    }
+    .payment_header_object > h1{
+        font-size: 1.2rem !important;
+        line-height: 25px !important;
+
+    }
+    .payment_header_object > h1 >span{
+        font-size: 1rem !important;
+        margin-left: 0.4rem;
+    }
+    .payment_header_object > p{
+        font-size: 1.2rem !important;
+        letter-spacing: 1px !important;
+    }
+    .payment_header_object > p > b{
+        font-size: 1.3rem !important;
+    }
+    .piggyimg{
+        width: 30% !important;
+        height: 23% !important;
+    }
+    .stripe_input_amount{
+        gap: 1.5rem !important;
+        margin-left: 2.5rem;
+    }
+    .label_icons{
+        margin-left: 11% !important;
+    }
+    .label_icons > label{
+        font-size: 1.1rem !important;
+    }
+    .stripe_input_amount > input{
+        width: 70% !important;
+        height: 4rem !important;
+        font-size: 1.3rem !important;
+        margin-left: 10.3% !important;
+    }
+    .stripe_input_button > button{
+        width: 70% !important;
+        height: 4.5rem !important;
+        font-size: 1.4rem !important;
+        padding-left: 0rem !important;
+    }
+}

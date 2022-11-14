@@ -39,7 +39,7 @@ function Footer() {
               className="iconsz"
               sx={{color:"gray"}}
             />
-            <p className='support_app' style={{color: "blue", opacity:"0.9", fontSize:"1.1rem"}}>Support</p>
+            <p className='support_appz' style={{color: "blue", opacity:"0.9"}}>Support</p>
           </a>
         </div>
         <div className='footer_links'
@@ -52,7 +52,6 @@ function Footer() {
          >
           <PersonOutlineOutlined 
               className="icons1"
-              sx={{fontSize: "3rem"}}
             />
             <p style={{color: "gray"}} className="profile_profile">Profile</p>
          </NavLink>

@@ -173,4 +173,63 @@ a{
       color: red !important;
    }
 }
+@media screen and (min-width: 450px) and (max-width: 768px) {
+   .login_container{
+      left: 18%;
+      padding: 20px;
+   }
+   .login_container2{
+      gap: 15px;
+      padding: 15px;
+   }
+   .login_container2 > h1{
+      margin-top: 1.5rem;
+      font-size: 1.8rem;
+   }
+   .login_container2 > label{
+      font-size: 20px;
+      letter-spacing: 0.7px;
+   }
+   .avatar_container > img{
+      width: 4.5rem;
+      height: 4.5rem;
+   }
+   
+   .login_container2>input{
+      height: 2.2rem;
+      font-size: 1.2rem;
+      padding: 10px;
+      border-radius: 5px;
+   }
+   .otp_button{
+      font-size: 16px;
+      border-radius: 2px;
+      letter-spacing: 0.7;
+      width: 50%;
+      height: 2.7rem;
+   }
+   .login_button{
+      height: 3.5rem;
+      font-size: 1.3rem;
+      letter-spacing: 1.1px;
+      margin-left: 0.6rem;
+      border-radius: 3px;
+   }
+   .enabled_button{
+      height: 3.5rem;
+      font-size: 1.3rem;
+      letter-spacing: 1.1px;
+      margin-left: 0.6rem;
+      border-radius: 3px;
+   }
+   .loginLink{
+      width: 100%;
+      font-size: 0.8rem !important;
+      letter-spacing: 0px;
+      margin-top: 1.2rem;
+   }
+   a{
+      color: red !important;
+   }
+}
 

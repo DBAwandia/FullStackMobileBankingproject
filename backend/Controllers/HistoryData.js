@@ -51,6 +51,11 @@ export const saveWithdrawTransaction = async (req,res)=>{
     const receiverNumber = req.body.receiverNumber
     const amount = req.body.amount
 
+    //notify sender or receiver
+    // const send = req.body.send
+    const send = "Received"
+
+
     //update receiver name
     const receiverNames = await User.findOne({uuid: receiverNumber})
     const isReceiverName = receiverNames.username
@@ -62,6 +67,7 @@ export const saveWithdrawTransaction = async (req,res)=>{
             transactNumber: transactNumber,
             amount: amount,
             type: type,
+            send:send,
             name: name,
             receiverName: isReceiverName,
             senderNumber: senderNumber,
@@ -75,6 +81,7 @@ export const saveWithdrawTransaction = async (req,res)=>{
 
          await User.findByIdAndUpdate(req.params.id, {$push: {history: saved.transactNumber}})
          await User.findOneAndUpdate({uuid:receiverNumber}, {$push: {history: saved.transactNumber}})
+         await User.findOneAndUpdate({uuid: receiverNumber}, {$set: {send: send}}, {new: true})
 
         }catch(err){
         res.status(500).json(err)

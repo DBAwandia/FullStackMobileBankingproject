@@ -188,3 +188,59 @@ span{
         font-size: 1.3rem;
     }
 }
+@media screen and (min-width: 450px) and (max-width: 768px) {
+    .transfer_container{
+        margin: 1.3rem 2.5rem;
+        left: 4.5%;
+        gap: 0.8rem;
+    }
+    .arrowBack_Ios{
+        margin-left: -2.8rem !important;
+        font-size: 1.8rem !important;
+    }
+    .top_bar > p{
+        margin-right: 6.8rem;
+    }
+    .transact_header{
+        font-size: 1.7rem;
+        padding: 0rem 2rem;
+    }
+    .account_details{
+        gap: 0.7rem;
+    }
+    .account_details > p{
+        font-size: 1.3rem;
+        padding: 0.7rem 2rem;
+    }
+    .account_details > b{
+        font-size: 1.3rem;
+    }
+    span{
+        font-size: 1.7rem;
+    }
+    .account_balance{
+        width: 100%;
+        font-size: 1.5rem;
+    }
+    .account_details > input{
+        height: 4.3rem;
+        font-size: 1.3rem;
+        letter-spacing: 0px;
+        padding: 0px 1.3rem;
+        margin-left: 1.3rem;
+    }
+    .submitt_button{
+        width: 75% ;
+        letter-spacing: 1px ;
+        height: 4.5rem ;
+        margin-left: 1.35rem;
+        font-size: 1.5rem;
+    }
+    .enablez{
+        width: 75% ;
+        letter-spacing: 1px ;
+        height: 4.5rem ;
+        margin-left: 1.35rem;
+        font-size: 1.5rem;
+    }
+}

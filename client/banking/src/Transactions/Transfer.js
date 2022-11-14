@@ -96,7 +96,7 @@ function Transfer() {
         <div className='transfer_container'>
            <div className='top_bar'>
             <Link to="/">
-                <ArrowBackIos sx={{fontSize: "35px",marginLeft: "-12rem"}}/>
+                <ArrowBackIos className='arrowBack_Ios' sx={{fontSize: "35px",marginLeft: "-12rem"}}/>
             </Link>
             <p>Send to mobile wallet</p>
            </div>
