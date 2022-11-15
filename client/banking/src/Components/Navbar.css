@@ -130,6 +130,45 @@
         right: -0.1rem;
     }
 }
+@media screen and (max-height: 720px)  and (max-width: 420px){
+    .Navbar{
+        height: 3.5rem;
+    }
+    .logoutAndPhone_container{
+        gap: 0.8rem;
+        margin-right: 0;
+    }
+    .avatar_img{
+        width: 1.75rem;
+        height: 1.75rem;
+        margin: 0.6rem 0rem;
+    }
+    .phonenumber_input{
+        font-size: 0.6rem ;
+    }
+    .logout_button{
+        width: 3rem;
+        height: 1.3rem;
+        font-size: 0.4rem;
+        letter-spacing: 0.3px;
+        margin-left: 0.3rem;
+        border-radius: 10px;
+    }
+    .logoutAndPhone_container > span{
+        font-size: 0.5rem;
+        margin-right: -0.5rem;
+
+    }
+    .iconss{
+        font-size: 2rem !;
+        margin-left: 0.8rem;
+    }
+    .number_span{
+        font-size: 0.5rem !important;
+        padding: 2px;
+        right: -0.1rem;
+    }
+}
 @media screen and (min-width: 450px) and (max-width: 768px) {
     .Navbar{
         height: 6rem;

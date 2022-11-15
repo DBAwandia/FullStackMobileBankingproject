@@ -132,3 +132,10 @@
 .transaction_email{
     margin-left: -0.1rem !important;
 }
+@media screen and (max-height: 720px) and (max-width: 420px) {
+    .continue_button{
+        margin-top: 3rem !important;
+        height: 2.8rem !important;
+        font-size: 1.3rem !important;
+    }
+}

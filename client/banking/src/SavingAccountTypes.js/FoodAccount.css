@@ -461,6 +461,118 @@ a{
     font-size: 0.8rem;
   }
 }
+@media screen and (max-height: 720px) and (max-width: 420px) {
+  .FoodAccount_container_header{
+      height: 4rem;
+  }
+  .hide_modal{
+      display: block;
+  }
+  .deposit_button{
+      display: none;
+  }
+  .dehaze_icon{
+      display: block;
+      position: absolute;
+      top: 2.7%;
+      left: 3.7%;
+      color: whitesmoke;
+      cursor: pointer;
+      z-index: 999999999999999999;
+  }
+  .dehaze_icon:hover{
+      color: orange;
+  }
+  .FoodAccount_container_header > a > h1{
+     font-size: 0.8rem;
+     color: wheat;
+     letter-spacing: 0.8px;
+     margin-left: 7rem;
+     margin-top: -1.8rem;
+  }
+  
+  .foodandhealth_balance >span{
+      font-size: 1.3rem;
+  }
+  .foodandhealth_balance{
+      display: none;
+  }
+  .blocked_withdraw_button{
+      display: none;
+  }
+  .foodandhealth_balances{
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0px 1rem;
+  }
+  .foodandhealth_balances > p{
+      font-size: 0.6rem;
+  }
+  .foodandhealth_balances >span{
+      font-size: 0.9rem;
+      color: green;
+      opacity: 0.97;
+      margin-top: 0.1rem;
+  }
+ .FoodAccount_container_animate{
+      height: 1.5rem;
+ }
+.FoodAccount_container_body > p{
+  font-size: 0.8rem !important;
+}
+.photos{
+  top: 16%;
+  left: 18%;
+}
+.immage{
+  margin-left: 8%;
+}
+.immage>img{
+  width: 50%;
+  height: 35%;
+}
+.center_message_foodaccount{
+  top: 28%;
+  width: 100%;
+  left: 26%;
+}
+.center_message_foodaccount > p{
+  font-size: 1rem;
+  line-height: 20px;
+}
+.foodbalance{
+  font-size: 0.9rem ;
+  margin: 0px 0.8rem;
+}
+.FoodAccount_container_circularbar > p{
+  font-size: 0.9rem;
+  right: 22%;
+  margin-top: 35em;
+}
+hr{
+  display: none;
+}
+.circular_chart_model{
+  margin-top: 12.5rem;
+}
+.circulchartbar{
+  width: 35% !important;
+  height: 35% !important;
+  margin-left: 39%;
+}
+.arrow_up_icon{
+  font-size: 20px !important;
+}
+.icon_paragraph_chart{
+  width: 100%;
+  margin-top: 2rem;
+  margin-left: 3.3rem;
+}
+.icon_paragraph_chart > p{
+  font-size: 0.9rem;
+}
+}
 @media screen and (min-width: 450px) and (max-width: 768px) {
     .FoodAccount_container_header{
         height: 6rem;
