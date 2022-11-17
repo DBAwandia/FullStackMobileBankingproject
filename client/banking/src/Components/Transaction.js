@@ -38,7 +38,9 @@ const photo = [photos?.map(item => item)]
 const receiverAvatar = photo?.map(item => item[0]?.photos[0])
 const receiverusernames = photo?.map(item => item[0]?.usernames[0])
 
-console.log(receiverusernames)
+console.log(receiverAvatar)
+
+
 
   return (
     <div className='transaction_body_container'>
@@ -106,19 +108,20 @@ console.log(receiverusernames)
             </div>}
         <div className="Quick_send">
             <div className="Quick_sendContainer">
-                <h1>Send to recent friends...</h1>
+                <h1>Send to friend again...</h1>
                 <div className='transaction_avatars'>
                     <p className='rounded_borders'>
                       {/* <AddCircleOutlineOutlined sx={{ fontSize: "75px", position: "absolute", left: 34,top: 29,color: "lightgray"}}/> */}
                       <h1 style={{color: "red", position: "absolute"}} className='add'>Add</h1>
                       <p style={{position: "absolute", left: 170, top: 60,fontSize: 15, color: "teal"}} className="send_now">Send now</p>
                     </p>
-                  <div className='img_avatar' >
-                    <div className='avatar_datails'>
+                 { saveDatas[0]?.details?.photos?.length < 1 ? <h1 className='no_transaction'>No transfer yet ☹</h1>: 
+                    <div className='img_avatar' >
+                     <div className='avatar_datails'>
                         <img  src={receiverAvatar} alt='' />
                         <p>{receiverusernames}</p>
                     </div>
-                   </div>
+                   </div>}
                 </div>
 
            </div>

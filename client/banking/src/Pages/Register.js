@@ -52,7 +52,7 @@ function Register() {
       data.append("upload_preset", "keniko")
       const res = await axios.post("https://api.cloudinary.com/v1_1/wandia/image/upload", data)
       const URL = res.data.url
-
+console.log(URL)
       final.confirm(otp).then(async(result) => {
         setOpen(true)
         await axiosInstance.post("/User/register", {photos: URL, password: password, phonenumber:phonenumbers,username: username })

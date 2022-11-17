@@ -9,6 +9,9 @@ function Login() {
   const navigate = useNavigate()
   const [phonenumbers, setPhonenumbers] = useState("")
   const [password, setPassword] = useState("")
+  const pasword = password.trim()
+  const phonnumbers = phonenumbers.trim()
+
   const [open, setOpen] = useState(false)
   const { loadings,dispatch} = useContext(LoginContext)
     const handleClick = async(e)=>{
@@ -16,13 +19,13 @@ function Login() {
       dispatch({type:"LOGIN_START"})
       // setOpen(true)
       try{
-         const res = await axiosInstance.post("/User/login", {  phonenumber:phonenumbers,password: password })
+         const res = await axiosInstance.post("/User/login", {  phonenumber:phonnumbers,password: pasword })
          dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
          navigate("/")
       }catch(err){
         dispatch({type:"LOGIN_ERROR"})
         // setOpen(false)
-        alert("wrong password or phonenumber")
+        // alert("wrong password or phonenumber")
         console.log("err" + err)
       }
     }

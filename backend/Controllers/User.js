@@ -17,6 +17,7 @@ export const registerUser = async( req,res)=>{
     var maxm = 9999999;
     const generatedNumbers = Math.floor(Math.random() * (maxm - minm + 1)) + minm;
    const {username,photos,history,phonenumber} = req.body
+   console.log(phonenumber)
    const uuid= generatedNumbers
    const password = CryptoJS.AES.encrypt(req.body.password, (process.env.PASS_SEC));
    const newUser =User({password: password,phonenumber:phonenumber,username: username,history: history,uuid:uuid,photos:photos}
@@ -25,8 +26,8 @@ export const registerUser = async( req,res)=>{
    const saveUuidToAccountSchema = accountBalances({uuid: generatedNumbers})
    
    //generate timestamp
-   const date = new Date()
-   const timeStamp = moment(date).format("DD/MM/YYYY  HH:mm:ss a")
+//    const date = new Date()
+//    const timeStamp = moment(date).format("DD/MM/YYYY  HH:mm:ss a")
 
    try{
        const oldUser = await User.findOne({ phonenumber: phonenumber})
@@ -34,8 +35,7 @@ export const registerUser = async( req,res)=>{
           return res.status(400).json("Already exists")
        }else {
                        const user = await newUser.save()
-                       const bal =  await saveUuidToAccountSchema.save()
-                       console.log(bal)
+                       await saveUuidToAccountSchema.save()
                        //send message to user after registering
                     //    try{
                     //     await  client.messages
@@ -88,13 +88,16 @@ export const loginUser = async (req,res)=>{
     }
 }
 
-//notify user with success on account registration
+//remove duplicate names uuid after sending internal to other customers
 export const removeduplicate = async (req,res)=>{
     const user = await User.findById(req.params.id)
     const allUserUID = user.recentFriends.reverse()
 
     //update removed duplicates
     let pushEmptyUserUID = []
+
+    //limit array fetch
+    // let limitedArray = pushEmptyUserUID.filter((val, i) => i < 2)
 
     try{
         allUserUID.forEach((item)=>{
