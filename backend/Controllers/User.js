@@ -37,16 +37,16 @@ export const registerUser = async( req,res)=>{
                        const bal =  await saveUuidToAccountSchema.save()
                        console.log(bal)
                        //send message to user after registering
-                       try{
-                        await  client.messages
-                           .create({
-                               body: `CONGRATULATIONS ${user.username}. Account created. on ${timeStamp}. Your account number is ${user.uuid}. Availabale balnce is $${bal.balance}. We are happy serving you !!!!`,
-                               from: '+18148592232', 
-                               to: `+${phonenumber}`}).then((message)=> console.log(message.body))
+                    //    try{
+                    //     await  client.messages
+                    //        .create({
+                    //            body: `CONGRATULATIONS ${user.username}. Account created. on ${timeStamp}. Your account number is ${user.uuid}. Availabale balnce is $${bal.balance}. We are happy serving you !!!!`,
+                    //            from: '+18148592232', 
+                    //            to: `+${phonenumber}`}).then((message)=> console.log(message.body))
                 
-                        }catch(err){
-                            res.status(500).json(err)
-                        }
+                    //     }catch(err){
+                    //         res.status(500).json(err)
+                    //     }
 
                         //registration response
                         res.status(200).json(user)
@@ -89,8 +89,33 @@ export const loginUser = async (req,res)=>{
 }
 
 //notify user with success on account registration
-export const sendMessage = async (req,res)=>{
-    // const
+export const removeduplicate = async (req,res)=>{
+    const user = await User.findById(req.params.id)
+    const allUserUID = user.recentFriends.reverse()
+
+    //update removed duplicates
+    let pushEmptyUserUID = []
+
+    try{
+        allUserUID.forEach((item)=>{
+            if(pushEmptyUserUID.indexOf(item) < 0){
+                pushEmptyUserUID.push(item)
+            }
+        })
+
+        //get the users photos and name
+        const pushedUser = await Promise.all( (pushEmptyUserUID.map((item)=>{
+            return User.findOne({ uuid: item})
+
+        })))
+
+        const photos = pushedUser.map(item => item.photos)
+        const usernames = pushedUser.map(item => item.username)
+        res.status(200).json({details: {photos,usernames}})
+    }catch(err){
+        res.status(500).json(err)
+    }
+
         
 }
 

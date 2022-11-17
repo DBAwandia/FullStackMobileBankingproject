@@ -40,6 +40,12 @@ const userSchema = new mongoose.Schema({
     stripeID:{
         type: String,
     },
+    receiverUID:{
+        type: String
+    },
+    recentFriends:{
+       type: [Number]
+    },
     isAdmin:{
         type: Boolean,
         default: false

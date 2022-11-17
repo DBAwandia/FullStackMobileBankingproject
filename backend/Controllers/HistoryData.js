@@ -112,7 +112,7 @@ export const usertransactionhistory = async (req,res)=>{
         const historydata = await Promise.all(user.history.map((item)=>{
             return historys.findOne({transactNumber: item})
         }))        
-        res.status(201).json(historydata)
+        res.status(201).json(historydata.reverse())
     }catch(err){
         res.status(500).json(err)
     }

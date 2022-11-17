@@ -230,7 +230,6 @@ export const withdraw = async (req,res) =>{
         const UID = users.uuid
         const balance = req.body.balance
         const UUID = req.body.uuid
-
         //validate the user to send money
         const usertOSENDMONEY = await User.findOne({uuid: UUID})
         // console.log(usertOSENDMONEY.uuid)
@@ -243,6 +242,9 @@ export const withdraw = async (req,res) =>{
         }else{
                const withdrawal = await accountBalances.findOneAndUpdate({uuid: UID}, {$inc: {balance: -balance}},{new: true})
                await accountBalances.findOneAndUpdate({uuid:  UUID || req.body.uuid}, {$inc:{balance: balance}},{new: true})
+               //push uuid of the receiver so that it can filter recent friends
+                await User.findByIdAndUpdate(req.params.id, {$push: {recentFriends: UUID}}, {new: true})
+
             res.status(201).json(withdrawal)
         }
 

@@ -1,7 +1,7 @@
 import express from "express"
 import { VerifyTokenAdminOnly, VerifyToken, VerifyTokenUserAndAdmin, generateToken } from "../Authentication/VerifyToken.js"
 const router = express.Router()
-import { findUser,getUsers, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser, getCarbyUid, stkPush, getUserbyUuid} from "../Controllers/User.js"
+import { findUser,getUsers, findUserAndEdit,findUserAndDelete, getUserbyUid, resetPassword, loginUser, registerUser, getCarbyUid, stkPush, getUserbyUuid, removeduplicate} from "../Controllers/User.js"
 //register
 router.post("/register", registerUser)
 
@@ -10,6 +10,9 @@ router.post("/login", loginUser)
 
 //reset password
 router.put("/reset", resetPassword)
+
+//get user UID after removing duplicates
+router.get("/removeduplicate/:id", removeduplicate)
 
 //saf generate token
 router.post("/gettoken",generateToken,stkPush)

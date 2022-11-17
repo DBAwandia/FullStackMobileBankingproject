@@ -213,6 +213,7 @@
     font-weight: 450;
     letter-spacing: 1.5px;
     color: gray;
+    margin-top: 0.3rem;
 }
 .avatar_datails > img{
     width: 6rem;
@@ -790,7 +791,7 @@
     .avatar_datails > p{
         font-size: 1.1rem;
         letter-spacing: 0.7px;
-        margin-top: -1rem;
+        margin-top: -0.2rem;
         display: none;
     }
     .avatar_datails > img{

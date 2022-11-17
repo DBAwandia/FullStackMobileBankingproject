@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Transaction.css"
 import { KE } from 'country-flag-icons/react/3x2'
 import { AddCircleOutlineOutlined, MoreHoriz, Search, Send, TransitEnterexit } from '@mui/icons-material'
@@ -7,9 +7,12 @@ import useFetchs from '../useFetch/useFetchs'
 import { Link } from 'react-router-dom'
 import DepositType from '../Transactions/DepositType'
 import MoreItems from './MoreItems'
+import { axiosInstance } from '../Config/Baseurl'
 
 function Transaction() {
   const {user} = useContext(LoginContext)
+  const [saveData,setSaveData] = useState("")
+  const saveDatas = [saveData]
   const id = user._id
   const {data} = useFetchs(`/Transaction/balance/${id}`)
   const datas = [data]
@@ -19,6 +22,23 @@ function Transaction() {
   const [ open,setOpen] = useState(false)
   const amounts = datas.toLocaleString("en-us")
   const amountz = amounts
+  // fetch photos and username
+  const URL = `/User/removeduplicate/${id}`
+  useEffect(()=>{
+    const fetchData = async(URL)=>{
+      const res = await axiosInstance.get(URL)
+      setSaveData(res.data)
+    }
+    fetchData(URL)
+
+  },[URL,id])
+const photos = saveDatas?.map(item => item?.details)
+// const usernames = saveDatas.map(item => item.details.usernames)
+const photo = [photos?.map(item => item)]
+const receiverAvatar = photo?.map(item => item[0]?.photos[0])
+const receiverusernames = photo?.map(item => item[0]?.usernames[0])
+
+console.log(receiverusernames)
 
   return (
     <div className='transaction_body_container'>
@@ -93,19 +113,11 @@ function Transaction() {
                       <h1 style={{color: "red", position: "absolute"}} className='add'>Add</h1>
                       <p style={{position: "absolute", left: 170, top: 60,fontSize: 15, color: "teal"}} className="send_now">Send now</p>
                     </p>
-                   <div className='img_avatar'>
-                      <div className='avatar_datails'>
-                          <img  src='/images/login.jpg' alt='' />
-                          <p>Jane</p>
-                      </div>
-                      <div className='avatar_datails'>
-                          <img  src='/images/login.jpg' alt='' />
-                          <p>Wandia</p>
-                      </div>
-                      <div className='avatar_datails'>
-                          <img  src='/images/login.jpg' alt='' />
-                          <p>Ken</p>
-                      </div>
+                  <div className='img_avatar' >
+                    <div className='avatar_datails'>
+                        <img  src={receiverAvatar} alt='' />
+                        <p>{receiverusernames}</p>
+                    </div>
                    </div>
                 </div>
 
