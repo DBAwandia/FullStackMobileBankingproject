@@ -8,6 +8,9 @@ function Login() {
 
   const navigate = useNavigate()
   const [phonenumbers, setPhonenumbers] = useState("")
+  const [ showSucess, setShowSuccess] = useState(false)
+  const [ showFail, setShowFail] = useState(false)
+
   const [password, setPassword] = useState("")
   const pasword = password.trim()
   const phonnumbers = phonenumbers.trim()
@@ -18,11 +21,20 @@ function Login() {
       e.preventDefault()
       dispatch({type:"LOGIN_START"})
       // setOpen(true)
+      // const time = setTimeout(()=>{
+      //   alert("success")
+      // },[500])
+
+      //  clearTimeout(time)
+
       try{
+      setShowSuccess(true)
+
          const res = await axiosInstance.post("/User/login", {  phonenumber:phonnumbers,password: pasword })
          dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
          navigate("/")
       }catch(err){
+        setShowFail(true)
         dispatch({type:"LOGIN_ERROR"})
         // setOpen(false)
         // alert("wrong password or phonenumber")
@@ -35,6 +47,8 @@ function Login() {
         <HomeLoading/>
       </div>} */}
         <div className='login_container'>
+          {showSucess && <div className='show_success_login'>Successful redirecting...</div>}
+          {showFail && <div className='show_unsuccess_login'>Wrong credentials</div>}
             <div className='login_container2'>
               <h1 style={{margin: "50px 0px", color: "teal"}}>LOGIN</h1>
               <label>Enter phonenumber</label>

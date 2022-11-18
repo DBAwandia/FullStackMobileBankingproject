@@ -10,6 +10,28 @@
    background: rgb(199,190,235);
    background: radial-gradient(circle, rgba(199,190,235,1) 52%, rgba(233,148,193,1) 100%);
 }
+.show_success_login{
+   width: 53%;
+   height: 3.5rem;
+   padding-top: 1rem;
+   font-size: 2.1rem;
+   position: absolute;
+   bottom: 13rem;
+   color: white;
+   background-color: green;
+   z-index: 999999999991;
+}
+.show_unsuccess_login{
+   width: 53%;
+   height: 3.5rem;
+   padding-top: 1rem;
+   font-size: 2.1rem;
+   position: absolute;
+   bottom: 19rem;
+   color: white;
+   background-color: red;
+   z-index: 999999999991;
+}
 .home_loading_container{
   position: absolute;
   top: 0;
