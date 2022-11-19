@@ -47,10 +47,11 @@ export const twilioWhatsapp = async (req,res) =>{
 export const startSession = async (req,res)=>{
 
     //dormain to redirect after successfull
-    const success_url = "http://localhost:3000/confirmtransfer"
+    const success_url = "http://localhost:3000/"
     const cancel_url = "http://localhost:3000/depotype"
 
-    const {line_items,customer_email} = req.body
+    const customer_email = "ken@gmail.com"
+    const {line_items} = req.body
     //validate req.body
     if(!line_items || !customer_email){
         return res.status(403).json("Inavlid paramaters")
@@ -64,7 +65,7 @@ export const startSession = async (req,res)=>{
             cancel_url:  `${cancel_url}`,
             mode: 'payment',
           });
-          res.status(200).json(session.id)
+          res.status(200).json(session)
     }catch(err){
         res.status(500).json(err)
         console.log("err")

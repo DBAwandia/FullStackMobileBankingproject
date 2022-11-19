@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from '../Firebase/Firebase';
 import "./Login.css"
@@ -21,29 +21,66 @@ function Register() {
   const [open, setOpen] = useState(false)
   const [opens, setOpens] = useState(false)
   const phonenumber = `+${phonenumbers}`
-  // const {loadings,error,dispatch} = useContext(LoginContext)
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(59);
+
+  useEffect(()=>{
+    let timer = setInterval(()=>{
+      if(seconds > 0){
+        setSeconds(seconds -1)
+      }
+      if(seconds === 0 ){
+        clearInterval(timer)
+        setSeconds(59)
+      }else{
+        setMinutes(0)
+        // setSeconds(59)
+      }
+      
+    },1000)
+
+    return ()=> clearInterval(timer)
+
+  },[seconds])
+    
+  // console.log(seconds)
     const sendOtp = (e)=>{
       e.preventDefault()
       setLoadings(true)
+      // setSeconds(59)
+      if(!window.recaptchaVerifier){
       window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
         'size': 'invisible',
         'callback': (response) => {
           console.log(response)
+          
+      
+         
+        },
+        'expired-callback': () => {
+          
         }
+        
       }, auth);
+      }
+    
       const appVerifier = window.recaptchaVerifier
+     
       signInWithPhoneNumber(auth,phonenumber,  appVerifier)
           .then((confirmationResult) => {
             window.confirmationResult = confirmationResult;
             setLoadings(false)
             setFinal(window.confirmationResult)
             setOpen(true)
+            
           }).catch((error) => {
             console.log(error)
             setOpens(true)
             setLoadings(false)
+           
           });
     }
+   
     const handleClick = async(e)=>{
       e.preventDefault()
       setLoading(true)
@@ -52,7 +89,7 @@ function Register() {
       data.append("upload_preset", "keniko")
       const res = await axios.post("https://api.cloudinary.com/v1_1/wandia/image/upload", data)
       const URL = res.data.url
-console.log(URL)
+      console.log(URL)
       final.confirm(otp).then(async(result) => {
         setOpen(true)
         await axiosInstance.post("/User/register", {photos: URL, password: password, phonenumber:phonenumbers,username: username })
@@ -71,6 +108,8 @@ console.log(URL)
   return (
      <div className='login'>
         <div className='login_container'>
+        <button className='login_button'  >{minutes}:{seconds}</button>
+
             <div className='login_container2'>
                 <div className='avatar_container'>
                     <img className='avatar_image' src={image ? URL.createObjectURL(image): "/images/login.jpg"} alt=''/>
@@ -84,7 +123,7 @@ console.log(URL)
                 <input type="password" placeholder="Enter password" onChange={e=>setPassword(e.target.value)} required/>
                 <label>Enter phonenumber</label>
                 <input type="number" placeholder="Enter phonenumber" onChange={e=>setPhonenumbers(e.target.value)} required/>
-                <button className='otp_button'   onClick={sendOtp}>{loadings? "Requesting..." : "Request otp"}</button>
+                <button className='otp_button'   onClick={sendOtp}>{seconds > 0? `resend otp in ${minutes}:${seconds}` : "Request otp"}</button>
                 {open && <label>Verify otp</label>}
                 {open && <input type="number" placeholder="Verify otp sent" onChange={e=>setOtp(e.target.value)} required/>}
                  <button className='login_button'  onClick={handleClick}>{loading?"Loading...": "Register"}</button>
