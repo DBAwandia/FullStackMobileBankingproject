@@ -21,6 +21,10 @@ function ResetPassword() {
   const [open, setOpen] = useState(false)
   const [opens, setOpens] = useState(false)
   const phonenumber = `+${phonenumbers.trim()}`
+
+  const [seconds,setSeconds] = useState(59)
+  const [status,setStatus] = useState(false)
+
   // const {loadings,error,dispatch} = useContext(LoginContext)
 
   useEffect(()=>{
@@ -41,17 +45,33 @@ function ResetPassword() {
     }
   },[enabled,phonenumbers,password,cPassword,isPassOkay])
 
-
+  let timer;
+  useEffect(()=>{
+    timer = setInterval(()=>{
+      if(status){
+        setSeconds(seconds-1)
+        if(seconds < 2){
+          setStatus(false)
+          clearInterval(timer)
+          setSeconds(59)
+        }
+      }
+    },1000)
+    return ()=>clearInterval(timer)
+  },[status,seconds])
  
-
+console.log(status,seconds)
     const sendOtp = (e)=>{
       e.preventDefault()
+      setStatus(true)
       setLoadings(true)
-      window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
-        'size': 'invisible',
-        'callback': (response) => {
-        }
-      }, auth);
+      if(!window.recaptchaVerifier ){
+        window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
+          'size': 'invisible',
+          'callback': (response) => {
+          }
+        }, auth);
+      }
       const appVerifier = window.recaptchaVerifier
       signInWithPhoneNumber(auth,phonenumber,  appVerifier)
           .then((confirmationResult) => {
@@ -95,7 +115,7 @@ function ResetPassword() {
                 <label>Confirm password</label>
                 {isPassOkay ? <label style={{color: "red"}}>pass dont match</label>:""}
                 <input type="password" placeholder="Confirm password" name='cPassword' value={cPassword}  onChange={e=>setCpassword(e.target.value)} required />
-                <button className="otp_button"    onClick={sendOtp}>{loadings? "Requesting..." : "Request otp"}</button>
+                <button className="otp_button"    onClick={sendOtp}>{seconds === 59?"Request otp" : `Resend ${seconds < 10? "0"+seconds:seconds}`  }</button>
                 {open && <label>Verify otp</label>}
                 {open && <input type="number" placeholder="Verify otp sent" onChange={e=>setOtp(e.target.value)} required/>}
                  <button  className="login_button"  onClick={handleClick}>{loading?"Loading...": "ResetPassword"}</button>

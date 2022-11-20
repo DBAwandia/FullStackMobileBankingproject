@@ -23,30 +23,33 @@ function Register() {
   const phonenumber = `+${phonenumbers}`
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(59);
+  const [status, setStatus] = useState(false)
 
+    console.log(phonenumber)
+  let timer;
   useEffect(()=>{
-    let timer = setInterval(()=>{
-      if(seconds > 0){
-        setSeconds(seconds -1)
+     timer = setInterval(()=>{
+      if(status){
+        setSeconds(seconds - 1)
+        if(seconds < 2 ){
+          // setStatus(false)
+          clearInterval(timer)
+          setStatus(false)
+          setSeconds(59)
+  
+        }
       }
-      if(seconds === 0 ){
-        clearInterval(timer)
-        setSeconds(59)
-      }else{
-        setMinutes(0)
-        // setSeconds(59)
-      }
-      
+     
     },1000)
-
     return ()=> clearInterval(timer)
 
-  },[seconds])
-    
-  // console.log(seconds)
+  },[status,seconds])
+  console.log(seconds)
     const sendOtp = (e)=>{
       e.preventDefault()
       setLoadings(true)
+      setStatus(true)
+      // clearInterval(timer)
       // setSeconds(59)
       if(!window.recaptchaVerifier){
       window.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
@@ -63,6 +66,7 @@ function Register() {
         
       }, auth);
       }
+      setStatus(true)
     
       const appVerifier = window.recaptchaVerifier
      
@@ -108,8 +112,6 @@ function Register() {
   return (
      <div className='login'>
         <div className='login_container'>
-        <button className='login_button'  >{minutes}:{seconds}</button>
-
             <div className='login_container2'>
                 <div className='avatar_container'>
                     <img className='avatar_image' src={image ? URL.createObjectURL(image): "/images/login.jpg"} alt=''/>
@@ -123,7 +125,11 @@ function Register() {
                 <input type="password" placeholder="Enter password" onChange={e=>setPassword(e.target.value)} required/>
                 <label>Enter phonenumber</label>
                 <input type="number" placeholder="Enter phonenumber" onChange={e=>setPhonenumbers(e.target.value)} required/>
-                <button className='otp_button'   onClick={sendOtp}>{seconds > 0? `resend otp in ${minutes}:${seconds}` : "Request otp"}</button>
+                <button className='otp_button'    onClick={sendOtp}>
+                  {seconds === 59 ?"Request otp": <p>
+                                Resend  {minutes < 10? "0"+minutes: minutes }: {seconds <10? "0"+seconds : seconds}
+                                 </p>  }
+                </button>
                 {open && <label>Verify otp</label>}
                 {open && <input type="number" placeholder="Verify otp sent" onChange={e=>setOtp(e.target.value)} required/>}
                  <button className='login_button'  onClick={handleClick}>{loading?"Loading...": "Register"}</button>
