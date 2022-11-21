@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState ,useEffect} from 'react'
 import "./Login.css"
 import { Link, useNavigate} from "react-router-dom"
 import { LoginContext } from '../Contexts/LoginContext';
@@ -17,38 +17,41 @@ function Login() {
 
   const [open, setOpen] = useState(false)
   const { loadings,dispatch} = useContext(LoginContext)
+
+  let timer;
+  
     const handleClick = async(e)=>{
-      e.preventDefault()
-      dispatch({type:"LOGIN_START"})
-      // setOpen(true)
-      // const time = setTimeout(()=>{
-      //   alert("success")
-      // },[500])
+        e.preventDefault()
+        dispatch({type:"LOGIN_START"})
+        try{
+        setShowSuccess(true)
+      
+        const res = await axiosInstance.post("/User/login", {  phonenumber:phonnumbers,password: pasword })
+        dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
+        setOpen(true)
+        timer= setTimeout(()=>{
+        navigate("/")
+        },2000)
 
-      //  clearTimeout(time)
-
-      try{
-      setShowSuccess(true)
-
-         const res = await axiosInstance.post("/User/login", {  phonenumber:phonnumbers,password: pasword })
-         dispatch({type: "LOGIN_SUCCESS", payload: res.data.details})
-         navigate("/")
-      }catch(err){
-        setShowFail(true)
-        dispatch({type:"LOGIN_ERROR"})
-        // setOpen(false)
-        // alert("wrong password or phonenumber")
-        console.log("err" + err)
-      }
+     }catch(err){
+      setOpen(false)
+       setShowFail(true)
+       clearInterval(timer)
+       alert("wrong details")
+       dispatch({type:"LOGIN_ERROR"})
+        }
     }
+      
+    
+   
   return (
      <div className='login'>
-     {/* {open && <div className='home_loading_container'>
-        <HomeLoading/>
-      </div>} */}
+     {open && <div className='home_loading_container'>
+      <img className='profile_image_pic' src='/images/profile.jpg' alt='' />
+      </div>}
         <div className='login_container'>
-          {showSucess && <div className='show_success_login'>Successful redirecting...</div>}
-          {showFail && <div className='show_unsuccess_login'>Wrong credentials</div>}
+          {/* {showSucess ?<div className='show_success_login'>Successful redirecting...</div>:""} */}
+          {/* {showFail ? <div className='show_unsuccess_login'>Wrong credentials</div>:""} */}
             <div className='login_container2'>
               <h1 style={{margin: "50px 0px", color: "teal"}}>LOGIN</h1>
               <label>Enter phonenumber</label>

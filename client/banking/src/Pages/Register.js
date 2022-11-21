@@ -125,9 +125,9 @@ function Register() {
                 <input type="password" placeholder="Enter password" onChange={e=>setPassword(e.target.value)} required/>
                 <label>Enter phonenumber</label>
                 <input type="number" placeholder="Enter phonenumber" onChange={e=>setPhonenumbers(e.target.value)} required/>
-                <button className='otp_button'    onClick={sendOtp}>
+                <button className={status?"otps_button":"otp_button"} disabled={status}    onClick={sendOtp}>
                   {seconds === 59 ?"Request otp": <p>
-                                Resend  {minutes < 10? "0"+minutes: minutes }: {seconds <10? "0"+seconds : seconds}
+                                Resend in {minutes < 10? "0"+minutes: minutes }: {seconds <10? "0"+seconds : seconds}
                                  </p>  }
                 </button>
                 {open && <label>Verify otp</label>}

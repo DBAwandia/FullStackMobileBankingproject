@@ -85,23 +85,29 @@ console.log(status,seconds)
             setLoadings(false)
           });
     }
-    const handleClick = async(e)=>{
-      e.preventDefault()
-      setLoading(true)
-    
 
-      final.confirm(otp).then(async(result) => {
-        setOpen(true)
-        setLoading(false)
-        await axiosInstance.put("/User/reset", {phonenumber: phonenumber, password: password})
-        navigate("/login")
-      }).catch((error) => {
-        console.log(error)
-       setOpens(true)
-       setLoading(false)
-      });
+    let timerz
+    const handleClick = async(e)=>{
+      timerz = setTimeout(()=>{
+        e.preventDefault()
+          setLoading(true)
+        
+
+          final.confirm(otp).then(async(result) => {
+            setOpen(true)
+            setLoading(false)
+            await axiosInstance.put("/User/reset", {phonenumber: phonenumber, password: password})
+            navigate("/login")
+          }).catch((error) => {
+            console.log(error)
+          setOpens(true)
+          setLoading(false)
+          });
      
 
+      },2000)
+
+      return clearInterval(timerz)
     }
   return (
      <div className='login'>
@@ -115,7 +121,7 @@ console.log(status,seconds)
                 <label>Confirm password</label>
                 {isPassOkay ? <label style={{color: "red"}}>pass dont match</label>:""}
                 <input type="password" placeholder="Confirm password" name='cPassword' value={cPassword}  onChange={e=>setCpassword(e.target.value)} required />
-                <button className="otp_button"    onClick={sendOtp}>{seconds === 59?"Request otp" : `Resend ${seconds < 10? "0"+seconds:seconds}`  }</button>
+                <button className={status?"otps_button":"otp_button"} disabled={seconds < 59}    onClick={sendOtp}>{seconds === 59?"Request otp" : `Resend in ${seconds < 10? "0"+seconds:seconds}`  }</button>
                 {open && <label>Verify otp</label>}
                 {open && <input type="number" placeholder="Verify otp sent" onChange={e=>setOtp(e.target.value)} required/>}
                  <button  className="login_button"  onClick={handleClick}>{loading?"Loading...": "ResetPassword"}</button>
